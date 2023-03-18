@@ -2,12 +2,8 @@ import React, {useEffect, useRef, useState} from "react";
 import {requestAns} from "../api/config";
 import {ChatCompletionRequestMessage} from "openai";
 import {Input, Card, Avatar} from 'antd';
-import {UserOutlined} from '@ant-design/icons';
 import './views.css'
-
-
-const {Search} = Input;
-
+import InputArea from "../components/InputArea/InputArea";
 interface Chat{
     role: 'system' | 'user';
     content: string[]
@@ -50,6 +46,7 @@ export default function MainContent() {
 
     // @ts-ignore
     const onSubmit = (value) => {
+        if(value.length === 0) return;
         const user: Chat ={
             role: "user",
             content: [value]
@@ -88,17 +85,6 @@ export default function MainContent() {
                 })
             }
         </div>
-        <div className="position-input-area">
-            <div className="input-area-container">
-                <Search style={{width: '95%'}} placeholder="input questions here~ "
-                        enterButton="Submit" size="large"
-                        loading={loading}
-                        allowClear
-                        value={inputValue}
-                        onChange={onInputChange}
-                        onSearch={onSubmit}
-                />
-            </div>
-        </div>
+        <InputArea loading={loading} onSubmit={onSubmit}/>
     </div>)
 }

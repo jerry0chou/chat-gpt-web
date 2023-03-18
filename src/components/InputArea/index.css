@@ -1,0 +1,12 @@
+.position-input-area{
+    position: absolute;
+    bottom: 0px;
+}
+.input-area-container{
+    display: flex;
+    width: calc(100vw - 256px);
+    height: 65px;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+}

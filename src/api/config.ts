@@ -3,12 +3,11 @@ import {
     ChatCompletionRequestMessage,
     Configuration,
     CreateChatCompletionResponse,
-    CreateCompletionResponse,
     OpenAIApi
 } from 'openai'
 import {AxiosResponse} from "axios";
 const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: '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',
 });
 
 
