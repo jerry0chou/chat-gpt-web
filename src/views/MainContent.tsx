@@ -5,40 +5,21 @@ import {Input, Card, Avatar} from 'antd';
 import './views.css'
 import InputArea from "../components/InputArea/InputArea";
 import ChatList, {Chat} from "../components/ChatList/ChatList";
+import useRequest from "../hooks/useRequest";
 
 export default function MainContent() {
-    console.log('MainContent')
     const messages = useRef<ChatCompletionRequestMessage[]>([])
-    const [loading, setLoading] = useState(false)
+    const [refreshCount, setRefreshCount] = useState(0)
+    const {loading ,systemReply} = useRequest(messages.current, refreshCount)
     const [chatList, setChatList] = useState<Chat[]>([])
 
-    const requestAPI = ()=>{
-        setLoading(true)
-
-        requestAns(messages.current).then((res) => {
-            console.log(res)
-            let msg: string[] = []
-            res.data.choices.forEach(item=>{
-                const array = item?.message?.content?.split('\n') || []
-                console.log('array', array)
-                for (const m of array){
-                    if(m.length> 0){
-                        msg.push(m)
-                    }
-                }
-            })
-            chatList.push({
-                role: "system",
-                content: msg
-            })
-            setChatList([...chatList])
-            setLoading(false)
-        }).catch(err=>{
-            setLoading(false)
-        })
-    }
-    // @ts-ignore
-    const onSubmit = (value) => {
+    useEffect(()=>{
+        if(systemReply.content.length>0){
+            console.log('systemReply', systemReply)
+            setChatList(prevState => prevState.concat(systemReply))
+        }
+    }, [systemReply])
+    const onSubmit = (value: string) => {
         if(value.length === 0) return;
         const user: Chat ={
             role: "user",
@@ -51,7 +32,7 @@ export default function MainContent() {
         })
         console.log('messges', messages)
         setChatList([...chatList])
-        requestAPI()
+        setRefreshCount(prevState => prevState+1)
     }
     return (<div className="main-container">
         <ChatList data={chatList}/>
