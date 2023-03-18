@@ -1,0 +1,32 @@
+
+.app-container{
+    display: flex;
+    flex-direction: row;
+}
+.main-container{
+    height: 100vh;
+    overflow: scroll;
+}
+.position-input-area{
+    position: absolute;
+    bottom: 0px;
+}
+.input-area-container{
+    display: flex;
+    width: calc(100vw - 256px);
+    height: 65px;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+}
+.chat-list-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 150px;
+}
+.chat-box{
+    display: flex;
+    justify-content: center;
+    width: calc(100vw - 256px);
+}
