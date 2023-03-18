@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {requestAns} from "../api/config";
 import {ChatCompletionRequestMessage} from "openai";
-import {Input, Card, Avatar} from 'antd';
+import {Input, Card, Avatar, message} from 'antd';
 import './views.css'
 import InputArea from "../components/InputArea/InputArea";
 import ChatList, {Chat} from "../components/ChatList/ChatList";
@@ -11,9 +11,9 @@ import Setting from "../components/Setting/Setting";
 export default function MainContent() {
     const messages = useRef<ChatCompletionRequestMessage[]>([])
     const [refreshCount, setRefreshCount] = useState(0)
-    const {loading ,systemReply} = useRequest(messages.current, refreshCount)
+    const [messageApi, contextHolder] = message.useMessage();
+    const {loading ,systemReply} = useRequest(messages.current, refreshCount, messageApi)
     const [chatList, setChatList] = useState<Chat[]>([])
-
     useEffect(()=>{
         if(systemReply.content.length>0){
             console.log('systemReply', systemReply)
@@ -36,6 +36,7 @@ export default function MainContent() {
         setRefreshCount(prevState => prevState+1)
     }
     return (<div className="main-container">
+        {contextHolder}
         <Setting/>
         <ChatList data={chatList}/>
         <InputArea loading={loading} onSubmit={onSubmit}/>

@@ -6,15 +6,12 @@ import {
     OpenAIApi
 } from 'openai'
 import {AxiosResponse} from "axios";
-const configuration = new Configuration({
-    apiKey: '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',
-});
 
-
-const openai = new OpenAIApi(configuration);
-
-
-export const requestAns = async (array: ChatCompletionRequestMessage[]): Promise<AxiosResponse<CreateChatCompletionResponse>> => {
+export const requestAns = async (array: ChatCompletionRequestMessage[], token: string): Promise<AxiosResponse<CreateChatCompletionResponse>> => {
+    const configuration = new Configuration({
+        apiKey: token,
+    });
+    const openai = new OpenAIApi(configuration);
     const response = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages:  array
