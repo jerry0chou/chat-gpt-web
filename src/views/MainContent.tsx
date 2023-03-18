@@ -5,7 +5,7 @@ import './views.css'
 import InputArea from "../components/InputArea/InputArea";
 import ChatList, {Chat} from "../components/ChatList/ChatList";
 import useRequest from "../hooks/useRequest";
-import Setting, {FontKind} from "../components/Setting/Setting";
+import Header, {FontKind} from "../components/Header/Header";
 import {useCookies} from "react-cookie";
 import {fontSizeValue} from "../util/constanst";
 
@@ -49,7 +49,7 @@ export default function MainContent() {
     }
     return (<div className="main-container">
         {contextHolder}
-        <Setting adjustFontSize={adjustFontSize}/>
+        <Header adjustFontSize={adjustFontSize} loading={loading}/>
         <ChatList data={chatList} fontSize={fontSize.current}/>
         <InputArea loading={loading} onSubmit={onSubmit}/>
     </div>)
