@@ -6,6 +6,7 @@ import './views.css'
 import InputArea from "../components/InputArea/InputArea";
 import ChatList, {Chat} from "../components/ChatList/ChatList";
 import useRequest from "../hooks/useRequest";
+import Setting from "../components/Setting/Setting";
 
 export default function MainContent() {
     const messages = useRef<ChatCompletionRequestMessage[]>([])
@@ -35,6 +36,7 @@ export default function MainContent() {
         setRefreshCount(prevState => prevState+1)
     }
     return (<div className="main-container">
+        <Setting/>
         <ChatList data={chatList}/>
         <InputArea loading={loading} onSubmit={onSubmit}/>
     </div>)
