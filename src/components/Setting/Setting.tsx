@@ -2,14 +2,17 @@ import React, {useState} from "react";
 import './index.css'
 import { Avatar, Space } from 'antd';
 import MyModal from "../Modal/Modal";
-
-
-export default function Setting(){
+export type FontKind = 'A+' |'A-'
+interface SettingProps{
+    adjustFontSize: (kind: FontKind)=>void
+}
+export default function Setting(p: SettingProps){
     const [visible, setVisible] = useState(false)
-    const onItemClick = (kind: 'Token' | 'A+' | 'A-')=>{
-        console.log('kind', kind)
+    const onItemClick = (kind: 'Token' | FontKind)=>{
         if(kind === 'Token'){
             setVisible(true)
+        }else {
+            p.adjustFontSize(kind)
         }
     }
     return(<div className="setting-container">

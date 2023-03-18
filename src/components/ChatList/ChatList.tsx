@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {Avatar, Card} from "antd";
 import './index.css'
 import cs from 'classnames'
-import { UserOutlined } from '@ant-design/icons';
 export interface Chat {
     role: 'system' | 'user';
     content: string[]
@@ -10,13 +9,14 @@ export interface Chat {
 
 export interface ChatListProps {
     data: Chat[]
+    fontSize: number
 }
 
 export default function ChatList(p: ChatListProps) {
-    // const [chatList, setChatList] = useState<Chat[]>([])
     const url = 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg';
     // <Avatar size={40} src={url}/>
     // const clsObj = cs({'is-first-line': true})
+    console.log('p', p.fontSize)
     return (
         <div className="chat-list-container">
             {
@@ -34,7 +34,7 @@ export default function ChatList(p: ChatListProps) {
                             <div className="content-container">
                             {
                                 item.content.map((msg, index) => {
-                                    return (<p key={index}>
+                                    return (<p key={index} style={{fontSize: p.fontSize}}>
                                         {msg}
                                     </p>)
                             })}

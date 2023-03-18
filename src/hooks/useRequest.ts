@@ -48,7 +48,7 @@ export default function useRequest(messages: ChatCompletionRequestMessage[], ref
             })
             setLoading(false)
         }).catch(err => {
-            messageApi.error(JSON.stringify(err), 5)
+            messageApi.error(JSON.stringify(err.message), 4)
             setLoading(false)
         })
     }, [messages, refreshCount])
