@@ -28,7 +28,7 @@ export default function ChatList(p: ChatListProps) {
                                 item.role === 'system' ? <div className="profile-container">
                                     <Avatar size={40} src={url}/>
                                 </div> : <div className="profile-container">
-                                    <Avatar size={40} style={{ backgroundColor: '#fde3cf', color: '#f56a00' }}>U</Avatar>
+                                    <Avatar size={40} style={{ backgroundColor: '#c6e1ff', color: '#0083d3' }}>U</Avatar>
                                 </div>
                             }
                             <div className="content-container">

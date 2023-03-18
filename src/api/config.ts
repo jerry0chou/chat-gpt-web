@@ -6,6 +6,7 @@ import {
     OpenAIApi
 } from 'openai'
 import {AxiosResponse} from "axios";
+import {apiModelName} from "../util/constanst";
 
 export const requestAns = async (array: ChatCompletionRequestMessage[], token: string): Promise<AxiosResponse<CreateChatCompletionResponse>> => {
     const configuration = new Configuration({
@@ -13,7 +14,7 @@ export const requestAns = async (array: ChatCompletionRequestMessage[], token: s
     });
     const openai = new OpenAIApi(configuration);
     const response = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
+        model: apiModelName,
         messages:  array
     });
     // @ts-ignore
