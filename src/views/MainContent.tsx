@@ -17,11 +17,20 @@ export default function MainContent() {
     const [chatList, setChatList] = useState<Chat[]>([])
     const [cookies, setCookie] = useCookies([fontSizeValue]);
     const fontSize = useRef<number>(Number(cookies.fontSizeValue) || 18)
+    const scrollRef = useRef(null)
+
+    const scrollToBottom = () => {
+        // @ts-ignore
+        if (scrollRef.current && scrollRef.current?.scrollIntoView) { // @ts-ignore
+            scrollRef.current?.scrollIntoView({behavior: "smooth"})
+        }
+    }
 
     useEffect(() => {
         if (systemReply.content.length > 0) {
             console.log('systemReply', systemReply)
             setChatList(prevState => prevState.concat(systemReply))
+            scrollToBottom()
         }
     }, [systemReply])
     const onSubmit = (value: string) => {
@@ -42,9 +51,9 @@ export default function MainContent() {
     const adjustFontSize = (kind: FontKind) => {
         console.log('adjustFontSize kind', kind, fontSize)
         if (kind === 'A+')
-            fontSize.current+=1
+            fontSize.current += 1
         else
-            fontSize.current-=1
+            fontSize.current -= 1
         setCookie(fontSizeValue, Number(fontSize.current))
     }
     return (<div className="main-container">
@@ -52,5 +61,6 @@ export default function MainContent() {
         <Header adjustFontSize={adjustFontSize} loading={loading}/>
         <ChatList data={chatList} fontSize={fontSize.current}/>
         <InputArea loading={loading} onSubmit={onSubmit}/>
+        <div ref={scrollRef}/>
     </div>)
 }
