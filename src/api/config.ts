@@ -7,7 +7,7 @@ import {
 } from 'openai'
 import {AxiosResponse} from "axios";
 const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: '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',
 });
 
 

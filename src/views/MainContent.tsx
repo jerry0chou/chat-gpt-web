@@ -4,17 +4,12 @@ import {ChatCompletionRequestMessage} from "openai";
 import {Input, Card, Avatar} from 'antd';
 import './views.css'
 import InputArea from "../components/InputArea/InputArea";
-interface Chat{
-    role: 'system' | 'user';
-    content: string[]
-}
+import ChatList, {Chat} from "../components/ChatList/ChatList";
+
 export default function MainContent() {
     console.log('MainContent')
-    const url = 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg';
-
     const messages = useRef<ChatCompletionRequestMessage[]>([])
     const [loading, setLoading] = useState(false)
-    const [inputValue, setInputValue] = useState('')
     const [chatList, setChatList] = useState<Chat[]>([])
 
     const requestAPI = ()=>{
@@ -42,8 +37,6 @@ export default function MainContent() {
             setLoading(false)
         })
     }
-
-
     // @ts-ignore
     const onSubmit = (value) => {
         if(value.length === 0) return;
@@ -58,33 +51,10 @@ export default function MainContent() {
         })
         console.log('messges', messages)
         setChatList([...chatList])
-        setInputValue('')
         requestAPI()
     }
-    const onInputChange = (e: any) => {
-        setInputValue(e?.target?.value || '')
-    }
     return (<div className="main-container">
-        <div className="chat-list-container">
-            {
-                chatList.map((item, index)=>{
-                    return (<div className="chat-box" key={index}>
-                        <Card style={{width: '95%'}}>
-                            {
-                                item.role === 'system'?<Avatar size={40} src={url}/>: <Avatar size={40}>USER</Avatar>
-                            }
-                            {
-                                item.content.map((msg)=>{
-                                    return(<p>
-                                        {msg}
-                                    </p>)
-                                })
-                            }
-                        </Card>
-                    </div>)
-                })
-            }
-        </div>
+        <ChatList data={chatList}/>
         <InputArea loading={loading} onSubmit={onSubmit}/>
     </div>)
 }

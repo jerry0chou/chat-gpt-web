@@ -7,15 +7,3 @@
     height: 100vh;
     overflow: scroll;
 }
-
-.chat-list-container{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 150px;
-}
-.chat-box{
-    display: flex;
-    justify-content: center;
-    width: calc(100vw - 256px);
-}

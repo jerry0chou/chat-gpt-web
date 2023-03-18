@@ -21,7 +21,10 @@ export default function InputArea(p: InputAreaProps){
                         allowClear
                         value={inputValue}
                         onChange={onInputChange}
-                        onSearch={p.onSubmit}
+                        onSearch={(value)=>{
+                            setInputValue('')
+                            p.onSubmit(value)
+                        }}
                 />
             </div>
         </div>
