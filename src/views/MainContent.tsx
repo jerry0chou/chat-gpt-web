@@ -57,7 +57,7 @@ export default function MainContent() {
         {contextHolder}
         <Header adjustFontSize={adjustFontSize} loading={loading}/>
         <ChatList data={chatList} fontSize={fontSize.current}/>
-        <InputArea loading={loading} onSubmit={onSubmit}/>
+        <InputArea loading={loading} onSubmit={onSubmit} userQuestion={messages.current}/>
         <div ref={scrollRef}/>
     </div>)
 }
