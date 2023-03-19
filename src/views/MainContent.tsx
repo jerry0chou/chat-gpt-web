@@ -28,7 +28,6 @@ export default function MainContent() {
 
     useEffect(() => {
         if (systemReply.content.length > 0) {
-            console.log('systemReply', systemReply)
             setChatList(prevState => prevState.concat(systemReply))
             scrollToBottom()
         }
@@ -44,12 +43,10 @@ export default function MainContent() {
             role: "user",
             content: value
         })
-        console.log('messges', messages)
         setChatList([...chatList])
         setRefreshCount(prevState => prevState + 1)
     }
     const adjustFontSize = (kind: FontKind) => {
-        console.log('adjustFontSize kind', kind, fontSize)
         if (kind === 'A+')
             fontSize.current += 1
         else

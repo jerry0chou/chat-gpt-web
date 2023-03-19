@@ -4,6 +4,8 @@ import './index.css'
 import cs from 'classnames'
 import CodeDisplay from "../CodeDisplay/CodeDisplay";
 import {tidyContent} from "../../util/tidyContent";
+import PlainTextDisplay from "../PlainTextDisplay/PlainTextDisplay";
+
 export interface Chat {
     role: 'system' | 'user';
     content: string[]
@@ -28,15 +30,19 @@ export default function ChatList(p: ChatListProps) {
                                 item.role === 'system' ? <div className="profile-container">
                                     <Avatar size={40} src={url}/>
                                 </div> : <div className="profile-container">
-                                    <Avatar size={40} style={{ backgroundColor: '#c6e1ff', color: '#0083d3' }}>U</Avatar>
+                                    <Avatar size={40} style={{backgroundColor: '#c6e1ff', color: '#0083d3'}}>U</Avatar>
                                 </div>
                             }
                             <div className="content-container">
                                 {
-                                    tidyContent(item.content).map((item, index2)=>{
-                                       return  item.kind === 'plain'? <p key={index2} style={{fontSize: p.fontSize}}>
-                                            {item.content}
-                                        </p>: <CodeDisplay  language={'js'} code={item.content} key={index2}/>
+                                    tidyContent(item.content).map((item, index2) => {
+                                        return (
+                                            <div key={index2}>
+                                                {item.kind === 'plain' ?
+                                                    <PlainTextDisplay content={item.content} fontSize={p.fontSize}/> :
+                                                    <CodeDisplay language={'js'} code={item.content} key={index2}/>}
+                                            </div>
+                                        )
                                     })
                                 }
                             </div>

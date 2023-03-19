@@ -24,7 +24,7 @@ export default function useRequest(messages: ChatCompletionRequestMessage[], ref
                 type: 'error',
                 content: 'please set OpenAIToken via the top right button',
             })
-            // return;
+            return;
         }
         setLoading(true)
         requestAns(messages, cookies.openAIToken).then((res) => {
