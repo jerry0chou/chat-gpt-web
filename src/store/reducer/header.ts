@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {fontSizeValue} from "../../util/constanst";
 
 export type Theme = 'night'|'day'
 export interface HeaderState{
@@ -6,7 +7,7 @@ export interface HeaderState{
     theme: Theme
 }
 const initialState: HeaderState = {
-    fontSize: 18,
+    fontSize: Number(localStorage.getItem(fontSizeValue)) || 18,
     theme: 'day'
 }
 export const headerSlice = createSlice({
@@ -15,6 +16,7 @@ export const headerSlice = createSlice({
     reducers: {
         setFontSize: (state, action: PayloadAction<number>) => {
             state.fontSize += action.payload
+            localStorage.setItem(fontSizeValue, String(state.fontSize))
         },
         setTheme: (state, action: PayloadAction<Theme>) =>{
             state.theme = action.payload

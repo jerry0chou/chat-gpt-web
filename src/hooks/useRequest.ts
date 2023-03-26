@@ -15,7 +15,7 @@ interface Response {
 export default function useRequest(messages: ChatCompletionRequestMessage[], refreshCount: number, messageApi: MessageInstance): Response {
     const dispatch = useAppDispatch();
     const [chat, setChat] = useState<Chat>({content: [], role: "system"})
-    const [cookies, setCookie] = useCookies([openAIToken]);
+    const [cookies] = useCookies([openAIToken]);
     useEffect(() => {
         if (messages.length === 0 || refreshCount === 0) return;
         if (!cookies.openAIToken) {
