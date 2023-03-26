@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Avatar, Card} from "antd";
 import './index.css'
 import cs from 'classnames'
@@ -12,18 +12,14 @@ export interface Chat {
     content: string[]
 }
 
-export interface ChatListProps {
-    data: Chat[]
-}
 
-export default function ChatList(p: ChatListProps) {
+export default function ChatList() {
     const url = 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg';
-    const {fontSize} = useAllStates()
-    console.log('fontSize=', fontSize)
+    const {fontSize, chatList} = useAllStates()
     return (
         <div className="chat-list-container">
             {
-                p.data.map((item, index) => {
+                chatList.map((item, index) => {
                     return (<div className="chat-box" key={index}>
                         <Card style={{width: '95%'}}>
                             {

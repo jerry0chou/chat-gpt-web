@@ -7,17 +7,19 @@ import {openAIToken} from "../util/constanst";
 import {MessageInstance} from "antd/es/message/interface";
 import {useAppDispatch} from "./storeHooks";
 import {setLoading} from "../store/reducer/chat";
+import useAllStates from "./useAllStates";
 
 interface Response {
     systemReply: Chat
 }
 
-export default function useRequest(messages: ChatCompletionRequestMessage[], refreshCount: number, messageApi: MessageInstance): Response {
+export default function useRequest( refreshCount: number, messageApi: MessageInstance): Response {
     const dispatch = useAppDispatch();
     const [chat, setChat] = useState<Chat>({content: [], role: "system"})
     const [cookies] = useCookies([openAIToken]);
+    const { questionList} = useAllStates();
     useEffect(() => {
-        if (messages.length === 0 || refreshCount === 0) return;
+        if (questionList.length === 0 || refreshCount === 0) return;
         if (!cookies.openAIToken) {
             console.log('openAIToken none', openAIToken)
             messageApi.open({
@@ -27,7 +29,8 @@ export default function useRequest(messages: ChatCompletionRequestMessage[], ref
             return;
         }
         dispatch(setLoading(true))
-        requestAns(messages, cookies.openAIToken).then((res) => {
+        // console.log('questionList', questionList, cookies.openAIToken)
+        requestAns(questionList, cookies.openAIToken).then((res) => {
             console.log(res)
             if(!res.data){
                 messageApi.error(res.data, 4)
@@ -35,7 +38,6 @@ export default function useRequest(messages: ChatCompletionRequestMessage[], ref
             let msg: string[] = []
             res.data.choices.forEach(item => {
                 const array = item?.message?.content?.split('\n') || []
-                console.log('array', array)
                 for (const m of array) {
                     if (m.length > 0) {
                         msg.push(m)
@@ -51,7 +53,7 @@ export default function useRequest(messages: ChatCompletionRequestMessage[], ref
             messageApi.error(JSON.stringify(err.message), 4)
             dispatch(setLoading(false))
         })
-    }, [messages, refreshCount])
+    }, [ refreshCount])
 
     return { systemReply: chat}
 

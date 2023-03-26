@@ -5,24 +5,22 @@ import {ChatCompletionRequestMessage} from "openai";
 import useAllStates from "../../hooks/useAllStates";
 const {Search} = Input;
 export interface InputAreaProps{
-    userQuestion: ChatCompletionRequestMessage[]
     onSubmit: (value:string)=>void
-
 }
 export default function InputArea(p: InputAreaProps){
+    const {loading, questionList} = useAllStates()
     const [inputValue, setInputValue] = useState('')
-    const currentIndex = useRef(p.userQuestion.length-1)
-    const {loading} = useAllStates()
+    const currentIndex = useRef(questionList.length-1)
     const onInputChange = (e: any) => {
         setInputValue(e?.target?.value || '')
     }
     const onKeyUp = (e: any)=>{
         let index = currentIndex.current
         if(e.code === 'ArrowUp' && index>=1){
-           setInputValue(p.userQuestion[index-1].content)
+           setInputValue(questionList[index-1].content)
             index-=1
-        }else if(e.code === 'ArrowDown'&& index<p.userQuestion.length-1){
-            setInputValue(p.userQuestion[index+1].content)
+        }else if(e.code === 'ArrowDown'&& index<questionList.length-1){
+            setInputValue(questionList[index+1].content)
             index+=1
         }
         currentIndex.current = index

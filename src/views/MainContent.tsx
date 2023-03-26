@@ -6,12 +6,15 @@ import InputArea from "../components/InputArea/InputArea";
 import ChatList, {Chat} from "../components/ChatList/ChatList";
 import useRequest from "../hooks/useRequest";
 import Header from "../components/Header/Header";
+import useAllStates from "../hooks/useAllStates";
+import {useAppDispatch} from "../hooks/storeHooks";
+import {setChatList} from "../store/reducer/chat";
 export default function MainContent() {
-    const messages = useRef<ChatCompletionRequestMessage[]>([])
+    const dispatch = useAppDispatch();
     const [refreshCount, setRefreshCount] = useState(0)
     const [messageApi, contextHolder] = message.useMessage();
-    const {systemReply} = useRequest(messages.current, refreshCount, messageApi)
-    const [chatList, setChatList] = useState<Chat[]>([])
+    const {systemReply} = useRequest(refreshCount, messageApi)
+    const {chatList} = useAllStates()
     const scrollRef = useRef(null)
 
     const scrollToBottom = () => {
@@ -23,7 +26,7 @@ export default function MainContent() {
 
     useEffect(() => {
         if (systemReply.content.length > 0) {
-            setChatList(prevState => prevState.concat(systemReply))
+            dispatch(setChatList(chatList.concat(systemReply)))
             scrollToBottom()
         }
     }, [systemReply])
@@ -33,19 +36,15 @@ export default function MainContent() {
             role: "user",
             content: [value]
         }
-        chatList.push(user)
-        messages.current.push({
-            role: "user",
-            content: value
-        })
-        setChatList([...chatList])
+        const newChatList = chatList.concat(user)
+        dispatch(setChatList(newChatList))
         setRefreshCount(prevState => prevState + 1)
     }
     return (<div className="main-container">
         {contextHolder}
         <Header/>
-        <ChatList data={chatList}/>
-        <InputArea onSubmit={onSubmit} userQuestion={messages.current}/>
+        <ChatList/>
+        <InputArea onSubmit={onSubmit}/>
         <div ref={scrollRef}/>
     </div>)
 }
