@@ -8,10 +8,13 @@ export interface MenuItem{
 export interface MenuState{
     menuList: MenuItem[],
     currentTabKey: string,
+    isInit: boolean
 }
+const key = localStorage.getItem(currentTabKey) || '0'
 const initialState: MenuState = {
     menuList: localStorage.getItem(menuList) ? JSON.parse(localStorage.getItem(menuList) as string) : [],
-    currentTabKey: localStorage.getItem(currentTabKey) || '',
+    currentTabKey: key,
+    isInit: key !== "0"
 }
 
 export const menuSlice = createSlice({
@@ -32,9 +35,12 @@ export const menuSlice = createSlice({
             state.menuList.splice(index, 1)
             localStorage.setItem(menuList, JSON.stringify(state.menuList));
             localStorage.removeItem(key)
+        },
+        init: (state) => {
+            state.isInit = true
         }
     }
 })
 
-export const { setMenuList, setCurrentTabKey, deleteTab} = menuSlice.actions
+export const { setMenuList, setCurrentTabKey, deleteTab, init} = menuSlice.actions
 export default menuSlice.reducer

@@ -15,7 +15,7 @@ const NewChat = {
 export default function SideMenu() {
     const dispatch = useAppDispatch();
     const [theme, setTheme] = useState<MenuTheme>('dark');
-    const {menuList, currentTabKey} = useAllStates()
+    const {menuList, currentTabKey, isInit} = useAllStates()
     const [localMenuList, setLocalMenuList] = useState<MenuProps['items']>([
         NewChat,
         ...menuList
@@ -26,16 +26,25 @@ export default function SideMenu() {
     useEffect(()=>{
         dispatch(updateChatListFromLocalStorage())
     }, [currentTabKey])
+
+    useEffect(()=>{
+        if(!isInit){
+            newChat()
+        }
+    }, [isInit])
+    const newChat = ()=>{
+        const newKey = String(new Date().getTime())
+        const newMenu: MenuItem = {
+            label: 'New Chat' + localMenuList?.length,
+            key: newKey
+        }
+        setLocalMenuList(prevState => prevState?.concat(newMenu))
+        dispatch(setMenuList(menuList.concat(newMenu)))
+        dispatch(setCurrentTabKey(newKey))
+    }
     const onClick: MenuProps['onClick'] = (e) => {
         if (e.key === '0') {
-            const newKey = String(new Date().getTime())
-            const newMenu: MenuItem = {
-                label: 'New Chat' + localMenuList?.length,
-                key: newKey
-            }
-            setLocalMenuList(prevState => prevState?.concat(newMenu))
-            dispatch(setMenuList(menuList.concat(newMenu)))
-            dispatch(setCurrentTabKey(newKey))
+            newChat()
         } else {
             dispatch(setCurrentTabKey(e.key))
         }
