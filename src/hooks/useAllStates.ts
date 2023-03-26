@@ -12,5 +12,8 @@ export default function useAllStates(){
             questionList.push({ role: 'user', content: chat.content.join('\n')})
         }
     }
-    return {fontSize, theme, loading, chatList, questionList};
+
+    const menuList = useAppSelector(state => state.menu.menuList)
+
+    return {fontSize, theme, loading, chatList, questionList, menuList};
 }

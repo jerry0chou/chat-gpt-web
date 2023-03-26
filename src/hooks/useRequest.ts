@@ -29,6 +29,7 @@ export default function useRequest( refreshCount: number, messageApi: MessageIns
             return;
         }
         dispatch(setLoading(true))
+        if(true) return;
         // console.log('questionList', questionList, cookies.openAIToken)
         requestAns(questionList, cookies.openAIToken).then((res) => {
             console.log(res)

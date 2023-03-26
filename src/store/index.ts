@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import headerSlice from "./reducer/header";
 import chatSlice from "./reducer/chat";
+import menuSlice from "./reducer/menu";
 export const store =  configureStore({
     reducer: {
         header: headerSlice,
         chat: chatSlice,
+        menu: menuSlice,
     }
 })
 export type AppDispatch = typeof store.dispatch;
