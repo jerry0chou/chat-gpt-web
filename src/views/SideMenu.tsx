@@ -5,20 +5,21 @@ import type {MenuProps, MenuTheme} from 'antd';
 import {Menu} from 'antd';
 import useAllStates from "../hooks/useAllStates";
 import {useAppDispatch} from "../hooks/storeHooks";
-import {MenuItem, setCurrentTabKey, setMenuList} from "../store/reducer/menu";
+import {deleteTab, MenuItem, setCurrentTabKey, setMenuList} from "../store/reducer/menu";
 import {updateChatListFromLocalStorage} from "../store/reducer/chat";
+const NewChat = {
+    label: 'New Chat',
+    key: '0',
+    icon: <PlusOutlined/>,
+}
 export default function SideMenu() {
     const dispatch = useAppDispatch();
     const [theme, setTheme] = useState<MenuTheme>('dark');
     const {menuList, currentTabKey} = useAllStates()
-    const [localMenuList, setLocalMenuList] = useState<MenuProps['items']>([{
-        label: 'New Chat',
-        key: '0',
-        icon: <PlusOutlined/>,
-    },
+    const [localMenuList, setLocalMenuList] = useState<MenuProps['items']>([
+        NewChat,
         ...menuList
     ])
-    console.log('menuList', menuList)
     const changeTheme = (value: boolean) => {
         setTheme(value ? 'dark' : 'light');
     };
@@ -26,7 +27,6 @@ export default function SideMenu() {
         dispatch(updateChatListFromLocalStorage())
     }, [currentTabKey])
     const onClick: MenuProps['onClick'] = (e) => {
-        console.log('click ', e);
         if (e.key === '0') {
             const newKey = String(new Date().getTime())
             const newMenu: MenuItem = {
@@ -40,10 +40,20 @@ export default function SideMenu() {
             dispatch(setCurrentTabKey(e.key))
         }
     };
+    const onKeyUp: MenuProps['onKeyUp'] = (e) => {
+        if(e.code === 'Delete' && currentTabKey !== '0'){
+            console.log('delete')
+            const newMenuList = localMenuList?.filter(item => item?.key !== currentTabKey)
+            setLocalMenuList(newMenuList)
+            dispatch(deleteTab(currentTabKey))
+            dispatch(setCurrentTabKey('0'))
+        }
+    }
     return (
         <div className="side-menu-container">
             <Menu style={{width: 256, height: '100vh'}} theme={theme}
                   onClick={onClick}
+                  onKeyUp={onKeyUp}
                   selectedKeys={[currentTabKey]} mode="inline"
                   items={localMenuList}/>
         </div>

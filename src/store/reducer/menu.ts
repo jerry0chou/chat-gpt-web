@@ -25,9 +25,16 @@ export const menuSlice = createSlice({
         setCurrentTabKey: (state , action) => {
             state.currentTabKey = action.payload
             localStorage.setItem(currentTabKey, state.currentTabKey)
+        },
+        deleteTab: (state, action: PayloadAction<string>) => {
+            const key = action.payload
+            const index = state.menuList.findIndex(item => item.key === key)
+            state.menuList.splice(index, 1)
+            localStorage.setItem(menuList, JSON.stringify(state.menuList));
+            localStorage.removeItem(key)
         }
     }
 })
 
-export const {setMenuList, setCurrentTabKey} = menuSlice.actions
+export const { setMenuList, setCurrentTabKey, deleteTab} = menuSlice.actions
 export default menuSlice.reducer

@@ -27,7 +27,6 @@ export const chatSlice = createSlice({
         },
         updateChatListFromLocalStorage: (state) => {
             const key = localStorage.getItem(currentTabKey) || ''
-            console.log(localStorage.getItem(key) || '')
             state.chatList = JSON.parse(localStorage.getItem(key) || '[]') || []
         }
     }
