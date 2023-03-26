@@ -1,14 +1,16 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Chat} from "../../components/ChatList/ChatList";
+import {chatList, currentTabKey} from "../../util/constanst";
 
 export interface ChatState {
     loading: boolean;
     chatList: Chat[]
 }
 
+const key = localStorage.getItem(currentTabKey) || ''
 const initialState: ChatState = {
     loading: false,
-    chatList: localStorage.getItem('chatList') ? JSON.parse(localStorage.getItem('chatList') as string) : []
+    chatList: JSON.parse(localStorage.getItem(key) || '[]')
 }
 
 export const chatSlice = createSlice({
@@ -20,10 +22,16 @@ export const chatSlice = createSlice({
         },
         setChatList: (state, action: PayloadAction<Chat[]>) => {
             state.chatList = action.payload;
-            localStorage.setItem('chatList', JSON.stringify(state.chatList));
+            const key = localStorage.getItem(currentTabKey)
+            key && localStorage.setItem(key, JSON.stringify(state.chatList));
+        },
+        updateChatListFromLocalStorage: (state) => {
+            const key = localStorage.getItem(currentTabKey) || ''
+            console.log(localStorage.getItem(key) || '')
+            state.chatList = JSON.parse(localStorage.getItem(key) || '[]') || []
         }
     }
 })
 
-export const {setLoading, setChatList} = chatSlice.actions;
+export const {setLoading, setChatList, updateChatListFromLocalStorage} = chatSlice.actions;
 export default chatSlice.reducer;

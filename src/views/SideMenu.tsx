@@ -5,25 +5,12 @@ import type {MenuProps, MenuTheme} from 'antd';
 import {Menu} from 'antd';
 import useAllStates from "../hooks/useAllStates";
 import {useAppDispatch} from "../hooks/storeHooks";
-import {MenuItem, setMenuList} from "../store/reducer/menu";
-
-const items: MenuProps['items'] = [
-    {
-        label: 'New Chat',
-        key: '0',
-        icon: <PlusOutlined/>,
-    },
-    {
-        label: 'Hello world',
-        key: 'B',
-    },
-];
+import {MenuItem, setCurrentTabKey, setMenuList} from "../store/reducer/menu";
+import {updateChatListFromLocalStorage} from "../store/reducer/chat";
 export default function SideMenu() {
     const dispatch = useAppDispatch();
     const [theme, setTheme] = useState<MenuTheme>('dark');
-    const [current, setCurrent] = useState('A');
-
-    const {menuList} = useAllStates()
+    const {menuList, currentTabKey} = useAllStates()
     const [localMenuList, setLocalMenuList] = useState<MenuProps['items']>([{
         label: 'New Chat',
         key: '0',
@@ -35,6 +22,9 @@ export default function SideMenu() {
     const changeTheme = (value: boolean) => {
         setTheme(value ? 'dark' : 'light');
     };
+    useEffect(()=>{
+        dispatch(updateChatListFromLocalStorage())
+    }, [currentTabKey])
     const onClick: MenuProps['onClick'] = (e) => {
         console.log('click ', e);
         if (e.key === '0') {
@@ -45,16 +35,16 @@ export default function SideMenu() {
             }
             setLocalMenuList(prevState => prevState?.concat(newMenu))
             dispatch(setMenuList(menuList.concat(newMenu)))
-            setCurrent(newKey);
+            dispatch(setCurrentTabKey(newKey))
         } else {
-            setCurrent(e.key);
+            dispatch(setCurrentTabKey(e.key))
         }
     };
     return (
         <div className="side-menu-container">
             <Menu style={{width: 256, height: '100vh'}} theme={theme}
                   onClick={onClick}
-                  selectedKeys={[current]} mode="inline"
+                  selectedKeys={[currentTabKey]} mode="inline"
                   items={localMenuList}/>
         </div>
 

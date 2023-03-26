@@ -14,6 +14,6 @@ export default function useAllStates(){
     }
 
     const menuList = useAppSelector(state => state.menu.menuList)
-
-    return {fontSize, theme, loading, chatList, questionList, menuList};
+    const currentTabKey = useAppSelector(state => state.menu.currentTabKey)
+    return {fontSize, theme, loading, chatList, questionList, menuList, currentTabKey};
 }

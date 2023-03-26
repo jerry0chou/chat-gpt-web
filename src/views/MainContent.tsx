@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from "react";
-import {ChatCompletionRequestMessage} from "openai";
 import {message} from 'antd';
 import './views.css'
 import InputArea from "../components/InputArea/InputArea";
