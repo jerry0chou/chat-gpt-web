@@ -4,16 +4,16 @@ import {ChatCompletionRequestMessage} from "openai";
 import {Chat} from "../components/ChatList/ChatList";
 import {useCookies} from "react-cookie";
 import {openAIToken} from "../util/constanst";
-import {message} from "antd";
 import {MessageInstance} from "antd/es/message/interface";
+import {useAppDispatch} from "./storeHooks";
+import {setLoading} from "../store/reducer/chat";
 
 interface Response {
-    loading: boolean;
     systemReply: Chat
 }
 
 export default function useRequest(messages: ChatCompletionRequestMessage[], refreshCount: number, messageApi: MessageInstance): Response {
-    const [loading, setLoading] = useState(false);
+    const dispatch = useAppDispatch();
     const [chat, setChat] = useState<Chat>({content: [], role: "system"})
     const [cookies, setCookie] = useCookies([openAIToken]);
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function useRequest(messages: ChatCompletionRequestMessage[], ref
             })
             return;
         }
-        setLoading(true)
+        dispatch(setLoading(true))
         requestAns(messages, cookies.openAIToken).then((res) => {
             console.log(res)
             if(!res.data){
@@ -46,13 +46,13 @@ export default function useRequest(messages: ChatCompletionRequestMessage[], ref
                 role: "system",
                 content: msg
             })
-            setLoading(false)
+            dispatch(setLoading(false))
         }).catch(err => {
             messageApi.error(JSON.stringify(err.message), 4)
-            setLoading(false)
+            dispatch(setLoading(false))
         })
     }, [messages, refreshCount])
 
-    return {loading, systemReply: chat}
+    return { systemReply: chat}
 
 }

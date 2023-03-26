@@ -10,7 +10,7 @@ export default function MainContent() {
     const messages = useRef<ChatCompletionRequestMessage[]>([])
     const [refreshCount, setRefreshCount] = useState(0)
     const [messageApi, contextHolder] = message.useMessage();
-    const {loading, systemReply} = useRequest(messages.current, refreshCount, messageApi)
+    const {systemReply} = useRequest(messages.current, refreshCount, messageApi)
     const [chatList, setChatList] = useState<Chat[]>([])
     const scrollRef = useRef(null)
 
@@ -43,9 +43,9 @@ export default function MainContent() {
     }
     return (<div className="main-container">
         {contextHolder}
-        <Header loading={loading}/>
+        <Header/>
         <ChatList data={chatList}/>
-        <InputArea loading={loading} onSubmit={onSubmit} userQuestion={messages.current}/>
+        <InputArea onSubmit={onSubmit} userQuestion={messages.current}/>
         <div ref={scrollRef}/>
     </div>)
 }

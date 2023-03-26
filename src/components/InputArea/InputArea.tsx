@@ -2,9 +2,9 @@ import React, {useRef, useState} from "react";
 import {Input} from "antd";
 import './index.css'
 import {ChatCompletionRequestMessage} from "openai";
+import useAllStates from "../../hooks/useAllStates";
 const {Search} = Input;
 export interface InputAreaProps{
-    loading: boolean;
     userQuestion: ChatCompletionRequestMessage[]
     onSubmit: (value:string)=>void
 
@@ -12,6 +12,7 @@ export interface InputAreaProps{
 export default function InputArea(p: InputAreaProps){
     const [inputValue, setInputValue] = useState('')
     const currentIndex = useRef(p.userQuestion.length-1)
+    const {loading} = useAllStates()
     const onInputChange = (e: any) => {
         setInputValue(e?.target?.value || '')
     }
@@ -31,7 +32,7 @@ export default function InputArea(p: InputAreaProps){
             <div className="input-area-container">
                 <Search style={{width: '95%'}} placeholder="input questions here~ "
                         enterButton="Submit" size="large"
-                        loading={p.loading}
+                        loading={loading}
                         allowClear
                         value={inputValue}
                         onKeyUp={onKeyUp}

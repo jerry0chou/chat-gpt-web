@@ -6,13 +6,12 @@ import {apiModelName} from "../../util/constanst";
 import { LoadingOutlined } from '@ant-design/icons';
 import {useAppDispatch} from "../../hooks/storeHooks";
 import {setFontSize} from "../../store/reducer/header";
+import useAllStates from "../../hooks/useAllStates";
 
 export type FontKind = 'A+' |'A-'
-interface SettingProps{
-    loading: boolean
-}
-export default function Header(p: SettingProps){
+export default function Header(){
     const dispatch = useAppDispatch();
+    const {loading} = useAllStates()
     const [visible, setVisible] = useState(false)
     const onItemClick = (kind: 'Token' | FontKind)=>{
         if(kind === 'Token'){
@@ -31,8 +30,8 @@ export default function Header(p: SettingProps){
         <Tag color="blue">Copyright@Jerry</Tag>
         <Tag color="cyan">{apiModelName}</Tag>
         {
-            p.loading? <div className="refresh-status">
-            <Spin indicator={antIcon} spinning={p.loading}/>
+            loading? <div className="refresh-status">
+            <Spin indicator={antIcon} spinning={loading}/>
             </div>: <div/>
         }
         <MyModal isOpen={visible} close={ ()=> setVisible(false)}/>
