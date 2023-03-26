@@ -22,3 +22,4 @@ export const headerSlice = createSlice({
     }
 })
 export const {setFontSize, setTheme} = headerSlice.actions
+export default headerSlice.reducer

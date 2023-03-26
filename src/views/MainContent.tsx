@@ -5,18 +5,13 @@ import './views.css'
 import InputArea from "../components/InputArea/InputArea";
 import ChatList, {Chat} from "../components/ChatList/ChatList";
 import useRequest from "../hooks/useRequest";
-import Header, {FontKind} from "../components/Header/Header";
-import {useCookies} from "react-cookie";
-import {fontSizeValue} from "../util/constanst";
-
+import Header from "../components/Header/Header";
 export default function MainContent() {
     const messages = useRef<ChatCompletionRequestMessage[]>([])
     const [refreshCount, setRefreshCount] = useState(0)
     const [messageApi, contextHolder] = message.useMessage();
     const {loading, systemReply} = useRequest(messages.current, refreshCount, messageApi)
     const [chatList, setChatList] = useState<Chat[]>([])
-    const [cookies, setCookie] = useCookies([fontSizeValue]);
-    const fontSize = useRef<number>(Number(cookies.fontSizeValue) || 18)
     const scrollRef = useRef(null)
 
     const scrollToBottom = () => {
@@ -46,17 +41,10 @@ export default function MainContent() {
         setChatList([...chatList])
         setRefreshCount(prevState => prevState + 1)
     }
-    const adjustFontSize = (kind: FontKind) => {
-        if (kind === 'A+')
-            fontSize.current += 1
-        else
-            fontSize.current -= 1
-        setCookie(fontSizeValue, Number(fontSize.current))
-    }
     return (<div className="main-container">
         {contextHolder}
-        <Header adjustFontSize={adjustFontSize} loading={loading}/>
-        <ChatList data={chatList} fontSize={fontSize.current}/>
+        <Header loading={loading}/>
+        <ChatList data={chatList}/>
         <InputArea loading={loading} onSubmit={onSubmit} userQuestion={messages.current}/>
         <div ref={scrollRef}/>
     </div>)

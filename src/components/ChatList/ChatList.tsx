@@ -5,6 +5,7 @@ import cs from 'classnames'
 import CodeDisplay from "../CodeDisplay/CodeDisplay";
 import {tidyContent} from "../../util/tidyContent";
 import PlainTextDisplay from "../PlainTextDisplay/PlainTextDisplay";
+import useAllStates from "../../hooks/useAllStates";
 
 export interface Chat {
     role: 'system' | 'user';
@@ -13,13 +14,12 @@ export interface Chat {
 
 export interface ChatListProps {
     data: Chat[]
-    fontSize: number
 }
 
 export default function ChatList(p: ChatListProps) {
     const url = 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg';
-    // const clsObj = cs({'is-first-line': true})
-    console.log('p', p.fontSize)
+    const {fontSize} = useAllStates()
+    console.log('fontSize=', fontSize)
     return (
         <div className="chat-list-container">
             {
@@ -39,7 +39,7 @@ export default function ChatList(p: ChatListProps) {
                                         return (
                                             <div key={index2}>
                                                 {item.kind === 'plain' ?
-                                                    <PlainTextDisplay content={item.content} fontSize={p.fontSize}/> :
+                                                    <PlainTextDisplay content={item.content} fontSize={fontSize}/> :
                                                     <CodeDisplay language={'js'} code={item.content} key={index2}/>}
                                             </div>
                                         )

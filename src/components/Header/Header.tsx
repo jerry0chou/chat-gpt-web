@@ -4,19 +4,23 @@ import {Avatar, Spin, Tag} from 'antd';
 import MyModal from "../Modal/Modal";
 import {apiModelName} from "../../util/constanst";
 import { LoadingOutlined } from '@ant-design/icons';
+import {useAppDispatch} from "../../hooks/storeHooks";
+import {setFontSize} from "../../store/reducer/header";
 
 export type FontKind = 'A+' |'A-'
 interface SettingProps{
     loading: boolean
-    adjustFontSize: (kind: FontKind)=>void
 }
 export default function Header(p: SettingProps){
+    const dispatch = useAppDispatch();
     const [visible, setVisible] = useState(false)
     const onItemClick = (kind: 'Token' | FontKind)=>{
         if(kind === 'Token'){
             setVisible(true)
-        }else {
-            p.adjustFontSize(kind)
+        }else if(kind === 'A+'){
+            dispatch(setFontSize(1))
+        } else if(kind === 'A-'){
+            dispatch(setFontSize(-1))
         }
     }
     const antIcon = <LoadingOutlined style={{ fontSize: 32 }} spin />;
