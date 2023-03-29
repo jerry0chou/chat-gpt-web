@@ -7,6 +7,7 @@ import useAllStates from "../hooks/useAllStates";
 import {useAppDispatch} from "../hooks/storeHooks";
 import {deleteTab, MenuItem, setCurrentTabKey, setMenuList} from "../store/reducer/menu";
 import {updateChatListFromLocalStorage} from "../store/reducer/chat";
+
 const NewChat = {
     label: 'New Chat',
     key: '0',
@@ -23,7 +24,7 @@ export default function SideMenu() {
     const changeTheme = (value: boolean) => {
         setTheme(value ? 'dark' : 'light');
     };
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(updateChatListFromLocalStorage())
     }, [currentTabKey])
 
@@ -32,7 +33,7 @@ export default function SideMenu() {
             newChat()
         }
     }, [isInit])
-    const newChat = ()=>{
+    const newChat = () => {
         const newKey = String(new Date().getTime())
         const newMenu: MenuItem = {
             label: 'New Chat' + localMenuList?.length,
@@ -50,8 +51,9 @@ export default function SideMenu() {
         }
     };
     const onKeyUp: MenuProps['onKeyUp'] = (e) => {
-        if(e.code === 'Delete' && currentTabKey !== '0'){
-            console.log('delete')
+        // @ts-ignore
+        if (localMenuList?.length <= 2) return;
+        if ((e.code === 'Delete' || e.code === 'Backspace') && currentTabKey !== '0') {
             const newMenuList = localMenuList?.filter(item => item?.key !== currentTabKey)
             setLocalMenuList(newMenuList)
             dispatch(deleteTab(currentTabKey))
