@@ -8,3 +8,8 @@ export const MainContainer = styled.div<{ theme: Theme }>`
   overflow: scroll;
   ${p=> p.theme === Theme.night ? nightTheme : dayTheme}
 `
+export const AppContainer = styled.div<{theme: Theme}>`
+  display: flex;
+  flex-direction: row;
+  ${p=> p.theme === Theme.night ? nightTheme : dayTheme}
+`

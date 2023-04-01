@@ -2,6 +2,7 @@
 .app-container{
     display: flex;
     flex-direction: row;
+    background-color: aqua;
 }
 .main-container{
     height: 100vh;
