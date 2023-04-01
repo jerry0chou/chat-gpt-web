@@ -6,6 +6,7 @@ import CodeDisplay from "../CodeDisplay/CodeDisplay";
 import {tidyContent} from "../../util/tidyContent";
 import PlainTextDisplay from "../PlainTextDisplay/PlainTextDisplay";
 import useAllStates from "../../hooks/useAllStates";
+import {CardContainer, ChatListContainer} from "./css";
 
 export interface Chat {
     role: 'system' | 'user';
@@ -15,13 +16,13 @@ export interface Chat {
 
 export default function ChatList() {
     const url = 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg';
-    const {fontSize, chatList} = useAllStates()
+    const {fontSize, chatList, theme} = useAllStates()
     return (
-        <div className="chat-list-container">
+        <ChatListContainer>
             {
                 chatList.map((item, index) => {
                     return (<div className="chat-box" key={index}>
-                        <Card style={{width: '95%'}}>
+                        <CardContainer theme={theme}>
                             {
                                 item.role === 'system' ? <div className="profile-container">
                                     <Avatar size={40} src={url}/>
@@ -42,10 +43,10 @@ export default function ChatList() {
                                     })
                                 }
                             </div>
-                        </Card>
+                        </CardContainer>
                     </div>)
                 })
             }
-        </div>
+        </ChatListContainer>
     )
 }

@@ -36,11 +36,11 @@ export const TokenIcon = styled(TokenSVG)`${svgStyle}`
 export const FontMinusIcon = styled(FontMinusSVG)`${svgStyle}`
 export const FontPlusIcon = styled(FontPlusSVG)`${svgStyle}`
 
-const darkTheme = css`
+const headerNightTheme = css`
   background-color: #000000;
   background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 `
-const dayTheme = css`
+const headerDayTheme = css`
   background-color: #ffffff;
   background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);  
 `
@@ -51,13 +51,13 @@ const baseHeaderStyle = css`
   height: 50px;
   width: calc(100vw - 256px);
   align-items: center;
-  border-bottom: #e7e1e1 1px solid;
   gap: 12px;
   z-index: 2;
 `
 export const HeaderContainer = styled.div<{ theme: Theme }>`
   ${baseHeaderStyle}
-  ${({theme}) => theme === Theme.night ? darkTheme : dayTheme}
+  ${({theme}) => theme === Theme.night ? headerNightTheme : headerDayTheme}
+  border-bottom: ${p=> p.theme === Theme.day? '#e7e1e1': ''} 1px solid;
 `;
 
 interface iTagProps {

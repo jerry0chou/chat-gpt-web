@@ -9,12 +9,13 @@ import useAllStates from "../hooks/useAllStates";
 import {useAppDispatch} from "../hooks/storeHooks";
 import {setChatList} from "../store/reducer/chat";
 import {init} from "../store/reducer/menu";
+import {MainContainer} from "./css";
 export default function MainContent() {
     const dispatch = useAppDispatch();
     const [refreshCount, setRefreshCount] = useState(0)
     const [messageApi, contextHolder] = message.useMessage();
     const {systemReply} = useRequest(refreshCount, messageApi)
-    const {chatList, isInit} = useAllStates()
+    const {chatList, isInit, theme} = useAllStates()
     const scrollRef = useRef(null)
 
     const scrollToBottom = () => {
@@ -43,11 +44,11 @@ export default function MainContent() {
         dispatch(setChatList(newChatList))
         setRefreshCount(prevState => prevState + 1)
     }
-    return (<div className="main-container">
+    return (<MainContainer theme={theme}>
         {contextHolder}
         <Header/>
         <ChatList/>
         <InputArea onSubmit={onSubmit}/>
         <div ref={scrollRef}/>
-    </div>)
+    </MainContainer>)
 }
