@@ -11,12 +11,3 @@
     z-index: 2;
 }
 
-.refresh-status{
-    width: 28px;
-    height: 28px;
-    background: rgba(42, 252, 244, 0.35);
-    border-radius: 50%;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-}

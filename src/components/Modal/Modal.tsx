@@ -33,7 +33,7 @@ export default function MyModal(p: ModalProps){
                footer={null}
         >
             <Search
-                placeholder="input search text"
+                placeholder="input openAI token here"
                 allowClear
                 enterButton="Save"
                 size="large"
