@@ -12,9 +12,9 @@
 }
 
 .refresh-status{
-    width: 32px;
-    height: 32px;
-    background: rgba(84, 245, 252, 0.35);
+    width: 28px;
+    height: 28px;
+    background: rgba(42, 252, 244, 0.35);
     border-radius: 50%;
     display: flex;
     align-content: center;

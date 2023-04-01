@@ -24,6 +24,7 @@
     "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
     "react-syntax-highlighter": "^15.5.0",
+    "styled-components": "^5.3.9",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.19"
@@ -33,6 +34,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "resolutions": {
+    "styled-components": "5.3.9"
   },
   "eslintConfig": {
     "extends": [
@@ -51,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26"
   }
 }

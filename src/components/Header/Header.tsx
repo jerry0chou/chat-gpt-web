@@ -1,39 +1,40 @@
 import React, {useState} from "react";
 import './index.css'
-import {Avatar, Spin, Tag} from 'antd';
+import {Tag} from 'antd';
 import MyModal from "../Modal/Modal";
 import {apiModelName} from "../../util/constanst";
-import { LoadingOutlined } from '@ant-design/icons';
+import {LoadingOutlined, SyncOutlined} from '@ant-design/icons';
 import {useAppDispatch} from "../../hooks/storeHooks";
 import {setFontSize} from "../../store/reducer/header";
 import useAllStates from "../../hooks/useAllStates";
+import {DayIcon, FontMinusIcon, FontPlusIcon, NightIcon, TokenIcon} from "./css";
 
-export type FontKind = 'A+' |'A-'
-export default function Header(){
+export type FontKind = 'A+' | 'A-'
+export default function Header() {
     const dispatch = useAppDispatch();
     const {loading} = useAllStates()
     const [visible, setVisible] = useState(false)
-    const onItemClick = (kind: 'Token' | FontKind)=>{
-        if(kind === 'Token'){
+    const onItemClick = (kind: 'Token' | FontKind) => {
+        if (kind === 'Token') {
             setVisible(true)
-        }else if(kind === 'A+'){
+        } else if (kind === 'A+') {
             dispatch(setFontSize(1))
-        } else if(kind === 'A-'){
+        } else if (kind === 'A-') {
             dispatch(setFontSize(-1))
         }
     }
-    const antIcon = <LoadingOutlined style={{ fontSize: 32 }} spin />;
-    return(<div className="header-container">
-        <Avatar onClick={()=>onItemClick('Token')} style={{ backgroundColor: '#d1f1e9', color: '#0288a2', marginRight: 12 }}>T</Avatar>
-        <Avatar onClick={()=> onItemClick('A+')} style={{ backgroundColor: '#fde3cf', color: '#f56a00' }}>A+</Avatar>
-        <Avatar onClick={()=> onItemClick('A-')} style={{ backgroundColor: '#fde3cf', color: '#f56a00' }}>A-</Avatar>
-        <Tag color="blue">Copyright@Jerry</Tag>
-        <Tag color="cyan">{apiModelName}</Tag>
+    const antIcon = <LoadingOutlined style={{fontSize: 32}} spin/>;
+    return (<div className="header-container">
+        <TokenIcon style={{marginRight: 12}} size={26} color={'black'} onClick={() => onItemClick('Token')}/>
+        <DayIcon size={26} color={'black'}/>
+        <NightIcon size={26} color={'black'}/>
+        <FontMinusIcon size={32} color={'black'} onClick={() => onItemClick('A-')}/>
+        <FontPlusIcon size={32} color={'black'} onClick={() => onItemClick('A+')}/>
+        <Tag>Copyright@Jerry</Tag>
+        <Tag>{apiModelName}</Tag>
         {
-            loading? <div className="refresh-status">
-            <Spin indicator={antIcon} spinning={loading}/>
-            </div>: <div/>
+            loading ? <SyncOutlined spin/> : <div/>
         }
-        <MyModal isOpen={visible} close={ ()=> setVisible(false)}/>
+        <MyModal isOpen={visible} close={() => setVisible(false)}/>
     </div>)
 }
