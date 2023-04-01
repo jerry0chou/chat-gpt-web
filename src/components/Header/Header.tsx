@@ -5,31 +5,40 @@ import MyModal from "../Modal/Modal";
 import {apiModelName} from "../../util/constanst";
 import {LoadingOutlined, SyncOutlined} from '@ant-design/icons';
 import {useAppDispatch} from "../../hooks/storeHooks";
-import {setFontSize} from "../../store/reducer/header";
+import {setFontSize, setTheme, Theme} from "../../store/reducer/header";
 import useAllStates from "../../hooks/useAllStates";
 import {DayIcon, FontMinusIcon, FontPlusIcon, NightIcon, TokenIcon} from "./css";
 
-export type FontKind = 'A+' | 'A-'
+export enum FontOperation {
+    FontPlus = 'A+',
+     FontMinus = 'A-'
+}
 export default function Header() {
     const dispatch = useAppDispatch();
-    const {loading} = useAllStates()
+    const {loading, theme} = useAllStates()
     const [visible, setVisible] = useState(false)
-    const onItemClick = (kind: 'Token' | FontKind) => {
+    const onItemClick = (kind: 'Token' | FontOperation | Theme) => {
         if (kind === 'Token') {
             setVisible(true)
-        } else if (kind === 'A+') {
+        } else if (kind === FontOperation.FontPlus) {
             dispatch(setFontSize(1))
-        } else if (kind === 'A-') {
+        } else if (kind === FontOperation.FontMinus) {
             dispatch(setFontSize(-1))
+        } else if(kind === Theme.day) {
+            dispatch(setTheme(Theme.night))
+        }else if(kind === Theme.night){
+            dispatch(setTheme(Theme.day))
         }
     }
     const antIcon = <LoadingOutlined style={{fontSize: 32}} spin/>;
     return (<div className="header-container">
         <TokenIcon style={{marginRight: 12}} size={26} color={'black'} onClick={() => onItemClick('Token')}/>
-        <DayIcon size={26} color={'black'}/>
-        <NightIcon size={26} color={'black'}/>
-        <FontMinusIcon size={32} color={'black'} onClick={() => onItemClick('A-')}/>
-        <FontPlusIcon size={32} color={'black'} onClick={() => onItemClick('A+')}/>
+        {
+            theme === 'day' ? <DayIcon size={26} color={'black'} onClick={() => onItemClick(Theme.day)}/> :
+                <NightIcon size={26} color={'black'} onClick={() => onItemClick(Theme.night)}/>
+        }
+        <FontMinusIcon size={32} color={'black'} onClick={() => onItemClick(FontOperation.FontMinus)}/>
+        <FontPlusIcon size={32} color={'black'} onClick={() => onItemClick(FontOperation.FontPlus)}/>
         <Tag>Copyright@Jerry</Tag>
         <Tag>{apiModelName}</Tag>
         {
