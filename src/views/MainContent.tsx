@@ -20,9 +20,13 @@ export default function MainContent() {
 
     const scrollToBottom = () => {
         // @ts-ignore
-        if (scrollRef.current && scrollRef.current?.scrollIntoView) { // @ts-ignore
-            scrollRef.current?.scrollIntoView({behavior: "smooth"})
-        }
+        setTimeout(()=>{
+            // @ts-ignore
+            if (scrollRef.current && scrollRef.current?.scrollIntoView) {
+                // @ts-ignore
+                scrollRef.current?.scrollIntoView({top: document.body.scrollHeight,behavior: "smooth"})
+            }
+        },100)
     }
 
     useEffect(() => {
@@ -49,6 +53,7 @@ export default function MainContent() {
         <Header/>
         <ChatList/>
         <InputArea onSubmit={onSubmit}/>
-        <div ref={scrollRef}/>
+        <div style={{color: 'white'}}>I am here</div>
+        <div style={{width: 1, height: 1}} ref={scrollRef}/>
     </MainContainer>)
 }
