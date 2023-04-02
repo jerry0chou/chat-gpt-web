@@ -53,7 +53,6 @@ export default function MainContent() {
         <Header/>
         <ChatList/>
         <InputArea onSubmit={onSubmit}/>
-        <div style={{color: 'white'}}>I am here</div>
         <div style={{width: 1, height: 1}} ref={scrollRef}/>
     </MainContainer>)
 }
