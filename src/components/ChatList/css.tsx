@@ -11,7 +11,7 @@ export const ChatListContainer = styled.div`
 `
 const nightContentTheme = css`
   background-color: #485461;
-  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+  background-image: linear-gradient(to right top, #4891bb, #478bb9, #4886b7, #4980b5, #4c7ab2, #4b77b3, #4b73b4, #4c6fb5, #496cba, #486ac0, #4866c5, #4963c9);
 `
 const dayContentTheme = css`
   background-color: #f0f4f5;
@@ -19,7 +19,7 @@ const dayContentTheme = css`
 `
 const nightHoverTheme = css`
   background-color: #000000;
-  background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
+  background-image: linear-gradient(to right top, #41a3db, #3c9bd8, #3a92d5, #3b89d1, #3f80cd, #3f7cce, #4178cf, #4473d0, #4472d7, #4571de, #486fe5, #4d6deb);
 `
 
 const dayHoverTheme = css`

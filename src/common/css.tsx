@@ -5,5 +5,5 @@ export const dayTheme  = css`
 `
 export const nightTheme = css`
   background-color: #000000;
-  background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+  background-image: linear-gradient(to right top, #5c6670, #58616b, #535c66, #4f5761, #4b525c, #4a515c, #48515b, #47505b, #47545f, #485962, #495d65, #4a6167);
 `
