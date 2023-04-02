@@ -8,5 +8,5 @@ export const InputContainer = styled.div<{theme: Theme}>`
   height: 65px;
   align-items: center;
   justify-content: center;
-  background: ${p=> p.theme === Theme.day? '#ffffff': '#414141'};
+  background: ${p=> p.theme === Theme.day? '#ffffff': '#212125'};
 `
