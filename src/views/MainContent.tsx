@@ -10,38 +10,56 @@ import {useAppDispatch} from "../hooks/storeHooks";
 import {setChatList} from "../store/reducer/chat";
 import {init} from "../store/reducer/menu";
 import {MainContainer} from "./css";
+
 export default function MainContent() {
     const dispatch = useAppDispatch();
     const [refreshCount, setRefreshCount] = useState(0)
     const [messageApi, contextHolder] = message.useMessage();
-    const {systemReply} = useRequest(refreshCount, messageApi)
-    const {chatList, isInit, theme} = useAllStates()
+    useRequest(refreshCount, messageApi)
+    const {chatList, isInit, theme, loading, currentStreamChat} = useAllStates()
     const scrollRef = useRef(null)
 
     const scrollToBottom = () => {
         // @ts-ignore
-        setTimeout(()=>{
+        setTimeout(() => {
             // @ts-ignore
             if (scrollRef.current && scrollRef.current?.scrollIntoView) {
                 // @ts-ignore
-                scrollRef.current?.scrollIntoView({top: document.body.scrollHeight,behavior: "smooth"})
+                scrollRef.current?.scrollIntoView({top: document.body.scrollHeight, behavior: "smooth"})
             }
-        },100)
+        }, 100)
     }
+    useEffect(() => {
+        scrollToBottom()
+    }, [currentStreamChat])
+
 
     useEffect(() => {
-        if (systemReply.content.length > 0) {
-            dispatch(setChatList(chatList.concat(systemReply)))
-            scrollToBottom()
+        if (loading) {
+            const lastChat = chatList[chatList.length - 1]
+            if (lastChat.role === 'system') {
+                const leftChatList = chatList.slice(0, - 1)
+                dispatch(setChatList(leftChatList.concat(currentStreamChat)))
+            } else {
+                let chat: Chat = {
+                    role: 'system',
+                    content: ['Loading...']
+                }
+                if(currentStreamChat.content.length > 0){
+                    chat = currentStreamChat
+                }
+                dispatch(setChatList(chatList.concat(chat)))
+            }
         }
-    }, [systemReply])
+    }, [currentStreamChat, loading])
+
     const onSubmit = (value: string) => {
         if (value.length === 0) return;
         const user: Chat = {
             role: "user",
             content: [value]
         }
-        if(!isInit){
+        if (!isInit) {
             dispatch(init())
         }
         const newChatList = chatList.concat(user)

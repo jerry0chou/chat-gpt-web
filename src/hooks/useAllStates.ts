@@ -7,6 +7,7 @@ export default function useAllStates(){
     const loading = useAppSelector(state => state.chat.loading);
     const chatList = useAppSelector(state => state.chat.chatList);
     const questionList: ChatCompletionRequestMessage[]= []
+    const currentStreamChat = useAppSelector(state => state.chat.currentStreamChat);
     for (const chat of chatList) {
         if(chat.role === 'user'){
             questionList.push({ role: 'user', content: chat.content.join('\n')})
@@ -16,5 +17,5 @@ export default function useAllStates(){
     const menuList = useAppSelector(state => state.menu.menuList)
     const currentTabKey = useAppSelector(state => state.menu.currentTabKey)
     const isInit = useAppSelector(state => state.menu.isInit)
-    return {fontSize, theme, loading, chatList, questionList, menuList, currentTabKey, isInit};
+    return {fontSize, theme, loading, chatList, questionList, menuList, currentTabKey, isInit, currentStreamChat};
 }
