@@ -1,10 +1,8 @@
 import React, {useRef, useState} from "react";
-import {Input} from "antd";
+import {Button} from "antd";
 import './index.css'
 import useAllStates from "../../hooks/useAllStates";
-import {InputContainer} from "./css";
-
-const {Search} = Input;
+import {InputContainer, Input} from "./css";
 
 export interface InputAreaProps {
     onSubmit: (value: string) => void
@@ -25,24 +23,20 @@ export default function InputArea(p: InputAreaProps) {
         } else if (e.code === 'ArrowDown' && index < questionList.length - 1) {
             setInputValue(questionList[index + 1].content)
             index += 1
+        }else if(e.code === 'Enter'){
+            setInputValue('')
+            p.onSubmit(inputValue)
         }
         currentIndex.current = index
     }
     return (<div>
         <div className="position-input-area">
             <InputContainer theme={theme}>
-                <Search style={{width: '95%', background: 'black'}} placeholder="input questions here~ "
-                        enterButton="Submit" size="large"
-                        loading={loading}
-                        allowClear
-                        value={inputValue}
-                        onKeyUp={onKeyUp}
-                        onChange={onInputChange}
-                        onSearch={(value) => {
-                            setInputValue('')
-                            p.onSubmit(value)
-                        }}
-                />
+                <Input theme={theme} value={inputValue} onKeyUp={onKeyUp} onChange={onInputChange}/>
+                <Button type="primary" size="large" loading={loading} onClick={() => {
+                    setInputValue('')
+                    p.onSubmit(inputValue)
+                }}>Submit</Button>
             </InputContainer>
         </div>
     </div>)
