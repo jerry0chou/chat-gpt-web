@@ -9,7 +9,7 @@ export const InputContainer = styled.div<{theme: Theme}>`
   align-items: center;
   justify-content: center;
   gap: 2px;
-  background: ${p=> p.theme === Theme.day? '#ffffff': '#212125'};
+  background: ${p=> p.theme === Theme.day? '#ffffff': '#181622'};
 `
 export const Input = styled.input<{theme: Theme}>`
   width: 80%;

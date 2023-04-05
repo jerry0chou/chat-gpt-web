@@ -37,8 +37,8 @@ export const FontMinusIcon = styled(FontMinusSVG)`${svgStyle}`
 export const FontPlusIcon = styled(FontPlusSVG)`${svgStyle}`
 
 const headerNightTheme = css`
-  background-color: #000000;
-  background-image: linear-gradient(to right top, #000000, #0d0b0c, #161415, #1c1a1d, #212125, #212125, #212125, #212125, #1c1a1d, #161415, #0d0b0c, #000000);
+  background-color: #181622;
+  //background-image: linear-gradient(to right top, #000000, #0d0b0c, #161415, #1c1a1d, #212125, #212125, #212125, #212125, #1c1a1d, #161415, #0d0b0c, #000000);
 `
 const headerDayTheme = css`
   background-color: #ffffff;
