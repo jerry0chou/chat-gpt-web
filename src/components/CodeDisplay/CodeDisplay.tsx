@@ -1,10 +1,12 @@
 import React from "react";
 import ReactMarkdown from 'react-markdown'
 import './index.css'
+
 // @ts-ignore
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 // @ts-ignore
-import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
+// import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
+
 import { CopyOutlined } from '@ant-design/icons';
 import {Avatar, message} from "antd";
 
@@ -34,28 +36,27 @@ ${p.code}
                 {contextHolder}
                 <ReactMarkdown
                     children={markdown}
+
                     components={{
-                        code({node, inline, className, children, ...props}) {
-                            const match = /language-(\w+)/.exec(className || '')
+                        code({ node, inline, className, children, ...props }) {
+                            const match = /language-(\w+)/.exec(className || "");
                             return !inline && match ? (
                                 <SyntaxHighlighter
-                                    children={String(children).replace(/\n$/, '')}
-                                    style={dark}
+                                    children={String(children).replace(/\n$/, "")}
                                     language={match[1]}
-                                    PreTag="div"
                                     {...props}
                                 />
                             ) : (
                                 <code className={className} {...props}>
                                     {children}
                                 </code>
-                            )
-                        }
+                            );
+                        },
                     }}
                 />
             </div>
             <div className="copy-container">
-                <Avatar shape="square" size={38} icon={<CopyOutlined />} onClick={onCopyClick} />
+                <Avatar shape="square" size={32} icon={<CopyOutlined />} onClick={onCopyClick} />
             </div>
         </div>
     )

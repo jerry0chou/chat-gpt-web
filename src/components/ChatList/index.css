@@ -12,6 +12,7 @@
     margin-top: 0px;
 }
 .content-container{
+    width: 90%;
     display: flex;
     margin-left: 50px;
     margin-right: 25px;

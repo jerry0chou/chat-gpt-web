@@ -1,16 +1,17 @@
 .code-display{
     position: relative;
-    width: content-box;
-    height: content-box;
 }
 .markdown{
     position: relative;
+    border: #e2e6ea 1px solid;
+    border-radius: 12px;
+    background-color: #f5f2f0;
 }
 
 .copy-container{
     position: absolute;
-    top: 7px;
+    top: 2px;
     right: 2px;
     border-radius: 10px;
-    background: #dacece;
+    background: #eadfdf;
 }
