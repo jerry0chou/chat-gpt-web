@@ -6,7 +6,7 @@ export const ChatListContainer = styled.div`
    display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-bottom: 180px;
+  margin-bottom: 120px;
   margin-top: 60px;
 `
 const nightContentTheme = css`
