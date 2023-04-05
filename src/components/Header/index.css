@@ -10,4 +10,13 @@
     gap: 12px;
     z-index: 2;
 }
-
+.icon-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #0e8ede;
+    background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+    width: 32px;
+    height: 32px;
+}

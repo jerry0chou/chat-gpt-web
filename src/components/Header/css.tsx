@@ -6,7 +6,6 @@ import {ReactComponent as TokenSVG} from "../../assets/token.svg";
 import {ReactComponent as FontMinusSVG} from "../../assets/fontMinus.svg";
 import {ReactComponent as FontPlusSVG} from "../../assets/fontPlus.svg";
 import {Theme} from "../../store/reducer/header";
-import {Tag} from 'antd';
 interface IconProps {
     size: number;
     theme: Theme;
@@ -18,13 +17,11 @@ const svgStyle = (p: IconProps) => {
       height: ${p.size}px;
 
       & path {
-        fill: ${p=> p.theme === Theme.day? 'black' : 'white'};
+        fill: #ebecf1;
       }
 
       &:hover {
         cursor: pointer;
-        background: ${p=> p.theme === Theme.day? '#e7e4e4': '#2db7f5'};
-        border-radius: 50%;
       }
     `
 }
@@ -60,12 +57,4 @@ export const HeaderContainer = styled.div<{ theme: Theme }>`
   border-bottom: ${p=> p.theme === Theme.day? '#e7e1e1': ''} 1px solid;
 `;
 
-interface iTagProps {
-    theme: Theme;
-    text: string;
-}
-export function MyTag(p: iTagProps) {
-    const color = p.theme === Theme.day ? '' : '#2db7f5'
-    return( <Tag color={color}>{p.text}</Tag>)
-}
 

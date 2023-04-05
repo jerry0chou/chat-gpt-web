@@ -2,6 +2,8 @@
     position: relative;
 }
 .markdown{
+    margin-top: 10px;
+    margin-bottom: 10px;
     position: relative;
     border: #e2e6ea 1px solid;
     border-radius: 12px;

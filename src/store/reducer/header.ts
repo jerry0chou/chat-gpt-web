@@ -18,6 +18,7 @@ export const headerSlice = createSlice({
     initialState,
     reducers: {
         setFontSize: (state, action: PayloadAction<number>) => {
+            if(action.payload <0 && state.fontSize < 16) return
             state.fontSize += action.payload
             localStorage.setItem(fontSizeValue, String(state.fontSize))
         },

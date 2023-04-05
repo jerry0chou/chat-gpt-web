@@ -6,8 +6,15 @@ import {LoadingOutlined, SyncOutlined} from '@ant-design/icons';
 import {useAppDispatch} from "../../hooks/storeHooks";
 import {setFontSize, setTheme, Theme} from "../../store/reducer/header";
 import useAllStates from "../../hooks/useAllStates";
-import {DayIcon, FontMinusIcon, FontPlusIcon, HeaderContainer, MyTag, NightIcon, TokenIcon} from "./css";
-
+import {
+    DayIcon,
+    FontMinusIcon,
+    FontPlusIcon,
+    HeaderContainer,
+    NightIcon,
+    TokenIcon,
+} from "./css";
+import {Tag} from 'antd';
 export enum FontOperation {
     FontPlus = 'A+',
     FontMinus = 'A-'
@@ -34,15 +41,24 @@ export default function Header() {
     // @ts-ignore
     return (
         <HeaderContainer theme={theme}>
-            <TokenIcon style={{marginRight: 12}} size={26} theme={theme} onClick={() => onItemClick('Token')}/>
+            <div className="icon-container" style={{marginRight: 12}} >
+                <TokenIcon size={20} theme={theme} onClick={() => onItemClick('Token')}/>
+            </div>
             {
-                theme === 'day' ? <DayIcon size={26} theme={theme} onClick={() => onItemClick(Theme.day)}/> :
-                    <NightIcon size={26} theme={theme} onClick={() => onItemClick(Theme.night)}/>
+                theme === 'day' ? <div className="icon-container">
+                    <DayIcon  size={20} theme={theme} onClick={() => onItemClick(Theme.day)}/>
+                    </div>:<div className="icon-container">
+                    <NightIcon  size={20} theme={theme} onClick={() => onItemClick(Theme.night)}/>
+                </div>
             }
-            <FontMinusIcon size={32} theme={theme} onClick={() => onItemClick(FontOperation.FontMinus)}/>
-            <FontPlusIcon size={32} theme={theme} onClick={() => onItemClick(FontOperation.FontPlus)}/>
-            <MyTag theme={theme} text="Copyright@Jerry"></MyTag>
-            <MyTag theme={theme} text={apiModelName}></MyTag>
+            <div className="icon-container">
+                <FontMinusIcon  size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontMinus)}/>
+            </div>
+            <div className="icon-container">
+                <FontPlusIcon  size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontPlus)}/>
+            </div>
+            <Tag color={'#2db7f5'}>Copyright@Jerry</Tag>
+            <Tag color={'#2db7f5'}>{apiModelName}</Tag>
             {
                 loading ? <SyncOutlined spin/> : <div/>
             }

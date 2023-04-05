@@ -9,6 +9,7 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 
 import { CopyOutlined } from '@ant-design/icons';
 import {Avatar, message} from "antd";
+import useAllStates from "../../hooks/useAllStates";
 
 interface CodeDisplayProps{
     language: string,
@@ -21,7 +22,7 @@ ${p.code}
 ~~~
 `
     const [messageApi, contextHolder] = message.useMessage();
-
+    const {fontSize} = useAllStates()
     const onCopyClick = ()=>{
         console.log('click')
         navigator.clipboard.writeText(p.code).then(()=>{
@@ -32,11 +33,10 @@ ${p.code}
     }
     return(
         <div className="code-display">
-            <div className="markdown">
+            <div className="markdown" style={{fontSize: fontSize-5}}>
                 {contextHolder}
                 <ReactMarkdown
                     children={markdown}
-
                     components={{
                         code({ node, inline, className, children, ...props }) {
                             const match = /language-(\w+)/.exec(className || "");
@@ -56,7 +56,7 @@ ${p.code}
                 />
             </div>
             <div className="copy-container">
-                <Avatar shape="square" size={32} icon={<CopyOutlined />} onClick={onCopyClick} />
+                <Avatar shape="square" size={28} icon={<CopyOutlined />} onClick={onCopyClick} />
             </div>
         </div>
     )
