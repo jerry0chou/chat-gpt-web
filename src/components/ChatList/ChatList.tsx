@@ -27,7 +27,7 @@ export default function ChatList() {
                                 item.role === 'system' ? <div className="profile-container">
                                     <Avatar size={40} src={url}/>
                                 </div> : <div className="profile-container">
-                                    <Avatar size={40} style={{backgroundColor: '#c6e1ff', color: '#0083d3'}}>U</Avatar>
+                                    <Avatar size={40} style={{backgroundColor: '#2a88f3', color: '#e9eef1'}}>User</Avatar>
                                 </div>
                             }
                             <div className="content-container">
@@ -37,7 +37,7 @@ export default function ChatList() {
                                             <div key={index2}>
                                                 {item.kind === 'plain' ?
                                                     <PlainTextDisplay content={item.content} fontSize={fontSize}/> :
-                                                    <CodeDisplay language={'js'} code={item.content} key={index2}/>}
+                                                    <CodeDisplay language={item.language || 'js'} code={item.content} key={index2}/>}
                                             </div>
                                         )
                                     })
