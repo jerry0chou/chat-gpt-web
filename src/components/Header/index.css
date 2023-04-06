@@ -4,7 +4,7 @@
     flex-direction: row-reverse;
     height: 50px;
     background: #ffffff;
-    width: calc(100vw - 256px);
+    width: 100%;
     align-items: center;
     border-bottom: #e7e1e1 1px solid;
     gap: 12px;

@@ -4,7 +4,6 @@ import './views.css'
 import InputArea from "../components/InputArea/InputArea";
 import ChatList, {Chat} from "../components/ChatList/ChatList";
 import useRequest from "../hooks/useRequest";
-import Header from "../components/Header/Header";
 import useAllStates from "../hooks/useAllStates";
 import {useAppDispatch} from "../hooks/storeHooks";
 import {setChatList} from "../store/reducer/chat";
@@ -68,7 +67,6 @@ export default function MainContent() {
     }
     return (<MainContainer theme={theme}>
         {contextHolder}
-        <Header/>
         <ChatList/>
         <InputArea onSubmit={onSubmit}/>
         <div style={{width: 1, height: 1}} ref={scrollRef}/>

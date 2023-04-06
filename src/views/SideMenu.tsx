@@ -7,6 +7,7 @@ import useAllStates from "../hooks/useAllStates";
 import {useAppDispatch} from "../hooks/storeHooks";
 import {deleteTab, MenuItem, setCurrentTabKey, setMenuList} from "../store/reducer/menu";
 import {updateChatListFromLocalStorage} from "../store/reducer/chat";
+import {SideMainContainer} from "./css";
 
 const NewChat = {
     label: 'New Chat',
@@ -15,15 +16,15 @@ const NewChat = {
 }
 export default function SideMenu() {
     const dispatch = useAppDispatch();
-    const [theme, setTheme] = useState<MenuTheme>('dark');
-    const {menuList, currentTabKey, isInit} = useAllStates()
+    // const [theme, setTheme] = useState<MenuTheme>('dark');
+    const {menuList, currentTabKey, isInit, theme} = useAllStates()
     const [localMenuList, setLocalMenuList] = useState<MenuProps['items']>([
         NewChat,
         ...menuList
     ])
-    const changeTheme = (value: boolean) => {
-        setTheme(value ? 'dark' : 'light');
-    };
+    // const changeTheme = (value: boolean) => {
+    //     setTheme(value ? 'dark' : 'light');
+    // };
     useEffect(() => {
         dispatch(updateChatListFromLocalStorage())
     }, [currentTabKey])
@@ -60,14 +61,32 @@ export default function SideMenu() {
             dispatch(setCurrentTabKey('0'))
         }
     }
+    // <Menu style={{width: 256, height: '100%'}} theme={theme}
+    //       onClick={onClick}
+    //       onKeyUp={onKeyUp}
+    //       selectedKeys={[currentTabKey]} mode="inline"
+    //       items={localMenuList}/>
     return (
-        <div className="side-menu-container">
-            <Menu style={{width: 256, height: '100vh'}} theme={theme}
-                  onClick={onClick}
-                  onKeyUp={onKeyUp}
-                  selectedKeys={[currentTabKey]} mode="inline"
-                  items={localMenuList}/>
-        </div>
-
+        <SideMainContainer theme={theme}>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello </h1>
+            <h1>hello world</h1>
+            <h1>hello world</h1>
+            <h1>hello world</h1>
+            <h1>hello world</h1>
+            <h1>hello world</h1>
+        </SideMainContainer>
     )
 }

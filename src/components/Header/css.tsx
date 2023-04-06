@@ -46,7 +46,7 @@ const baseHeaderStyle = css`
   display: flex;
   flex-direction: row-reverse;
   height: 50px;
-  width: calc(100vw - 256px);
+  width: 100%;
   align-items: center;
   gap: 12px;
   z-index: 2;

@@ -3,7 +3,16 @@
     display: flex;
     flex-direction: row;
 }
-.main-container{
-    height: 100vh;
-    overflow: scroll;
+.side-main-container{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+}
+.side-menu-container{
+    display: flex;
+    flex-direction: column;
+    width: 256px;
+    height: calc(100vh - 50px);
+    background-color: #ffffff;
+    border-right: #e7e1e1 1px solid;
 }
