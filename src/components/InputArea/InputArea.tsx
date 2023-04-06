@@ -23,13 +23,13 @@ export default function InputArea(p: InputAreaProps) {
         } else if (e.code === 'ArrowDown' && index < questionList.length - 1) {
             setInputValue(questionList[index + 1].content)
             index += 1
-        }else if(e.code === 'Enter'){
+        } else if (e.code === 'Enter') {
             setInputValue('')
             p.onSubmit(inputValue)
         }
         currentIndex.current = index
     }
-    return (<div>
+    return (
         <div className="position-input-area">
             <InputContainer theme={theme}>
                 <Input theme={theme} value={inputValue} onKeyUp={onKeyUp} onChange={onInputChange}/>
@@ -39,5 +39,5 @@ export default function InputArea(p: InputAreaProps) {
                 }}>Submit</Button>
             </InputContainer>
         </div>
-    </div>)
+    )
 }

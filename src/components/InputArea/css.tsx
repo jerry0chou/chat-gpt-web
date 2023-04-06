@@ -4,7 +4,7 @@ import {Theme} from "../../store/reducer/header";
 
 export const InputContainer = styled.div<{theme: Theme}>`
   display: flex;
-  width: calc(100vw - 256px);
+  width: 100%;
   height: 65px;
   align-items: center;
   justify-content: center;

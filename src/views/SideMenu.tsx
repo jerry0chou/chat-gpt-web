@@ -8,7 +8,7 @@ import {useAppDispatch} from "../hooks/storeHooks";
 import {deleteTab, MenuItem, setCurrentTabKey, setMenuList} from "../store/reducer/menu";
 import {updateChatListFromLocalStorage} from "../store/reducer/chat";
 import {SideMainContainer} from "./css";
-
+import SideMenuItem from "../components/SideMenuItem/SideMenuItem";
 const NewChat = {
     label: 'New Chat',
     key: '0',
@@ -66,27 +66,13 @@ export default function SideMenu() {
     //       onKeyUp={onKeyUp}
     //       selectedKeys={[currentTabKey]} mode="inline"
     //       items={localMenuList}/>
+    const onItemClick = (key: string) => {
+        // dispatch(setCurrentTabKey(key))
+    }
     return (
         <SideMainContainer theme={theme}>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello </h1>
-            <h1>hello world</h1>
-            <h1>hello world</h1>
-            <h1>hello world</h1>
-            <h1>hello world</h1>
-            <h1>hello world</h1>
+            <SideMenuItem id={'1'} key={1} isActive={false} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'2'} key={2} isActive={true} emitItemClick={onItemClick}/>
         </SideMainContainer>
     )
 }

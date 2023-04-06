@@ -1,0 +1,27 @@
+.item-container {
+    display: flex;
+    height: 40px;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 3px;
+    margin-right: 3px;
+    /*background-color: #3875f7;*/
+    border-radius: 10px;
+}
+
+.active-item-container {
+    background-color: #3875f7;
+}
+
+.item-font-style {
+    white-space: nowrap; /* 禁止换行 */
+    overflow: hidden; /* 溢出隐藏 */
+    text-overflow: ellipsis; /* 超出部分显示省略号 */
+    color: white;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-right: 5px;
+}
