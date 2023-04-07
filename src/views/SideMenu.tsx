@@ -70,9 +70,10 @@ export default function SideMenu() {
         // dispatch(setCurrentTabKey(key))
     }
     return (
-        <SideMainContainer theme={theme}>
-            <SideMenuItem id={'1'} key={1} isActive={false} emitItemClick={onItemClick}/>
-            <SideMenuItem id={'2'} key={2} isActive={true} emitItemClick={onItemClick}/>
+        <SideMainContainer  theme={theme}>
+            <SideMenuItem id={'1'} key={1} isActive={false} type={"add"} text={"add chat"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'2'} key={2} isActive={true} text={"New Chat1"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'3'} key={3} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
         </SideMainContainer>
     )
 }

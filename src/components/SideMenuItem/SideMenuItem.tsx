@@ -1,14 +1,16 @@
 import React, {memo} from "react";
-import './index.css'
-import {OperateIcon} from "./css";
-import cs from "classnames";
+import {ItemContainer, ItemText, OperateIcon} from "./css";
+import useAllStates from "../../hooks/useAllStates";
 
 interface ItemProp{
     id: string;
+    type?: 'normal' | 'add'
+    text: string;
     isActive: boolean;
     emitItemClick: (id: string)=>void;
 }
 function SideMenuItem(p: ItemProp){
+    const {theme} = useAllStates()
     const onMenuItemClick = ()=>{
         console.log('onMenuItemClick')
         p.emitItemClick(p.id)
@@ -20,12 +22,12 @@ function SideMenuItem(p: ItemProp){
     }
 
     return(
-        <div className={cs({'item-container': true, 'active-item-container': p.isActive})}onClick={onMenuItemClick}>
-            <span className="item-font-style">New Chatdfgffghfghfghfghdfgdfgdfhfg df梵蒂冈好风光好风光</span>
+        <ItemContainer onClick={onMenuItemClick} theme={theme}>
+            <ItemText theme={theme}>{p.text}</ItemText>
             {
-                p.isActive? <OperateIcon onClick={onOperateClick}/>: <div/>
+                p.isActive? <OperateIcon onClick={onOperateClick} theme={theme}/>: <div/>
             }
-        </div>
+        </ItemContainer>
     )
 }
 export default memo(SideMenuItem);
