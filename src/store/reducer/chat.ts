@@ -33,9 +33,14 @@ export const chatSlice = createSlice({
         },
         setCurrentStreamChat: (state, action: PayloadAction<Chat>) => {
             state.currentStreamChat = action.payload;
+        },
+        clearCurrentTabChat: (state) => {
+            const key = localStorage.getItem(currentTabKey) || ''
+            key && localStorage.removeItem(key)
+            state.chatList = []
         }
     }
 })
 
-export const {setLoading, setChatList, updateChatListFromLocalStorage,setCurrentStreamChat} = chatSlice.actions;
+export const {setLoading, setChatList, updateChatListFromLocalStorage,setCurrentStreamChat, clearCurrentTabChat} = chatSlice.actions;
 export default chatSlice.reducer;

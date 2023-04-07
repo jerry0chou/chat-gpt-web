@@ -14,6 +14,7 @@ import {
     TrashIcon
 } from "./css";
 import {Tag} from 'antd';
+import {clearCurrentTabChat} from "../../store/reducer/chat";
 
 export enum FontOperation {
     FontPlus = 'A+',
@@ -36,7 +37,7 @@ export default function Header() {
         } else if (kind === Theme.night) {
             dispatch(setTheme(Theme.day))
         } else if(kind === 'Clear'){
-            console.log('clear');
+            dispatch(clearCurrentTabChat())
         }
     }
     // @ts-ignore
