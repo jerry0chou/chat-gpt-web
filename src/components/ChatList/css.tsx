@@ -3,7 +3,7 @@ import styled, {css} from "styled-components";
 import {Theme} from "../../store/reducer/header";
 
 export const ChatListContainer = styled.div`
-   display: flex;
+  display: flex;
   flex-direction: column;
   gap: 5px;
   margin-bottom: 120px;
@@ -21,12 +21,29 @@ const dayHoverTheme = css`
   background-color: #ffffff;
   background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
 `
-export const CardContainer = styled.div<{theme: Theme}>`
+export const CardContainer = styled.div<{ theme: Theme }>`
   position: relative;
   display: flex;
   width: 95%;
   flex-direction: row;
   padding: 14px 15px;
   border-radius: 10px;
-  ${p=> p.theme === Theme.day? dayContentTheme: nightContentTheme};
+  ${p => p.theme === Theme.day ? dayContentTheme : nightContentTheme};
+`
+export const ProfileContainer = styled.div`
+  position: absolute;
+  top: 5px;
+  left: 5px;
+`
+export const ContentContainer = styled.div`
+  width: 95%;
+  display: flex;
+  margin-left: 35px;
+  margin-right: 0px;
+  flex-direction: column;
+`
+export const ChatBox = styled.div`
+  display: flex;
+  justify-content: center;
+  width: auto;
 `

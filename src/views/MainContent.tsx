@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
 import {message} from 'antd';
-import './views.css'
 import InputArea from "../components/InputArea/InputArea";
 import ChatList, {Chat} from "../components/ChatList/ChatList";
 import useRequest from "../hooks/useRequest";

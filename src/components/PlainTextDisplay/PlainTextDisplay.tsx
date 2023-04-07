@@ -1,5 +1,4 @@
 import React from "react";
-import './index.css'
 import parse from 'html-react-parser';
 import useAllStates from "../../hooks/useAllStates";
 interface PlainTextDisplayProps{

@@ -1,6 +1,5 @@
 import React from "react";
 import ReactMarkdown from 'react-markdown'
-import './index.css'
 
 // @ts-ignore
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
@@ -10,6 +9,7 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import { CopyOutlined } from '@ant-design/icons';
 import {Avatar, message} from "antd";
 import useAllStates from "../../hooks/useAllStates";
+import {CodeDisplayContainer, CopyContainer, MarkdownContainer} from "./css";
 
 interface CodeDisplayProps{
     language: string,
@@ -32,8 +32,8 @@ ${p.code}
         })
     }
     return(
-        <div className="code-display">
-            <div className="markdown" style={{fontSize: fontSize-5}}>
+        <CodeDisplayContainer>
+            <MarkdownContainer fontSize={fontSize}>
                 {contextHolder}
                 <ReactMarkdown
                     children={markdown}
@@ -54,10 +54,10 @@ ${p.code}
                         },
                     }}
                 />
-            </div>
-            <div className="copy-container">
+            </MarkdownContainer>
+            <CopyContainer>
                 <Avatar shape="square" size={28} icon={<CopyOutlined />} onClick={onCopyClick} />
-            </div>
-        </div>
+            </CopyContainer>
+        </CodeDisplayContainer>
     )
 }

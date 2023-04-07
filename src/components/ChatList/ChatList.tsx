@@ -1,12 +1,10 @@
 import React from "react";
-import {Avatar, Card} from "antd";
-import './index.css'
-import cs from 'classnames'
+import {Avatar} from "antd";
 import CodeDisplay from "../CodeDisplay/CodeDisplay";
 import {tidyContent} from "../../util/tidyContent";
 import PlainTextDisplay from "../PlainTextDisplay/PlainTextDisplay";
 import useAllStates from "../../hooks/useAllStates";
-import {CardContainer, ChatListContainer} from "./css";
+import {CardContainer, ChatListContainer, ContentContainer, ProfileContainer} from "./css";
 
 export interface Chat {
     role: 'system' | 'user';
@@ -24,13 +22,13 @@ export default function ChatList() {
                     return (<div className="chat-box" key={index}>
                         <CardContainer theme={theme}>
                             {
-                                item.role === 'system' ? <div className="profile-container">
+                                item.role === 'system' ? <ProfileContainer>
                                     <Avatar size={40} src={url}/>
-                                </div> : <div className="profile-container">
+                                </ProfileContainer> : <ProfileContainer>
                                     <Avatar size={40} style={{backgroundColor: '#2a88f3', color: '#e9eef1'}}>User</Avatar>
-                                </div>
+                                </ProfileContainer>
                             }
-                            <div className="content-container">
+                            <ContentContainer>
                                 {
                                     tidyContent(item.content).map((item, index2) => {
                                         return (
@@ -42,7 +40,7 @@ export default function ChatList() {
                                         )
                                     })
                                 }
-                            </div>
+                            </ContentContainer>
                         </CardContainer>
                     </div>)
                 })
