@@ -1,8 +1,7 @@
 import React, {useRef, useState} from "react";
 import {Button} from "antd";
-import './index.css'
 import useAllStates from "../../hooks/useAllStates";
-import {InputContainer, Input} from "./css";
+import {InputContainer, Input, PositionInputArea} from "./css";
 
 export interface InputAreaProps {
     onSubmit: (value: string) => void
@@ -30,7 +29,7 @@ export default function InputArea(p: InputAreaProps) {
         currentIndex.current = index
     }
     return (
-        <div className="position-input-area">
+        <PositionInputArea>
             <InputContainer theme={theme}>
                 <Input theme={theme} value={inputValue} onKeyUp={onKeyUp} onChange={onInputChange}/>
                 <Button type="primary" size="large" loading={loading} onClick={() => {
@@ -38,6 +37,6 @@ export default function InputArea(p: InputAreaProps) {
                     p.onSubmit(inputValue)
                 }}>Submit</Button>
             </InputContainer>
-        </div>
+        </PositionInputArea>
     )
 }

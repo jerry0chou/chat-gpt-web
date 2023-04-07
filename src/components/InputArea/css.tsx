@@ -26,3 +26,9 @@ export const Input = styled.input<{theme: Theme}>`
     border: 1px solid #3875f6;
   }
 `
+
+export const PositionInputArea = styled.div`
+  width: calc(100vw - 256px);
+  position: fixed;
+  bottom: 0;
+`

@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import './index.css'
 import MyModal from "../Modal/Modal";
 import {LoadingOutlined} from '@ant-design/icons';
 import {useAppDispatch} from "../../hooks/storeHooks";
@@ -9,11 +8,13 @@ import {
     DayIcon,
     FontMinusIcon,
     FontPlusIcon,
-    HeaderContainer,
+    HeaderContainer, IconContainer,
     NightIcon,
     TokenIcon,
+    TrashIcon
 } from "./css";
 import {Tag} from 'antd';
+
 export enum FontOperation {
     FontPlus = 'A+',
     FontMinus = 'A-'
@@ -23,7 +24,7 @@ export default function Header() {
     const dispatch = useAppDispatch();
     const {loading, theme} = useAllStates()
     const [visible, setVisible] = useState(false)
-    const onItemClick = (kind: 'Token' | FontOperation | Theme) => {
+    const onItemClick = (kind: 'Token' | 'Clear' | FontOperation | Theme) => {
         if (kind === 'Token') {
             setVisible(true)
         } else if (kind === FontOperation.FontPlus) {
@@ -34,28 +35,32 @@ export default function Header() {
             dispatch(setTheme(Theme.night))
         } else if (kind === Theme.night) {
             dispatch(setTheme(Theme.day))
+        } else if(kind === 'Clear'){
+            console.log('clear');
         }
     }
-    const antIcon = <LoadingOutlined style={{fontSize: 32}} spin/>;
     // @ts-ignore
     return (
         <HeaderContainer theme={theme}>
-            <div className="icon-container" style={{marginRight: 12}} >
+            <IconContainer style={{marginRight: 12}}>
                 <TokenIcon size={20} theme={theme} onClick={() => onItemClick('Token')}/>
-            </div>
+            </IconContainer>
             {
-                theme === 'day' ? <div className="icon-container">
-                    <DayIcon  size={20} theme={theme} onClick={() => onItemClick(Theme.day)}/>
-                    </div>:<div className="icon-container">
-                    <NightIcon  size={20} theme={theme} onClick={() => onItemClick(Theme.night)}/>
-                </div>
+                theme === 'day' ? <IconContainer>
+                    <DayIcon size={20} theme={theme} onClick={() => onItemClick(Theme.day)}/>
+                </IconContainer> : <IconContainer>
+                    <NightIcon size={20} theme={theme} onClick={() => onItemClick(Theme.night)}/>
+                </IconContainer>
             }
-            <div className="icon-container">
-                <FontMinusIcon  size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontMinus)}/>
-            </div>
-            <div className="icon-container">
-                <FontPlusIcon  size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontPlus)}/>
-            </div>
+            <IconContainer>
+                <FontMinusIcon size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontMinus)}/>
+            </IconContainer>
+            <IconContainer>
+                <FontPlusIcon size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontPlus)}/>
+            </IconContainer>
+            <IconContainer isClear={true}>
+                <TrashIcon size={19} theme={theme} onClick={() => onItemClick('Clear')}/>
+            </IconContainer>
             <MyModal isOpen={visible} close={() => setVisible(false)}/>
         </HeaderContainer>)
 }
