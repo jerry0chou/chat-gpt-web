@@ -2,13 +2,14 @@ import React, {useEffect, useState} from 'react';
 import './views.css'
 import {MailOutlined, PlusOutlined} from '@ant-design/icons';
 import type {MenuProps, MenuTheme} from 'antd';
-import {Menu} from 'antd';
+import {Menu, Tag} from 'antd';
 import useAllStates from "../hooks/useAllStates";
 import {useAppDispatch} from "../hooks/storeHooks";
 import {deleteTab, MenuItem, setCurrentTabKey, setMenuList} from "../store/reducer/menu";
 import {updateChatListFromLocalStorage} from "../store/reducer/chat";
 import {SideMainContainer} from "./css";
 import SideMenuItem from "../components/SideMenuItem/SideMenuItem";
+import TagContainer from "../components/TagContainer/TagContainer";
 const NewChat = {
     label: 'New Chat',
     key: '0',
@@ -74,6 +75,7 @@ export default function SideMenu() {
             <SideMenuItem id={'1'} key={1} isActive={false} type={"add"} text={"add chat"} emitItemClick={onItemClick}/>
             <SideMenuItem id={'2'} key={2} isActive={true} text={"New Chat1"} emitItemClick={onItemClick}/>
             <SideMenuItem id={'3'} key={3} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <TagContainer/>
         </SideMainContainer>
     )
 }

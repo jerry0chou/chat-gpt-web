@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import './index.css'
 import MyModal from "../Modal/Modal";
-import {apiModelName} from "../../util/constanst";
-import {LoadingOutlined, SyncOutlined} from '@ant-design/icons';
+import {LoadingOutlined} from '@ant-design/icons';
 import {useAppDispatch} from "../../hooks/storeHooks";
 import {setFontSize, setTheme, Theme} from "../../store/reducer/header";
 import useAllStates from "../../hooks/useAllStates";
@@ -57,11 +56,6 @@ export default function Header() {
             <div className="icon-container">
                 <FontPlusIcon  size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontPlus)}/>
             </div>
-            <Tag color={'#2db7f5'}>Copyright@Jerry</Tag>
-            <Tag color={'#2db7f5'}>{apiModelName}</Tag>
-            {
-                loading ? <SyncOutlined spin/> : <div/>
-            }
             <MyModal isOpen={visible} close={() => setVisible(false)}/>
         </HeaderContainer>)
 }
