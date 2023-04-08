@@ -38,7 +38,9 @@ export const ItemContainer = styled.div<ItemProp>`
     p.theme === Theme.day ? '#3875f7' : '#ffffff' : 
     p.theme === Theme.day ? '#e7e1e1' : '#42494d'
   } 2px solid;
-  background-color: ${p => p.theme === Theme.day ? '#ffffff' : '#3875f7'};
+  background-color: ${p => p.theme === Theme.day ? '#ffffff' : 
+    p.isActive ? '#3875f7' : '#244aa8'
+ };
   border-radius: 10px;
 `;
 
