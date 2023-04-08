@@ -24,11 +24,9 @@ export default function ChatList() {
                             {
                                 item.role === 'system' ? <ProfileContainer role={'system'}>
                                     <Avatar size={40} src={url}/>
-                                </ProfileContainer> : <ProfileContainer role={'user'}>
-                                    <Avatar size={40} style={{backgroundColor: '#2a88f3', color: '#e9eef1'}}>User</Avatar>
-                                </ProfileContainer>
+                                </ProfileContainer> :<div/>
                             }
-                            <ContentContainer role={item.role}>
+                            <ContentContainer role={item.role} theme={theme}>
                                 {
                                     tidyContent(item.content).map((item, index2) => {
                                         return (
@@ -41,6 +39,9 @@ export default function ChatList() {
                                     })
                                 }
                             </ContentContainer>
+                            {item.role === 'user' ?  <ProfileContainer role={'user'}>
+                                <Avatar size={40} style={{backgroundColor: '#3968e1', color: '#e9eef1'}}>User</Avatar>
+                            </ProfileContainer>: <div/>}
                         </CardContainer>
                    )
                 })
