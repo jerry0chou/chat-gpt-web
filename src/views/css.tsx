@@ -24,8 +24,6 @@ export const AppContainer = styled.div<{ theme: Theme }>`
 `
 
 export const SideMenuContainer = styled.div<{ theme: Theme }>`
-  display: flex;
-  flex-direction: column;
   width: 256px;
   height: calc(100vh - 50px);
   background-color: ${p => p.theme === Theme.night ? '#041527' : '#d9e4ee'};

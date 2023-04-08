@@ -7,6 +7,7 @@ import {ReactComponent as FontMinusSVG} from "../../assets/fontMinus.svg";
 import {ReactComponent as FontPlusSVG} from "../../assets/fontPlus.svg";
 import {ReactComponent as TrashSVG } from "../../assets/trash.svg";
 import {ReactComponent as FoldSVG } from "../../assets/fold.svg";
+import {ReactComponent as AddSVG} from "../../assets/add.svg";
 import {Theme} from "../../store/reducer/header";
 interface IconProps {
     size: number;
@@ -36,6 +37,17 @@ export const FontMinusIcon = styled(FontMinusSVG)`${svgStyle}`
 export const FontPlusIcon = styled(FontPlusSVG)`${svgStyle}`
 
 export const TrashIcon = styled(TrashSVG)`${svgStyle}`
+
+export const AddIcon = styled(AddSVG)<{ theme: Theme }>`
+  width: 20px;
+  height: 20px;
+  & path {
+    fill: ${p => p.theme === Theme.day ? '#343636' : '#faf8f8'};
+  }
+  &:hover {
+    cursor: pointer;
+  }
+`
 
 interface FoldIconProps extends IconProps {
     isfold: string;

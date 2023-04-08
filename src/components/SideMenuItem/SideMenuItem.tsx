@@ -1,37 +1,48 @@
 import React, {memo} from "react";
-import {AddIcon, ItemContainer, ItemText, OperateIcon} from "./css";
+import {ItemContainer, ItemText, DeleteIcon} from "./css";
 import useAllStates from "../../hooks/useAllStates";
-export enum ItemType{
+import {setCurrentTabKey, setMenuList} from "../../store/reducer/menu";
+import {useAppDispatch} from "../../hooks/storeHooks";
+
+export enum ItemType {
     Normal = 'Normal',
     Add = 'Add'
 }
-interface ItemProp{
+
+interface ItemProp {
     id: string;
-    type?: ItemType;
     text: string;
     isActive: boolean;
-    emitItemClick: (id: string)=>void;
 }
-function SideMenuItem(p: ItemProp){
-    const {theme} = useAllStates()
-    const onMenuItemClick = ()=>{
-        console.log('onMenuItemClick')
-        p.emitItemClick(p.id)
+
+function SideMenuItem(p: ItemProp) {
+    const {theme, menuList} = useAllStates()
+    const dispatch = useAppDispatch();
+
+    const onMenuItemClick = () => {
+        dispatch(setCurrentTabKey(p.id))
     }
     // @ts-ignore
-    const onOperateClick = (e)=>{
+    const onDeleteClick = (e) => {
         e.stopPropagation()
-        console.log('onOperateClick')
+        const index = menuList.findIndex(item => item.key === p.id)
+        const newMenuList = [...menuList]
+        newMenuList.splice(index, 1)
+        dispatch(setMenuList(newMenuList))
+        if(index+1 < menuList.length){
+            dispatch(setCurrentTabKey(menuList[index+1].key));
+        }else if(index === menuList.length-1 && index !== 0){
+            dispatch(setCurrentTabKey(menuList[index-1].key));
+        }
     }
-
-    return(
-        <ItemContainer onClick={onMenuItemClick} theme={theme} isActive={p.isActive} type={p.type}>
-            {p.type === ItemType.Add? <AddIcon theme={theme}/>: <div/>}
-            <ItemText theme={theme} >{p.text}</ItemText>
+    return (
+        <ItemContainer onClick={onMenuItemClick} theme={theme} isActive={p.isActive}>
+            <ItemText theme={theme}>{p.text}</ItemText>
             {
-                p.isActive? <OperateIcon onClick={onOperateClick} theme={theme}/>: <div/>
+                p.isActive ? <DeleteIcon onClick={onDeleteClick} theme={theme}/> : <div/>
             }
         </ItemContainer>
     )
 }
+
 export default memo(SideMenuItem);

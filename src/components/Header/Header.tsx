@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {Fragment, useState} from "react";
 import MyModal from "../Modal/Modal";
-import {LoadingOutlined} from '@ant-design/icons';
 import {useAppDispatch} from "../../hooks/storeHooks";
 import {setFontSize, setTheme, Theme} from "../../store/reducer/header";
 import useAllStates from "../../hooks/useAllStates";
 import {
+    AddIcon,
     DayIcon, FoldIcon,
     FontMinusIcon,
     FontPlusIcon,
@@ -14,7 +14,7 @@ import {
     TrashIcon
 } from "./css";
 import {clearCurrentTabChat} from "../../store/reducer/chat";
-import {foldMenuAction} from "../../store/reducer/menu";
+import {addNewChat, foldMenuAction} from "../../store/reducer/menu";
 import useWindowSize from "../../hooks/useWindowSize";
 import {SmallDeviceWidth} from "../../util/constanst";
 
@@ -28,7 +28,7 @@ export default function Header() {
     const {theme, foldMenu} = useAllStates()
     const [visible, setVisible] = useState(false)
     const {width} = useWindowSize();
-    const onItemClick = (kind: 'Token' | 'Clear' | 'Fold' | FontOperation | Theme) => {
+    const onItemClick = (kind: 'Token' | 'Clear' | 'Fold' | 'Add' | FontOperation | Theme) => {
         if (kind === 'Token') {
             setVisible(true)
         } else if (kind === FontOperation.FontPlus) {
@@ -43,6 +43,8 @@ export default function Header() {
             dispatch(clearCurrentTabChat())
         } else if (kind === 'Fold') {
             dispatch(foldMenuAction(!foldMenu))
+        } else if(kind === 'Add'){
+            dispatch(addNewChat())
         }
     }
     // @ts-ignore
@@ -67,9 +69,17 @@ export default function Header() {
             <IconContainer isClear={true}>
                 <TrashIcon size={19} theme={theme} onClick={() => onItemClick('Clear')}/>
             </IconContainer>
-            {width< SmallDeviceWidth ? <div/> : <IconContainer style={{marginRight: "auto"}}>
-                <FoldIcon isfold={String(foldMenu)} size={19} theme={theme} onClick={() => onItemClick('Fold')}/>
-            </IconContainer>}
+            {width< SmallDeviceWidth ? <div/> :
+                <Fragment>
+                    <IconContainer style={{marginRight: "auto"}}>
+                       <AddIcon onClick={() => onItemClick('Add')}/>
+                    </IconContainer>
+                    <IconContainer>
+                        <FoldIcon isfold={String(foldMenu)} size={19} theme={theme} onClick={() => onItemClick('Fold')}/>
+                    </IconContainer>
+                </Fragment>
+            }
+
             <MyModal isOpen={visible} close={() => setVisible(false)}/>
         </HeaderContainer>)
 }

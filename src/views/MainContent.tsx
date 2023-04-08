@@ -6,7 +6,6 @@ import useRequest from "../hooks/useRequest";
 import useAllStates from "../hooks/useAllStates";
 import {useAppDispatch} from "../hooks/storeHooks";
 import {setChatList} from "../store/reducer/chat";
-import {init} from "../store/reducer/menu";
 import {MainContainer} from "./css";
 
 export default function MainContent() {
@@ -14,7 +13,7 @@ export default function MainContent() {
     const [refreshCount, setRefreshCount] = useState(0)
     const [messageApi, contextHolder] = message.useMessage();
     useRequest(refreshCount, messageApi)
-    const {chatList, isInit, theme, loading, currentStreamChat, foldMenu} = useAllStates()
+    const {chatList, theme, loading, currentStreamChat, foldMenu} = useAllStates()
     const scrollRef = useRef(null)
 
     const scrollToBottom = () => {
@@ -56,9 +55,6 @@ export default function MainContent() {
         const user: Chat = {
             role: "user",
             content: [value]
-        }
-        if (!isInit) {
-            dispatch(init())
         }
         const newChatList = chatList.concat(user)
         dispatch(setChatList(newChatList))

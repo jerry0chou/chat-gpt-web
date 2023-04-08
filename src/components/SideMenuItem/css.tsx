@@ -1,16 +1,14 @@
 import React from "react";
 
-import {ReactComponent as OperateSVG} from "../../assets/operate.svg";
-import {ReactComponent as AddSVG} from "../../assets/add.svg";
+import {ReactComponent as DeleteSVG} from "../../assets/delete.svg";
 import styled from "styled-components";
 import {Theme} from "../../store/reducer/header";
-import {ItemType} from "./SideMenuItem";
 
-export const OperateIcon = styled(OperateSVG)<{ theme: Theme }>`
+export const DeleteIcon = styled(DeleteSVG)<{ theme: Theme }>`
   margin-right: 2px;
   margin-left: auto;
-  width: 17px;
-  height: 17px;
+  width: 20px;
+  height: 20px;
 
   & path {
     fill: ${p => p.theme === Theme.day ? '#8f9c9f' : '#e0e6ea'};
@@ -20,20 +18,9 @@ export const OperateIcon = styled(OperateSVG)<{ theme: Theme }>`
     cursor: pointer;
   }
 `
-export const AddIcon = styled(AddSVG)<{ theme: Theme }>`
-  width: 20px;
-  height: 20px;
-  & path {
-    fill: ${p => p.theme === Theme.day ? '#343636' : '#faf8f8'};
-  }
-  &:hover {
-    cursor: pointer;
-  }
-`
 interface ItemProp {
     theme: Theme;
     isActive?: boolean;
-    type?: ItemType
 }
 
 export const ItemContainer = styled.div<ItemProp>`
@@ -42,7 +29,7 @@ export const ItemContainer = styled.div<ItemProp>`
   height: 40px;
   flex-direction: row;
   align-items: center;
-  justify-content: ${p => p.type === ItemType.Add ? 'center' : 'flex-start'};
+  justify-content: flex-start;
   cursor: pointer;
   margin-left: 4px;
   margin-right: 4px;
@@ -66,3 +53,8 @@ export const ItemText = styled.div<ItemProp>`
   margin-left: 10px;
   margin-right: 5px;
 `;
+
+export const EmptyItem = styled.div`
+  width: 256px;
+  height: 80px;
+`

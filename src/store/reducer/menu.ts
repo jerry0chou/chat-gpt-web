@@ -4,13 +4,11 @@ import {currentTabKey, menuList, foldMenuValue} from "../../util/constanst";
 export interface MenuItem {
     key: string;
     label: string;
-    icon?: any
 }
 
 export interface MenuState {
     menuList: MenuItem[],
     currentTabKey: string,
-    isInit: boolean,
     foldMenu: boolean,
 }
 
@@ -18,7 +16,6 @@ const key = localStorage.getItem(currentTabKey) || '0'
 const initialState: MenuState = {
     menuList: localStorage.getItem(menuList) ? JSON.parse(localStorage.getItem(menuList) as string) : [],
     currentTabKey: key,
-    isInit: key !== "0",
     foldMenu: localStorage.getItem(foldMenuValue) === 'true'
 }
 
@@ -41,15 +38,22 @@ export const menuSlice = createSlice({
             localStorage.setItem(menuList, JSON.stringify(state.menuList));
             localStorage.removeItem(key)
         },
-        init: (state) => {
-            state.isInit = true
-        },
         foldMenuAction: (state, action: PayloadAction<boolean>) => {
             state.foldMenu = action.payload
             localStorage.setItem(foldMenuValue, state.foldMenu.toString())
-        }
+        },
+        addNewChat: (state) => {
+            const newItem: MenuItem = {
+                label: `New Chat` + (state.menuList.length+1),
+                key: String(new Date().getTime())
+            }
+            state.menuList.push(newItem)
+            state.currentTabKey = newItem.key
+            localStorage.setItem(menuList, JSON.stringify(state.menuList));
+            localStorage.setItem(currentTabKey, state.currentTabKey)
+        },
     }
 })
 
-export const {setMenuList, setCurrentTabKey, deleteTab, init, foldMenuAction} = menuSlice.actions
+export const {setMenuList, setCurrentTabKey, deleteTab, foldMenuAction, addNewChat} = menuSlice.actions
 export default menuSlice.reducer
