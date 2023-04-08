@@ -8,12 +8,15 @@ import {useAppDispatch} from "../hooks/storeHooks";
 import {setChatList} from "../store/reducer/chat";
 import {init} from "../store/reducer/menu";
 import {MainContainer} from "./css";
+import useWindowSize from "../hooks/useWindowSize";
+import {SmallDeviceWidth} from "../util/constanst";
 
 export default function MainContent() {
     const dispatch = useAppDispatch();
     const [refreshCount, setRefreshCount] = useState(0)
     const [messageApi, contextHolder] = message.useMessage();
     useRequest(refreshCount, messageApi)
+    const {width} = useWindowSize();
     const {chatList, isInit, theme, loading, currentStreamChat} = useAllStates()
     const scrollRef = useRef(null)
 
@@ -36,14 +39,14 @@ export default function MainContent() {
         if (loading) {
             const lastChat = chatList[chatList.length - 1]
             if (lastChat.role === 'system') {
-                const leftChatList = chatList.slice(0, - 1)
+                const leftChatList = chatList.slice(0, -1)
                 dispatch(setChatList(leftChatList.concat(currentStreamChat)))
             } else {
                 let chat: Chat = {
                     role: 'system',
                     content: ['Loading...']
                 }
-                if(currentStreamChat.content.length > 0){
+                if (currentStreamChat.content.length > 0) {
                     chat = currentStreamChat
                 }
                 dispatch(setChatList(chatList.concat(chat)))
@@ -64,7 +67,7 @@ export default function MainContent() {
         dispatch(setChatList(newChatList))
         setRefreshCount(prevState => prevState + 1)
     }
-    return (<MainContainer theme={theme}>
+    return (<MainContainer theme={theme} isSmallDevice={width < SmallDeviceWidth}>
         {contextHolder}
         <ChatList/>
         <InputArea onSubmit={onSubmit}/>
