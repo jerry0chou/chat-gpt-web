@@ -7,3 +7,4 @@ export const currentTabKey = 'currentTabKey'
 export const chatList = 'chatList'
 export const apiModelName = "gpt-3.5-turbo"
 export const SmallDeviceWidth = 768
+export const foldMenuValue = 'foldMenu'

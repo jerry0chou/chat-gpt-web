@@ -25,8 +25,8 @@ export const Input = styled.input<{ theme: Theme }>`
     border: 1px solid #3875f6;
   }
 `
-export const PositionInputArea = styled.div<{ isSmallDevice: boolean }>`
-  width: ${p => p.isSmallDevice ? '100vw' : 'calc(100vw - 256px)'};
+export const PositionInputArea = styled.div<{ foldMenu: boolean }>`
+  width: ${p => p.foldMenu ? '100vw' : 'calc(100vw - 256px)'};
   position: fixed;
   bottom: 0;
 `

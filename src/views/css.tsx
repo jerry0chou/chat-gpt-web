@@ -3,9 +3,9 @@ import styled, {css} from "styled-components";
 import {Theme} from "../store/reducer/header";
 import {nightTheme, dayTheme} from "../common/css";
 
-export const MainContainer = styled.div<{ theme: Theme, isSmallDevice: boolean }>`
+export const MainContainer = styled.div<{ theme: Theme, foldMenu: boolean }>`
   height: calc(100vh - 50px);
-  width: ${p=> p.isSmallDevice? '100vw': 'calc(100vw - 256px)'};
+  width: ${p=> p.foldMenu? '100vw': 'calc(100vw - 256px)'};
   /* hide scrollbar but allow scrolling */
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */

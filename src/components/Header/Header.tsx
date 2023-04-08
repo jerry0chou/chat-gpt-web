@@ -5,7 +5,7 @@ import {useAppDispatch} from "../../hooks/storeHooks";
 import {setFontSize, setTheme, Theme} from "../../store/reducer/header";
 import useAllStates from "../../hooks/useAllStates";
 import {
-    DayIcon,
+    DayIcon, FoldIcon,
     FontMinusIcon,
     FontPlusIcon,
     HeaderContainer, IconContainer,
@@ -13,8 +13,10 @@ import {
     TokenIcon,
     TrashIcon
 } from "./css";
-import {Tag} from 'antd';
 import {clearCurrentTabChat} from "../../store/reducer/chat";
+import {foldMenuAction} from "../../store/reducer/menu";
+import useWindowSize from "../../hooks/useWindowSize";
+import {SmallDeviceWidth} from "../../util/constanst";
 
 export enum FontOperation {
     FontPlus = 'A+',
@@ -23,9 +25,10 @@ export enum FontOperation {
 
 export default function Header() {
     const dispatch = useAppDispatch();
-    const {loading, theme} = useAllStates()
+    const {theme, foldMenu} = useAllStates()
     const [visible, setVisible] = useState(false)
-    const onItemClick = (kind: 'Token' | 'Clear' | FontOperation | Theme) => {
+    const {width} = useWindowSize();
+    const onItemClick = (kind: 'Token' | 'Clear' | 'Fold' | FontOperation | Theme) => {
         if (kind === 'Token') {
             setVisible(true)
         } else if (kind === FontOperation.FontPlus) {
@@ -36,8 +39,10 @@ export default function Header() {
             dispatch(setTheme(Theme.night))
         } else if (kind === Theme.night) {
             dispatch(setTheme(Theme.day))
-        } else if(kind === 'Clear'){
+        } else if (kind === 'Clear') {
             dispatch(clearCurrentTabChat())
+        } else if (kind === 'Fold') {
+            dispatch(foldMenuAction(!foldMenu))
         }
     }
     // @ts-ignore
@@ -62,6 +67,9 @@ export default function Header() {
             <IconContainer isClear={true}>
                 <TrashIcon size={19} theme={theme} onClick={() => onItemClick('Clear')}/>
             </IconContainer>
+            {width< SmallDeviceWidth ? <div/> : <IconContainer style={{marginRight: "auto"}}>
+                <FoldIcon isfold={String(foldMenu)} size={19} theme={theme} onClick={() => onItemClick('Fold')}/>
+            </IconContainer>}
             <MyModal isOpen={visible} close={() => setVisible(false)}/>
         </HeaderContainer>)
 }
