@@ -11,5 +11,5 @@ export const PositionTag = styled.div<{ theme: Theme }>`
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    background-color: ${p => p.theme === Theme.day ? '#cbd1d9' : '#041527'};
+    background-color: ${p => p.theme === Theme.day ? '#ffffff' : '#041527'};
 `

@@ -73,6 +73,19 @@ export default function SideMenu() {
             <SideMenuItem id={'1'} key={1} isActive={false} type={"add"} text={"add chat"} emitItemClick={onItemClick}/>
             <SideMenuItem id={'2'} key={2} isActive={true} text={"New Chat1"} emitItemClick={onItemClick}/>
             <SideMenuItem id={'3'} key={3} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'4'} key={4} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'5'} key={5} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'6'} key={6} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'7'} key={7} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'8'} key={8} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'9'} key={9} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'10'} key={10} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'11'} key={11} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'12'} key={12} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'13'} key={13} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'14'} key={14} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'15'} key={15} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
+            <SideMenuItem id={'16'} key={16} isActive={true} text={"New Chat2"} emitItemClick={onItemClick}/>
             <TagContainer/>
         </SideMenuContainer>
     )
