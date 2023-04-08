@@ -24,26 +24,25 @@ const dayHoverTheme = css`
 export const CardContainer = styled.div<{ theme: Theme }>`
   position: relative;
   display: flex;
-  width: 95%;
   flex-direction: row;
   padding: 14px 15px;
   border-radius: 10px;
   ${p => p.theme === Theme.day ? dayContentTheme : nightContentTheme};
 `
-export const ProfileContainer = styled.div`
+export const ProfileContainer = styled.div<{role: string}>`
   position: absolute;
   top: 5px;
-  left: 5px;
+  ${p=>{if(p.role === 'system') return 'left: 5px;'}}}
+  ${p=>{if(p.role === 'user') return 'right: 5px;'}}}
 `
-export const ContentContainer = styled.div`
+export const ContentContainer = styled.div<{role: string}>`
   width: 95%;
   display: flex;
-  margin-left: 35px;
-  margin-right: 0px;
+  margin-left: ${p =>  p.role === 'system'? 38: 0 }px;
+  margin-right: ${p =>  p.role === 'user'? 38: 0 }px;
   flex-direction: column;
-`
-export const ChatBox = styled.div`
-  display: flex;
-  justify-content: center;
-  width: auto;
+  align-items: ${p => {
+    if (p.role === 'system') return 'flex-start;'
+    else return 'flex-end;'
+  }};
 `

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {message} from 'antd';
 import InputArea from "../components/InputArea/InputArea";
 import ChatList, {Chat} from "../components/ChatList/ChatList";
@@ -7,6 +7,8 @@ import useAllStates from "../hooks/useAllStates";
 import {useAppDispatch} from "../hooks/storeHooks";
 import {setChatList} from "../store/reducer/chat";
 import {MainContainer} from "./css";
+import {Simulate} from "react-dom/test-utils";
+import load = Simulate.load;
 
 export default function MainContent() {
     const dispatch = useAppDispatch();
@@ -15,12 +17,13 @@ export default function MainContent() {
     useRequest(refreshCount, messageApi)
     const {chatList, theme, loading, currentStreamChat, foldMenu} = useAllStates()
     const scrollRef = useRef(null)
-
+    const mainContainerRef =  useRef(null)
     const scrollToBottom = () => {
         // @ts-ignore
         setTimeout(() => {
             // @ts-ignore
-            if (scrollRef.current && scrollRef.current?.scrollIntoView) {
+            if (scrollRef.current && scrollRef.current?.scrollIntoView && mainContainerRef.current.scrollHeight> document.body.scrollHeight) {
+                console.log('scroll H', document.body.scrollHeight)
                 // @ts-ignore
                 scrollRef.current?.scrollIntoView({top: document.body.scrollHeight, behavior: "smooth"})
             }
@@ -50,8 +53,9 @@ export default function MainContent() {
         }
     }, [currentStreamChat, loading])
 
-    const onSubmit = (value: string) => {
+    const onSubmit = useCallback((value: string) => {
         if (value.length === 0) return;
+        if(loading) return;
         const user: Chat = {
             role: "user",
             content: [value]
@@ -59,8 +63,9 @@ export default function MainContent() {
         const newChatList = chatList.concat(user)
         dispatch(setChatList(newChatList))
         setRefreshCount(prevState => prevState + 1)
-    }
-    return (<MainContainer theme={theme} foldMenu={foldMenu }>
+    }, [loading, chatList])
+
+    return (<MainContainer theme={theme} foldMenu={foldMenu } ref={mainContainerRef}>
         {contextHolder}
         <ChatList/>
         <InputArea onSubmit={onSubmit}/>

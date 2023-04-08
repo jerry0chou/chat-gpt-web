@@ -20,7 +20,7 @@ export const Input = styled.input<{ theme: Theme }>`
   color: ${p => p.theme === Theme.day ? '#62646e' : '#ffffff'};;
   outline: none;
   font-size: 20px;
-
+  padding: 0 10px;
   &:focus {
     border: 1px solid #3875f6;
   }
