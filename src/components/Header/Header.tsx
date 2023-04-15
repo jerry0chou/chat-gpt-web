@@ -11,7 +11,9 @@ import {
     HeaderContainer, IconContainer, LeftIconContainer,
     NightIcon,
     TokenIcon,
-    TrashIcon
+    TrashIcon,
+    GithubIconContainer,
+    GithubIcon
 } from "./css";
 import {clearCurrentTabChat} from "../../store/reducer/chat";
 import {addNewChat, foldMenuAction} from "../../store/reducer/menu";
@@ -47,10 +49,16 @@ export default function Header() {
             dispatch(addNewChat())
         }
     }
+    const jumpToGithub = () => {
+        window.open('https://github.com/jerry0chou/chat-gpt-web');
+    }
     // @ts-ignore
     return (
         <HeaderContainer theme={theme}>
-            <IconContainer style={{marginRight: 12}}>
+            <GithubIconContainer style={{marginRight: 12}} size={31} onClick={jumpToGithub}>
+                <GithubIcon size={26}/>
+            </GithubIconContainer>
+            <IconContainer>
                 <TokenIcon size={20} theme={theme} onClick={() => onItemClick('Token')}/>
             </IconContainer>
             {

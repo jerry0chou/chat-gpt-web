@@ -8,6 +8,7 @@ import {ReactComponent as FontPlusSVG} from "../../assets/fontPlus.svg";
 import {ReactComponent as TrashSVG } from "../../assets/trash.svg";
 import {ReactComponent as FoldSVG } from "../../assets/fold.svg";
 import {ReactComponent as AddSVG} from "../../assets/add.svg";
+import {ReactComponent as GithubSVG} from "../../assets/github.svg";
 import {Theme} from "../../store/reducer/header";
 interface IconProps {
     size: number;
@@ -83,7 +84,7 @@ export const IconContainer = styled.div<{isClear?: boolean}>`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-image: ${p=> p.isClear? 'linear-gradient(315deg, #ffac81 0%, #ff928b 74%)': 'linear-gradient(to top, #48c6ef 0%, #6f86d6 100%)'};
+  background-image: ${p=> p.isClear? 'linear-gradient(315deg, #fc9842 0%, #fe5f75 74%)': 'linear-gradient(315deg, #045de9 0%, #09c6f9 74%)'};
   width: 32px;
   height: 32px;
 `
@@ -91,3 +92,27 @@ export const LeftIconContainer = styled(IconContainer)<{needAuto: boolean}>`
   margin-right: ${p=> p.needAuto? 'auto': '0'};
 `
 
+export const GithubIcon = styled(GithubSVG)<{size: number}>`
+  width: ${p=> p.size}px;
+  height: ${p=> p.size}px;
+  & path {
+    fill: #faf8f8
+  }
+  &:hover {
+    cursor: pointer;
+  }
+`
+export const GithubIconContainer = styled.div<{size: number}>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${p=>p.size}px;
+  height: ${p=>p.size}px;
+  border-radius: 50%;
+  background-color: #000000;
+  background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+
+  &:hover {
+    cursor: pointer;
+  }
+`

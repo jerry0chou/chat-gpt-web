@@ -1,7 +1,6 @@
 import React from "react";
 import {Theme} from "../../store/reducer/header";
 import styled from "styled-components";
-
 export const PositionTag = styled.div<{ theme: Theme }>`
     position: fixed;
     width: 256px;
@@ -23,7 +22,9 @@ export const Tag = styled.div<{start: string, end: string}>`
   background-image: linear-gradient(315deg, ${p=> p.start} 0%, ${p=> p.end} 74%);
 `
 export const TagText = styled.div<{color: string}>`
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 13px;
   color: ${p=> p.color};
   padding: 0 10px;
 `
+
