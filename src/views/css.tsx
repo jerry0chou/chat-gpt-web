@@ -1,8 +1,12 @@
 import React from "react";
 import styled, {css} from "styled-components";
 import {Theme} from "../store/reducer/header";
-import {nightTheme, dayTheme} from "../common/css";
-
+export const dayTheme  = css`
+  background-color: #f9fcff;
+`
+export const nightTheme = css`
+  background-color: #17202a;
+`
 export const MainContainer = styled.div<{ theme: Theme, foldMenu: boolean }>`
   height: calc(100vh - 50px);
   width: ${p=> p.foldMenu? '100vw': 'calc(100vw - 256px)'};

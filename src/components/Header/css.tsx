@@ -58,7 +58,7 @@ export const FoldIcon = styled(FoldSVG)<FoldIconProps>`
 `
 
 const headerNightTheme = css`
-  background-color: #181622;
+  background-color: #17202a;
 `
 const headerDayTheme = css`
   background-color: #ffffff;

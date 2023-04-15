@@ -1,7 +1,8 @@
 import React, {useRef, useState} from "react";
 import {Button} from "antd";
 import useAllStates from "../../hooks/useAllStates";
-import {InputContainer, Input, PositionInputArea} from "./css";
+import {InputContainer, Input, PositionInputArea, RoundButton, SendIcon, ClearIcon} from "./css";
+
 export interface InputAreaProps {
     onSubmit: (value: string) => void
 }
@@ -27,14 +28,23 @@ export default function InputArea(p: InputAreaProps) {
         }
         currentIndex.current = index
     }
+    const ClearText = () => {
+        setInputValue('')
+    }
     return (
-        <PositionInputArea foldMenu={ foldMenu }>
+        <PositionInputArea foldMenu={foldMenu}>
             <InputContainer theme={theme}>
                 <Input theme={theme} value={inputValue} onKeyUp={onKeyUp} onChange={onInputChange}/>
-                <Button type="primary" size="large" loading={loading} onClick={() => {
-                    setInputValue('')
+                <RoundButton direction={'right'} onClick={() => {
+                    ClearText()
                     p.onSubmit(inputValue)
-                }}>Submit</Button>
+                }
+                }>
+                    <SendIcon/>
+                </RoundButton>
+                <RoundButton direction={'left'} onClick={ClearText}>
+                    <ClearIcon/>
+                </RoundButton>
             </InputContainer>
         </PositionInputArea>
     )
