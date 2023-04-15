@@ -9,6 +9,7 @@ import {setChatList} from "../store/reducer/chat";
 import {MainContainer} from "./css";
 import {Simulate} from "react-dom/test-utils";
 import load = Simulate.load;
+import Guide from "../components/Guide/Guide";
 
 export default function MainContent() {
     const dispatch = useAppDispatch();
@@ -67,7 +68,7 @@ export default function MainContent() {
 
     return (<MainContainer theme={theme} foldMenu={foldMenu } ref={mainContainerRef}>
         {contextHolder}
-        <ChatList/>
+        {chatList.length === 0?<Guide/> :<ChatList/>}
         <InputArea onSubmit={onSubmit}/>
         <div style={{width: 1, height: 1}} ref={scrollRef}/>
     </MainContainer>)
