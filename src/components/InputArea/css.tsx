@@ -32,8 +32,8 @@ export const InputContainer = styled.div<{ theme: Theme }>`
   display: flex;
   width: 100%;
   height: 65px;
-  margin-left: 5px;
-  margin-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
   align-items: center;
   justify-content: center;
   background: ${p => p.theme === Theme.day ? '#ffffff' : '#181622'};
@@ -43,7 +43,7 @@ export const RoundButton = styled.button<{ direction: 'left' |'right' }>`
   justify-content: center;
   align-items: center;
   position: absolute;
-  ${p => p.direction === 'left' ? 'left' : 'right'}: 3px;
+  ${p => p.direction === 'left' ? 'left' : 'right'}: 9px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
