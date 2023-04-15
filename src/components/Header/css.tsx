@@ -87,4 +87,7 @@ export const IconContainer = styled.div<{isClear?: boolean}>`
   width: 32px;
   height: 32px;
 `
+export const LeftIconContainer = styled(IconContainer)<{needAuto: boolean}>`
+  margin-right: ${p=> p.needAuto? 'auto': '0'};
+`
 

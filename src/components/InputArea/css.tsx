@@ -30,8 +30,10 @@ export const ClearIcon = styled(ClearSVG)`
 export const InputContainer = styled.div<{ theme: Theme }>`
   position: relative;
   display: flex;
-  width: 95%;
+  width: 100%;
   height: 65px;
+  margin-left: 5px;
+  margin-right: 5px;
   align-items: center;
   justify-content: center;
   background: ${p => p.theme === Theme.day ? '#ffffff' : '#181622'};

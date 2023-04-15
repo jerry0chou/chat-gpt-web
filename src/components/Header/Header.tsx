@@ -8,7 +8,7 @@ import {
     DayIcon, FoldIcon,
     FontMinusIcon,
     FontPlusIcon,
-    HeaderContainer, IconContainer,
+    HeaderContainer, IconContainer, LeftIconContainer,
     NightIcon,
     TokenIcon,
     TrashIcon
@@ -43,7 +43,7 @@ export default function Header() {
             dispatch(clearCurrentTabChat())
         } else if (kind === 'Fold') {
             dispatch(foldMenuAction(!foldMenu))
-        } else if(kind === 'Add'){
+        } else if (kind === 'Add') {
             dispatch(addNewChat())
         }
     }
@@ -69,14 +69,17 @@ export default function Header() {
             <IconContainer isClear={true}>
                 <TrashIcon size={19} theme={theme} onClick={() => onItemClick('Clear')}/>
             </IconContainer>
-            {width< SmallDeviceWidth ? <div/> :
+            {width < SmallDeviceWidth ? <div/> :
                 <Fragment>
-                    <IconContainer style={{marginRight: "auto"}}>
-                       <AddIcon onClick={() => onItemClick('Add')}/>
-                    </IconContainer>
-                    <IconContainer>
-                        <FoldIcon isfold={String(foldMenu)} size={19} theme={theme} onClick={() => onItemClick('Fold')}/>
-                    </IconContainer>
+                    {foldMenu ? <div/> :
+                        <LeftIconContainer needAuto={!foldMenu}>
+                            <AddIcon onClick={() => onItemClick('Add')}/>
+                        </LeftIconContainer>
+                    }
+                    <LeftIconContainer needAuto={foldMenu}>
+                        <FoldIcon isfold={String(foldMenu)} size={19} theme={theme}
+                                  onClick={() => onItemClick('Fold')}/>
+                    </LeftIconContainer>
                 </Fragment>
             }
 
