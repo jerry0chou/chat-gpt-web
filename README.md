@@ -1,14 +1,16 @@
 # ChatGPTWeb
 online chat room for ChatGPT api using React
-
+ 
+- Have a quick look to this project, please visit this link
+- https://jerry-chat-gpt.netlify.app/
 
 # Jerry's ChatGPT Space
 ## Features are as follows:
 Features are as follows:
-- ☀️Enable Multiple Tabs to converse with GPT
+- ☀️Enable multiple tabs to converse with GPT
 - ☀️Adapt effortlessly layout based on width
 - ☀️Access this site unlimitedly by any devices
-- ☀️Switch Seamlessly from night to day mode
+- ☀️Switch seamlessly from night to day mode
 - ☀️Scale font size at your disposal
 - ☀️Respond question interactively and swiftly
 - ☀️Copy code with one click

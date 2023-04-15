@@ -6,10 +6,10 @@ export default function Guide(){
             <GuideInnerContainer>
                 <GuideTitle>Jerry's ChatGPT Space</GuideTitle>
                 <GuideContent>Features are as follows:</GuideContent>
-                <GuideContent>☀️Enable Multiple Tabs to converse with GPT</GuideContent>
+                <GuideContent>☀️Enable multiple tabs to converse with GPT</GuideContent>
                 <GuideContent>☀️Adapt effortlessly layout based on width</GuideContent>
                 <GuideContent>☀️Access this site unlimitedly by any devices</GuideContent>
-                <GuideContent>☀️Switch Seamlessly from night to day mode</GuideContent>
+                <GuideContent>☀️Switch seamlessly from night to day mode</GuideContent>
                 <GuideContent>☀️Scale font size at your disposal</GuideContent>
                 <GuideContent>☀️Respond question interactively and swiftly</GuideContent>
                 <GuideContent>☀️Copy code with one click</GuideContent>
