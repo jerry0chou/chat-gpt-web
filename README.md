@@ -4,7 +4,7 @@
 An online chatroom for ChatGPT api using React
  
 ### Intention
-- Initially, I was inspired by one of my colleagues who compassionately shared his approach to invoke OpenAI api
+- Initially, I was inspired by one of my colleagues who passionately shared his approach to invoke OpenAI api
 - Then, I perceived that I was able to build a web app to interact with GPT for individual use.
 - Before that, people living in restrictive network regions are easily constrained by openAI official requirements when conversing with chatGPT due to malicious usage or a surge of user access.
 - Therefore, I made an attempt to construct this project to assist people who are in need of a chatbot to talk to.

@@ -15,7 +15,7 @@ export default function Guide(){
                 <GuideContent>☀️Copy code with one click</GuideContent>
                 <GuideContent>☀️Utilize hot key(↑, ↓) to browser history</GuideContent>
                 <GuideContent >😁Please stay tuned for the latest updates</GuideContent>
-                <GuideContent style={{marginBottom: 10}}>🙏if you find my project useful, please star me</GuideContent>
+                <GuideContent style={{marginBottom: 10}}>🙏If you find my project useful, please star me</GuideContent>
             </GuideInnerContainer>
         </GuideOuterContainer>
     )
