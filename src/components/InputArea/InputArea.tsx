@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import {Button} from "antd";
 import useAllStates from "../../hooks/useAllStates";
 import {InputContainer, Input, PositionInputArea, RoundButton, SendIcon, ClearIcon} from "./css";
@@ -8,26 +8,33 @@ export interface InputAreaProps {
 }
 
 export default function InputArea(p: InputAreaProps) {
-    const {loading, questionList, theme, foldMenu} = useAllStates()
+    const {loading, questionList, theme, foldMenu, currentTabKey, chatList} = useAllStates()
     const [inputValue, setInputValue] = useState('')
-    const currentIndex = useRef(questionList.length - 1)
+    const currentIndex = useRef(questionList.length)
     const onInputChange = (e: any) => {
         setInputValue(e?.target?.value || '')
     }
-    const onKeyUp = (e: any) => {
+    const isValidIndex = (index: number) => {
+        return index >= 0 && index < questionList.length
+    }
+    const onKeyUp = useCallback((e: any) => {
         let index = currentIndex.current
-        if (e.code === 'ArrowUp' && index >= 1) {
-            setInputValue(questionList[index - 1].content)
-            index -= 1
-        } else if (e.code === 'ArrowDown' && index < questionList.length - 1) {
-            setInputValue(questionList[index + 1].content)
-            index += 1
+        if (e.code === 'ArrowUp') {
+            if(isValidIndex(index - 1)){
+                setInputValue(questionList[index - 1].content)
+                index -= 1
+            }
+        } else if (e.code === 'ArrowDown') {
+            if(isValidIndex(index + 1)){
+                setInputValue(questionList[index + 1].content)
+                index += 1
+            }
         } else if (e.code === 'Enter') {
             setInputValue('')
             p.onSubmit(inputValue)
         }
         currentIndex.current = index
-    }
+    }, [questionList])
     const ClearText = () => {
         setInputValue('')
     }
