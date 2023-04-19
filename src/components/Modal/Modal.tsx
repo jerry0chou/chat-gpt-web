@@ -20,7 +20,7 @@ export default function MyModal(p: ModalProps){
 
     const onSave = (value: string) => {
         console.log(value);
-        setCookie('openAIToken', value, { path: '/' });
+        setCookie('openAIToken', value, { path: '/', maxAge: 3600 * 24 * 30 });
         p.close()
         messageApi.success('already saved')
     }
