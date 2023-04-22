@@ -16,8 +16,6 @@ export const MarkdownContainer = styled.div<{ fontSize: number }>`
 
 export const CopyContainer = styled.div`
   position: absolute;
-  top: 2px;
-  right: 2px;
-  border-radius: 10px;
-  background: #eadfdf;
+  top: 4px;
+  right: 4px;
 `

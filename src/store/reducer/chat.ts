@@ -12,7 +12,7 @@ const key = localStorage.getItem(currentTabKey) || ''
 const initialState: ChatState = {
     loading: false,
     chatList: JSON.parse(localStorage.getItem(key) || '[]'),
-    currentStreamChat: {role: 'system', content: []}
+    currentStreamChat: {role: 'system', content: [], timestamp: new Date().getTime()}
 }
 
 export const chatSlice = createSlice({

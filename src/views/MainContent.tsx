@@ -44,7 +44,8 @@ export default function MainContent() {
             } else {
                 let chat: Chat = {
                     role: 'system',
-                    content: ['Loading...']
+                    content: ['Loading...'],
+                    timestamp: new Date().getTime()
                 }
                 if (currentStreamChat.content.length > 0) {
                     chat = currentStreamChat
@@ -59,7 +60,8 @@ export default function MainContent() {
         if(loading) return;
         const user: Chat = {
             role: "user",
-            content: [value]
+            content: [value],
+            timestamp: new Date().getTime()
         }
         const newChatList = chatList.concat(user)
         dispatch(setChatList(newChatList))

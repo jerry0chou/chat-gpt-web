@@ -93,14 +93,7 @@ export const LeftIconContainer = styled(IconContainer)<{needAuto: boolean}>`
 `
 
 export const GithubIcon = styled(GithubSVG)<{size: number}>`
-  width: ${p=> p.size}px;
-  height: ${p=> p.size}px;
-  & path {
-    fill: #faf8f8
-  }
-  &:hover {
-    cursor: pointer;
-  }
+  ${svgStyle};
 `
 export const GithubIconContainer = styled.div<{size: number}>`
   display: flex;

@@ -24,13 +24,14 @@ export default function useRequest(refreshCount: number, messageApi: MessageInst
             })
             return;
         }
-        dispatch(setCurrentStreamChat({role: "system", content: []}))
+        dispatch(setCurrentStreamChat({role: "system", content: [], timestamp: new Date().getTime()}))
         dispatch(setLoading(true))
         requestStreamAns(questionList, cookies.openAIToken, (text, isFinished) => { // requestAns
                 if (text.length > 0) {
                     dispatch(setCurrentStreamChat({
                         role: "system",
-                        content: text.split('\n')
+                        content: text.split('\n'),
+                        timestamp: new Date().getTime()
                     }))
                 }
                 isFinished && dispatch(setLoading(false));

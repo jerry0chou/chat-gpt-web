@@ -6,15 +6,17 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 // @ts-ignore
 // import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
 
-import { CopyOutlined } from '@ant-design/icons';
+import {CopyOutlined} from '@ant-design/icons';
 import {Avatar, message} from "antd";
 import useAllStates from "../../hooks/useAllStates";
 import {CodeDisplayContainer, CopyContainer, MarkdownContainer} from "./css";
+import {CopyIcon} from "../ChatList/css";
 
-interface CodeDisplayProps{
+interface CodeDisplayProps {
     language: string,
     code: string
 }
+
 export default function CodeDisplay(p: CodeDisplayProps) {
     const markdown = `
 ~~~${p.language}
@@ -22,23 +24,23 @@ ${p.code}
 ~~~
 `
     const [messageApi, contextHolder] = message.useMessage();
-    const {fontSize} = useAllStates()
-    const onCopyClick = ()=>{
+    const {fontSize, theme} = useAllStates()
+    const onCopyClick = () => {
         console.log('click')
-        navigator.clipboard.writeText(p.code).then(()=>{
-            messageApi.success('copy successfully')
-        }).catch(()=>{
-            messageApi.error('copy failed')
+        navigator.clipboard.writeText(p.code).then(() => {
+            messageApi.success('copy code successfully')
+        }).catch(() => {
+            messageApi.error('copy code failed')
         })
     }
-    return(
+    return (
         <CodeDisplayContainer>
             <MarkdownContainer fontSize={fontSize}>
                 {contextHolder}
                 <ReactMarkdown
                     children={markdown}
                     components={{
-                        code({ node, inline, className, children, ...props }) {
+                        code({node, inline, className, children, ...props}) {
                             const match = /language-(\w+)/.exec(className || "");
                             return !inline && match ? (
                                 <SyntaxHighlighter
@@ -55,8 +57,8 @@ ${p.code}
                     }}
                 />
             </MarkdownContainer>
-            <CopyContainer>
-                <Avatar shape="square" size={28} icon={<CopyOutlined />} onClick={onCopyClick} />
+            <CopyContainer onClick={onCopyClick} >
+                <CopyIcon size={20} theme={theme}></CopyIcon>
             </CopyContainer>
         </CodeDisplayContainer>
     )
