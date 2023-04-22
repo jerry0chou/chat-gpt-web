@@ -5,12 +5,11 @@ import ReactMarkdown from 'react-markdown'
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 // @ts-ignore
 // import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
-
-import {CopyOutlined} from '@ant-design/icons';
-import {Avatar, message} from "antd";
+import {message} from "antd";
 import useAllStates from "../../hooks/useAllStates";
 import {CodeDisplayContainer, CopyContainer, MarkdownContainer} from "./css";
 import {CopyIcon} from "../ChatList/css";
+import {Theme} from "../../store/reducer/header";
 
 interface CodeDisplayProps {
     language: string,
@@ -57,8 +56,8 @@ ${p.code}
                     }}
                 />
             </MarkdownContainer>
-            <CopyContainer onClick={onCopyClick} >
-                <CopyIcon size={20} theme={theme}></CopyIcon>
+            <CopyContainer onClick={onCopyClick}>
+                <CopyIcon size={20} theme={Theme.day}></CopyIcon>
             </CopyContainer>
         </CodeDisplayContainer>
     )
