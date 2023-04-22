@@ -61,8 +61,8 @@ export const ContentOutContainer = styled.div<{role: string}>`
 export const OperationContainer = styled.div<{role: string}>`
   display: flex;
   flex-direction: ${p=> p.role === 'user' ? 'row-reverse' : 'row'};
-  margin-left: ${p => p.role === 'user' ? 'auto' : '5px'};
-  margin-right: ${p => p.role === 'system' ? 'auto' : '5px'};
+  margin-left: ${p => p.role === 'user' ? 'auto' : '0px'};
+  margin-right: ${p => p.role === 'system' ? 'auto' : '0px'};
   margin-bottom: 4px;
   gap: 9px;
 `
@@ -80,5 +80,5 @@ export const ContentContainer = styled.div<{role: string, theme: Theme}>`
   border-radius: ${p => p.role === 'user' ? '15px 0 15px 15px' : '0 15px 15px 15px'};
   padding: 10px 10px;
   background-color: ${p => p.theme === Theme.day ? p.role === 'user'? '#bbe5fd': '#daf8d4' : 
-    p.role === 'system'? '#32935b': '#3968e1'};
+    p.role === 'system'? '#03915e': '#3968e1'};
 `
