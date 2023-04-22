@@ -8,7 +8,7 @@ interface PlainTextDisplayProps{
 export default function PlainTextDisplay(p: PlainTextDisplayProps){
     const {theme} = useAllStates()
     const color = theme === 'day' ?'#000000': '#ffffff'
-    return <p style={{fontSize: p.fontSize, color: color, fontFamily: 'Helvetica, sans-serif'}}>
+    return <p style={{fontSize: p.fontSize, color: color,lineHeight: 1.3, fontFamily: 'Helvetica, sans-serif'}}>
         {parse(p.content.replace(/`(.*?)`/g, "<span style='font-size: 17px; border: none; background: #0cb9ff; color: #ffffff; padding: 3px; border-radius: 8px'>$1</span>"))}
     </p>
 }
