@@ -9,7 +9,7 @@ export const nightTheme = css`
 `
 export const MainContainer = styled.div<{ theme: Theme, foldMenu: boolean }>`
   height: calc(100vh - 50px);
-  width: ${p=> p.foldMenu? '100vw': 'calc(100vw - 256px)'};
+  width: ${p=> p.foldMenu? '100vw': 'calc(100vw - 270px)'};
   /* hide scrollbar but allow scrolling */
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
@@ -28,7 +28,7 @@ export const AppContainer = styled.div<{ theme: Theme }>`
 `
 
 export const SideMenuContainer = styled.div<{ theme: Theme }>`
-  width: 256px;
+  width: 270px;
   height: calc(100vh - 50px);
   background-color: ${p => p.theme === Theme.night ? '#041527' : '#d9e4ee'};
   border-right: ${p => p.theme === Theme.day ? '#dde3e8' : '#2d3b5e'} 1px solid;

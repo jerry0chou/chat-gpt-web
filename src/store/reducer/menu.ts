@@ -4,6 +4,7 @@ import {currentTabKey, menuList, foldMenuValue} from "../../util/constanst";
 export interface MenuItem {
     key: string;
     label: string;
+    editTime: string;
 }
 
 export interface MenuState {
@@ -45,15 +46,22 @@ export const menuSlice = createSlice({
         addNewChat: (state) => {
             const newItem: MenuItem = {
                 label: `New Chat` + (state.menuList.length+1),
-                key: String(new Date().getTime())
+                key: String(new Date().getTime()),
+                editTime: ''
             }
             state.menuList.push(newItem)
             state.currentTabKey = newItem.key
             localStorage.setItem(menuList, JSON.stringify(state.menuList));
             localStorage.setItem(currentTabKey, state.currentTabKey)
         },
+        updateEditTime: (state, action: PayloadAction<string>) => {
+            const key = action.payload
+            const index = state.menuList.findIndex(item => item.key === key)
+            state.menuList[index].editTime = String(new Date().getTime())
+            localStorage.setItem(menuList, JSON.stringify(state.menuList));
+        }
     }
 })
 
-export const {setMenuList, setCurrentTabKey, deleteTab, foldMenuAction, addNewChat} = menuSlice.actions
+export const {setMenuList, setCurrentTabKey, deleteTab, foldMenuAction, addNewChat, updateEditTime} = menuSlice.actions
 export default menuSlice.reducer

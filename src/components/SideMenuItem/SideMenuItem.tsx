@@ -1,24 +1,28 @@
 import React, {memo} from "react";
-import {ItemContainer, ItemText, DeleteIcon} from "./css";
+import {
+    ItemContainer,
+    ItemText,
+    DeleteIcon,
+    DateContainer,
+    ItemUpperContainer,
+    ItemLowerContainer,
+    CreateTimeIcon, EditTimeIcon
+} from "./css";
 import useAllStates from "../../hooks/useAllStates";
 import {setCurrentTabKey, setMenuList} from "../../store/reducer/menu";
 import {useAppDispatch} from "../../hooks/storeHooks";
-
-export enum ItemType {
-    Normal = 'Normal',
-    Add = 'Add'
-}
-
+import formatTimestamp from "../../util/formatTimestamp";
 interface ItemProp {
     id: string;
     text: string;
     isActive: boolean;
+    editTime: string;
 }
 
 function SideMenuItem(p: ItemProp) {
-    const {theme, menuList} = useAllStates()
+    const {theme, menuList, currentTabKey} = useAllStates()
     const dispatch = useAppDispatch();
-
+    console.log('render SideMenuItem'   + p.id)
     const onMenuItemClick = () => {
         dispatch(setCurrentTabKey(p.id))
     }
@@ -36,11 +40,25 @@ function SideMenuItem(p: ItemProp) {
         }
     }
     return (
+
         <ItemContainer onClick={onMenuItemClick} theme={theme} isActive={p.isActive}>
-            <ItemText theme={theme}>{p.text}</ItemText>
-            {
-                p.isActive ? <DeleteIcon onClick={onDeleteClick} theme={theme}/> : <div/>
-            }
+            <ItemUpperContainer>
+                <ItemText theme={theme}>{p.text}</ItemText>
+                {
+                    p.isActive ? <DeleteIcon onClick={onDeleteClick} theme={theme} size={20}/> : <div/>
+                }
+            </ItemUpperContainer>
+            <ItemLowerContainer>
+                <DateContainer theme={theme}>
+                    <CreateTimeIcon theme={theme} size={13}/>
+                    {formatTimestamp(Number(p.id))}
+                </DateContainer>
+                <DateContainer theme={theme}>
+                    {p.editTime && <EditTimeIcon theme={theme} size={13}/>}
+                    {formatTimestamp(Number(p.editTime))}
+                </DateContainer>
+            </ItemLowerContainer>
+
         </ItemContainer>
     )
 }

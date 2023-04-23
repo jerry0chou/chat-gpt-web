@@ -10,13 +10,14 @@ import {MainContainer} from "./css";
 import {Simulate} from "react-dom/test-utils";
 import load = Simulate.load;
 import Guide from "../components/Guide/Guide";
+import {updateEditTime} from "../store/reducer/menu";
 
 export default function MainContent() {
     const dispatch = useAppDispatch();
     const [refreshCount, setRefreshCount] = useState(0)
     const [messageApi, contextHolder] = message.useMessage();
     useRequest(refreshCount, messageApi)
-    const {chatList, theme, loading, currentStreamChat, foldMenu} = useAllStates()
+    const {chatList, theme, loading, currentStreamChat, foldMenu, currentTabKey} = useAllStates()
     const scrollRef = useRef(null)
     const mainContainerRef =  useRef(null)
     const scrollToBottom = () => {
@@ -66,6 +67,7 @@ export default function MainContent() {
         const newChatList = chatList.concat(user)
         dispatch(setChatList(newChatList))
         setRefreshCount(prevState => prevState + 1)
+        dispatch(updateEditTime(currentTabKey))
     }, [loading, chatList])
 
     return (<MainContainer theme={theme} foldMenu={foldMenu } ref={mainContainerRef}>

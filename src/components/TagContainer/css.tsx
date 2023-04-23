@@ -3,7 +3,7 @@ import {Theme} from "../../store/reducer/header";
 import styled from "styled-components";
 export const PositionTag = styled.div<{ theme: Theme }>`
     position: fixed;
-    width: 256px;
+    width: 270px;
     height: 65px;
     bottom: 0;
     display: flex;

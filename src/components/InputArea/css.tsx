@@ -74,7 +74,7 @@ export const Input = styled.input<{ theme: Theme }>`
   }
 `
 export const PositionInputArea = styled.div<{ foldMenu: boolean }>`
-  width: ${p => p.foldMenu ? '100vw' : 'calc(100vw - 256px)'};
+  width: ${p => p.foldMenu ? '100vw' : 'calc(100vw - 270px)'};
   position: fixed;
   bottom: 0;
   display: flex;
