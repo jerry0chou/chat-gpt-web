@@ -8,11 +8,13 @@ import {
     CardContainer,
     ChatListContainer,
     ContentContainer,
-    ContentOutContainer, CopyContainer, CopyIcon, CopyToInputIcon, DateContainer,
+    ContentOutContainer, CopyContainer, CopyIcon, AddToInputIcon, DateContainer,
     OperationContainer,
     ProfileContainer
 } from "./css";
 import formatTimestamp from "../../util/formatTimestamp";
+import {useAppDispatch} from "../../hooks/storeHooks";
+import {setInputString} from "../../store/reducer/input";
 
 export interface Chat {
     role: 'system' | 'user';
@@ -25,6 +27,8 @@ export default function ChatList() {
     const [messageApi, contextHolder] = message.useMessage();
     const url = 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg';
     const {fontSize, chatList, theme} = useAllStates()
+
+    const dispatch = useAppDispatch();
     const onCopyClick = (content: string[]) => {
         console.log('click')
         navigator.clipboard.writeText(content.join('\n')).then(() => {
@@ -33,8 +37,9 @@ export default function ChatList() {
             messageApi.error('copy content failed')
         })
     }
-    const onCopyToInputClick = (content: string[]) => {
-        messageApi.success('copy to input successfully')
+    const onAddToInputClick = (content: string[]) => {
+        messageApi.success('add to input successfully')
+        dispatch(setInputString(content.join('\n')))
     }
     return (
         <ChatListContainer>
@@ -54,8 +59,8 @@ export default function ChatList() {
                                     <CopyContainer size={16} onClick={() => onCopyClick(item.content)}>
                                         <CopyIcon size={15} theme={theme}/>
                                     </CopyContainer>
-                                    <CopyContainer size={16} onClick={()=> onCopyToInputClick(item.content)}>
-                                        <CopyToInputIcon size={15} theme={theme}/>
+                                    <CopyContainer size={16} onClick={()=> onAddToInputClick(item.content)}>
+                                        <AddToInputIcon size={15} theme={theme}/>
                                     </CopyContainer>
                                 </OperationContainer>
                                 <ContentContainer role={item.role} theme={theme}>

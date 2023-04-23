@@ -2,7 +2,7 @@ import React from "react";
 import styled, {css} from "styled-components";
 import {Theme} from "../../store/reducer/header";
 import {ReactComponent as CopySVG} from "../../assets/copy.svg";
-import {ReactComponent as CopyToInputSVG} from "../../assets/copyToInput.svg";
+import {ReactComponent as AddToInputSVG} from "../../assets/addToInput.svg";
 
 export const ChatListContainer = styled.div`
   display: flex;
@@ -38,7 +38,7 @@ const svgStyle = (p: { size: number, theme: Theme}) => {
 export const CopyIcon = styled(CopySVG)<{ size: number, theme: Theme}>`
   ${svgStyle};
 `
-export const CopyToInputIcon = styled(CopyToInputSVG)<{ size: number, theme: Theme}>`
+export const AddToInputIcon = styled(AddToInputSVG)<{ size: number, theme: Theme}>`
     ${svgStyle};
 `
 export const CopyContainer = styled.div<{size: number}>`

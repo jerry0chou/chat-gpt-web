@@ -13,9 +13,9 @@ export default function useAllStates(){
             questionList.push({ role: 'user', content: chat.content.join('\n')})
         }
     }
-
+    const inputString = useAppSelector(state => state.input.inputString);
     const menuList = useAppSelector(state => state.menu.menuList)
     const currentTabKey = useAppSelector(state => state.menu.currentTabKey)
     const foldMenu = useAppSelector(state => state.menu.foldMenu)
-    return {fontSize, theme, loading, chatList, questionList, menuList, currentTabKey, currentStreamChat, foldMenu};
+    return {fontSize, theme, loading, chatList, questionList, menuList, currentTabKey, currentStreamChat, foldMenu, inputString};
 }
