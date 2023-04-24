@@ -93,10 +93,10 @@ export const DateContainer = styled.div<ItemProp>`
   align-items: center;
   margin-left: 10px;
   margin-right: 10px;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 500;
   font-family: sans-serif;
-  color: ${p => p.theme === Theme.day ? '#929c9d' : '#b2bac9'};
+  color: ${p => p.theme === Theme.day ? '#767f80' : '#c6cdd5'};
 `
 
 export const EmptyItem = styled.div`

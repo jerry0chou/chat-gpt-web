@@ -38,7 +38,6 @@ export default function ChatList() {
         })
     }
     const onAddToInputClick = (content: string[]) => {
-        messageApi.success('add to input successfully')
         dispatch(setInputString(content.join('\n')))
     }
     return (
