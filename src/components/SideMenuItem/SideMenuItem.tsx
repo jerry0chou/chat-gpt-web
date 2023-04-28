@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React, {memo, useEffect, useState} from "react";
 import {
     ItemContainer,
     ItemText,
@@ -9,9 +9,12 @@ import {
     CreateTimeIcon, EditTimeIcon
 } from "./css";
 import useAllStates from "../../hooks/useAllStates";
-import {setCurrentTabKey, setMenuList} from "../../store/reducer/menu";
+import {deleteTab, setCurrentTabKey, setMenuList, updateTitle} from "../../store/reducer/menu";
 import {useAppDispatch} from "../../hooks/storeHooks";
 import formatTimestamp from "../../util/formatTimestamp";
+import useTitleRequest from "../../hooks/useTitleRequest";
+import {currentTabKey} from "../../util/constanst";
+
 interface ItemProp {
     id: string;
     text: string;
@@ -20,9 +23,8 @@ interface ItemProp {
 }
 
 function SideMenuItem(p: ItemProp) {
-    const {theme, menuList} = useAllStates()
+    const {theme, menuList, questionList, currentTitle} = useAllStates()
     const dispatch = useAppDispatch();
-    console.log('render SideMenuItem'   + p.id)
     const onMenuItemClick = () => {
         dispatch(setCurrentTabKey(p.id))
     }
@@ -33,11 +35,12 @@ function SideMenuItem(p: ItemProp) {
         const newMenuList = [...menuList]
         newMenuList.splice(index, 1)
         dispatch(setMenuList(newMenuList))
-        if(index+1 < menuList.length){
-            dispatch(setCurrentTabKey(menuList[index+1].key));
-        }else if(index === menuList.length-1 && index !== 0){
-            dispatch(setCurrentTabKey(menuList[index-1].key));
+        if (index + 1 < menuList.length) {
+            dispatch(setCurrentTabKey(menuList[index + 1].key));
+        } else if (index === menuList.length - 1 && index !== 0) {
+            dispatch(setCurrentTabKey(menuList[index - 1].key));
         }
+        dispatch(deleteTab(p.id))
     }
     return (
 

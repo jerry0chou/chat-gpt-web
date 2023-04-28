@@ -4,7 +4,7 @@ import {
     CreateChatCompletionResponse,
     OpenAIApi
 } from 'openai'
-import axios, {Axios, AxiosResponse} from "axios";
+import axios, { AxiosResponse} from "axios";
 import {apiModelName} from "../util/constanst";
 
 export const requestAns = async (array: ChatCompletionRequestMessage[], token: string): Promise<AxiosResponse<CreateChatCompletionResponse>> => {

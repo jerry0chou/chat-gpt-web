@@ -1,7 +1,5 @@
-import {requestAns, requestStreamAns} from "../api/config";
-import {useEffect, useState} from "react";
-import {ChatCompletionRequestMessage} from "openai";
-import {Chat} from "../components/ChatList/ChatList";
+import { requestStreamAns} from "../api/config";
+import {useEffect} from "react";
 import {useCookies} from "react-cookie";
 import {openAIToken} from "../util/constanst";
 import {MessageInstance} from "antd/es/message/interface";
