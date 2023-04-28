@@ -69,7 +69,7 @@ export default function Header() {
                         }
                     </Fragment>
                 }
-                {!foldMenu && <TitleContainer>{currentTitle}</TitleContainer>}
+                {!foldMenu && <TitleContainer theme={theme}>{currentTitle}</TitleContainer>}
                 <IconContainer isClear={true} area={'delete'}>
                     <TrashIcon size={19} theme={theme} onClick={() => onItemClick('Clear')}/>
                 </IconContainer>

@@ -9,7 +9,7 @@ import {
     CreateTimeIcon, EditTimeIcon
 } from "./css";
 import useAllStates from "../../hooks/useAllStates";
-import {deleteTab, setCurrentTabKey, setMenuList, updateTitle} from "../../store/reducer/menu";
+import {deleteTab, setCurrentTabKey, setMenuList} from "../../store/reducer/menu";
 import {useAppDispatch} from "../../hooks/storeHooks";
 import formatTimestamp from "../../util/formatTimestamp";
 import useTitleRequest from "../../hooks/useTitleRequest";

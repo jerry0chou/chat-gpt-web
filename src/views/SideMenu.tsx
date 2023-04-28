@@ -6,14 +6,11 @@ import {SideMenuContainer} from "./css";
 import SideMenuItem from "../components/SideMenuItem/SideMenuItem";
 import TagContainer from "../components/TagContainer/TagContainer";
 import {EmptyItem} from "../components/SideMenuItem/css";
-import {addNewChat} from "../store/reducer/menu";
-import useTitleRequest from "../hooks/useTitleRequest";
+import {addNewChat, updateTitle} from "../store/reducer/menu";
 
 export default function SideMenu() {
     const dispatch = useAppDispatch();
-    const {menuList, currentTabKey, theme, questionList, currentTitle} = useAllStates()
-    const [freshCount, setFreshCount] = useState(0)
-    useTitleRequest(freshCount)
+    const {menuList, currentTabKey, theme} = useAllStates()
     useEffect(() => {
         if (menuList.length === 0) {
             dispatch(addNewChat())
@@ -21,12 +18,12 @@ export default function SideMenu() {
     }, [menuList])
 
     useEffect(() => {
-        if (!currentTitle || currentTitle.length === 0 || currentTitle.startsWith('New')) {
-            if (questionList.length > 3) {
-                setFreshCount(prevState => prevState + 1)
-            }
+        const title = menuList.find(item => item.key === currentTabKey)?.title || ''
+        if (title) {
+            dispatch(updateTitle({key: currentTabKey, title}))
         }
-    }, [currentTitle, questionList])
+    }, [currentTabKey, menuList])
+
 
     useEffect(() => {
         dispatch(updateChatListFromLocalStorage())

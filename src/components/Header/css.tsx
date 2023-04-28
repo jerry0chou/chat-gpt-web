@@ -113,8 +113,8 @@ export const TitleContainer = styled.div<{theme: Theme}>`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     font-family: 'Noto Sans TC', sans-serif;
-    color: ${p=> p.theme === Theme.day? '#343636': '#faf8f8'};
+    color: ${p=> p.theme === Theme.day? '#000000': '#faf8f8'};
 `

@@ -11,15 +11,19 @@ import {Simulate} from "react-dom/test-utils";
 import load = Simulate.load;
 import Guide from "../components/Guide/Guide";
 import {updateEditTime} from "../store/reducer/menu";
+import useTitleRequest from "../hooks/useTitleRequest";
 
 export default function MainContent() {
     const dispatch = useAppDispatch();
     const [refreshCount, setRefreshCount] = useState(0)
     const [messageApi, contextHolder] = message.useMessage();
     useRequest(refreshCount, messageApi)
-    const {chatList, theme, loading, currentStreamChat, foldMenu, currentTabKey} = useAllStates()
+    const {chatList, theme, loading, currentStreamChat, foldMenu, currentTabKey, currentTitle} = useAllStates()
     const scrollRef = useRef(null)
     const mainContainerRef =  useRef(null)
+    const [titleFreshCount, setTitleFreshCount] = useState(0)
+    useTitleRequest(titleFreshCount)
+
     const scrollToBottom = () => {
         // @ts-ignore
         setTimeout(() => {
@@ -56,6 +60,14 @@ export default function MainContent() {
         }
     }, [currentStreamChat, loading])
 
+
+    const changeTitle = useCallback(()=>{
+        if(!currentTitle || currentTitle.length ===0 || currentTitle.startsWith('New')){
+            if(chatList.length>3)
+                setTitleFreshCount(prevState => prevState + 1)
+        }
+    }, [currentTitle, chatList])
+
     const onSubmit = useCallback((value: string) => {
         if (value.length === 0) return;
         if(loading) return;
@@ -68,6 +80,7 @@ export default function MainContent() {
         dispatch(setChatList(newChatList))
         setRefreshCount(prevState => prevState + 1)
         dispatch(updateEditTime(currentTabKey))
+        changeTitle()
     }, [loading, chatList])
 
     return (<MainContainer theme={theme} foldMenu={foldMenu } ref={mainContainerRef}>
