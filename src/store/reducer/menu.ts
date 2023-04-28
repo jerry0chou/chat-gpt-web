@@ -3,13 +3,14 @@ import {currentTabKey, menuList, foldMenuValue} from "../../util/constanst";
 
 export interface MenuItem {
     key: string;
-    label: string;
+    title: string;
     editTime: string;
 }
 
 export interface MenuState {
     menuList: MenuItem[],
     currentTabKey: string,
+    currentTitle: string,
     foldMenu: boolean,
 }
 
@@ -17,6 +18,7 @@ const key = localStorage.getItem(currentTabKey) || '0'
 const initialState: MenuState = {
     menuList: localStorage.getItem(menuList) ? JSON.parse(localStorage.getItem(menuList) as string) : [],
     currentTabKey: key,
+    currentTitle: '',
     foldMenu: localStorage.getItem(foldMenuValue) === 'true'
 }
 
@@ -31,6 +33,9 @@ export const menuSlice = createSlice({
         setCurrentTabKey: (state, action) => {
             state.currentTabKey = action.payload
             localStorage.setItem(currentTabKey, state.currentTabKey)
+            // setTitle
+            const index = state.menuList.findIndex(item => item.key === state.currentTabKey)
+            state.currentTitle = state.menuList[index].title
         },
         deleteTab: (state, action: PayloadAction<string>) => {
             const key = action.payload
@@ -45,7 +50,7 @@ export const menuSlice = createSlice({
         },
         addNewChat: (state) => {
             const newItem: MenuItem = {
-                label: `New Chat` + (state.menuList.length+1),
+                title: `New Chat` + (state.menuList.length+1),
                 key: String(new Date().getTime()),
                 editTime: ''
             }
@@ -59,9 +64,22 @@ export const menuSlice = createSlice({
             const index = state.menuList.findIndex(item => item.key === key)
             state.menuList[index].editTime = String(new Date().getTime())
             localStorage.setItem(menuList, JSON.stringify(state.menuList));
+        },
+        updateTitle: (state, action: PayloadAction<{ key: string, title: string }>) => {
+            const {key, title} = action.payload
+            const index = state.menuList.findIndex(item => item.key === key)
+            state.menuList[index].title = title
+            state.currentTitle = title
+            localStorage.setItem(menuList, JSON.stringify(state.menuList));
         }
     }
 })
 
-export const {setMenuList, setCurrentTabKey, deleteTab, foldMenuAction, addNewChat, updateEditTime} = menuSlice.actions
+export const {setMenuList,
+    setCurrentTabKey,
+    deleteTab,
+    foldMenuAction,
+    addNewChat,
+    updateEditTime,
+    updateTitle} = menuSlice.actions
 export default menuSlice.reducer

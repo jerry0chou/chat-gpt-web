@@ -72,9 +72,8 @@ const baseHeaderStyle = css`
   align-items: center;
   grid-template-areas: "fold add title delete fontPlus fontMinus theme token github";
   height: 50px;
-  width: calc(100% - 30px);
+  width: 100vw;
   grid-column-gap: 15px;
-  margin-left: 15px;
 `
 export const HeaderContainer = styled.div<{ theme: Theme }>`
   ${baseHeaderStyle}
@@ -109,12 +108,13 @@ export const GithubIconContainer = styled.div<{size: number, area: string}>`
     cursor: pointer;
   }
 `
-export const TitleContainer = styled.div`
+export const TitleContainer = styled.div<{theme: Theme}>`
     grid-area: title;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     font-size: 20px;
     font-weight: 600;
-    color: #343636;
+    font-family: 'Noto Sans TC', sans-serif;
+    color: ${p=> p.theme === Theme.day? '#343636': '#faf8f8'};
 `

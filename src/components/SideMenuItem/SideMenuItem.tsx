@@ -20,7 +20,7 @@ interface ItemProp {
 }
 
 function SideMenuItem(p: ItemProp) {
-    const {theme, menuList, currentTabKey} = useAllStates()
+    const {theme, menuList} = useAllStates()
     const dispatch = useAppDispatch();
     console.log('render SideMenuItem'   + p.id)
     const onMenuItemClick = () => {

@@ -22,7 +22,7 @@ export default function SideMenu() {
     return (
         <SideMenuContainer  theme={theme}>
             {menuList.map((item, index) =>{
-                 return <SideMenuItem  id={item.key} key={item.key} isActive={item.key === currentTabKey}  text={item.label} editTime={item.editTime}/>
+                 return <SideMenuItem  id={item.key} key={item.key} isActive={item.key === currentTabKey}  text={item.title} editTime={item.editTime}/>
             })}
             <EmptyItem/>
             <TagContainer/>

@@ -27,7 +27,7 @@ export enum FontOperation {
 
 export default function Header() {
     const dispatch = useAppDispatch();
-    const {theme, foldMenu} = useAllStates()
+    const {theme, foldMenu, currentTitle} = useAllStates()
     const [visible, setVisible] = useState(false)
     const {width} = useWindowSize();
     const onItemClick = (kind: 'Token' | 'Clear' | 'Fold' | 'Add' | FontOperation | Theme) => {
@@ -69,7 +69,7 @@ export default function Header() {
                         }
                     </Fragment>
                 }
-                <TitleContainer>hello</TitleContainer>
+                {!foldMenu && <TitleContainer>{currentTitle}</TitleContainer>}
                 <IconContainer isClear={true} area={'delete'}>
                     <TrashIcon size={19} theme={theme} onClick={() => onItemClick('Clear')}/>
                 </IconContainer>
