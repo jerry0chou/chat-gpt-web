@@ -8,12 +8,12 @@ import {
     DayIcon, FoldIcon,
     FontMinusIcon,
     FontPlusIcon,
-    HeaderContainer, IconContainer, LeftIconContainer,
+    HeaderContainer, IconContainer,
     NightIcon,
     TokenIcon,
     TrashIcon,
     GithubIconContainer,
-    GithubIcon
+    GithubIcon, TitleContainer
 } from "./css";
 import {clearCurrentTabChat} from "../../store/reducer/chat";
 import {addNewChat, foldMenuAction} from "../../store/reducer/menu";
@@ -54,43 +54,47 @@ export default function Header() {
     }
     // @ts-ignore
     return (
-        <HeaderContainer theme={theme}>
-            <GithubIconContainer style={{marginRight: 12}} size={31} onClick={jumpToGithub}>
-                <GithubIcon size={26}/>
-            </GithubIconContainer>
-            <IconContainer>
-                <TokenIcon size={20} theme={theme} onClick={() => onItemClick('Token')}/>
-            </IconContainer>
-            {
-                theme === 'day' ? <IconContainer>
-                    <DayIcon size={20} theme={theme} onClick={() => onItemClick(Theme.day)}/>
-                </IconContainer> : <IconContainer>
-                    <NightIcon size={20} theme={theme} onClick={() => onItemClick(Theme.night)}/>
+        <Fragment>
+            <HeaderContainer theme={theme}>
+                {width < SmallDeviceWidth ? <div/> :
+                    <Fragment>
+                        <IconContainer area={'fold'}>
+                            <FoldIcon isfold={String(foldMenu)} size={19} theme={theme}
+                                      onClick={() => onItemClick('Fold')}/>
+                        </IconContainer>
+                        {foldMenu ? <div/> :
+                            <IconContainer area={'add'}>
+                                <AddIcon onClick={() => onItemClick('Add')}/>
+                            </IconContainer>
+                        }
+                    </Fragment>
+                }
+                <TitleContainer>hello</TitleContainer>
+                <IconContainer isClear={true} area={'delete'}>
+                    <TrashIcon size={19} theme={theme} onClick={() => onItemClick('Clear')}/>
                 </IconContainer>
-            }
-            <IconContainer>
-                <FontMinusIcon size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontMinus)}/>
-            </IconContainer>
-            <IconContainer>
-                <FontPlusIcon size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontPlus)}/>
-            </IconContainer>
-            <IconContainer isClear={true}>
-                <TrashIcon size={19} theme={theme} onClick={() => onItemClick('Clear')}/>
-            </IconContainer>
-            {width < SmallDeviceWidth ? <div/> :
-                <Fragment>
-                    {foldMenu ? <div/> :
-                        <LeftIconContainer needAuto={!foldMenu}>
-                            <AddIcon onClick={() => onItemClick('Add')}/>
-                        </LeftIconContainer>
-                    }
-                    <LeftIconContainer needAuto={foldMenu}>
-                        <FoldIcon isfold={String(foldMenu)} size={19} theme={theme}
-                                  onClick={() => onItemClick('Fold')}/>
-                    </LeftIconContainer>
-                </Fragment>
-            }
 
+                <IconContainer area={'fontPlus'}>
+                    <FontPlusIcon size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontPlus)}/>
+                </IconContainer>
+                <IconContainer area={'fontMinus'}>
+                    <FontMinusIcon size={23} theme={theme} onClick={() => onItemClick(FontOperation.FontMinus)}/>
+                </IconContainer>
+                {
+                    theme === 'day' ? <IconContainer area={'theme'}>
+                        <DayIcon size={20} theme={theme} onClick={() => onItemClick(Theme.day)}/>
+                    </IconContainer> : <IconContainer area={'theme'}>
+                        <NightIcon size={20} theme={theme} onClick={() => onItemClick(Theme.night)}/>
+                    </IconContainer>
+                }
+                <IconContainer area={'token'}>
+                    <TokenIcon size={20} theme={theme} onClick={() => onItemClick('Token')}/>
+                </IconContainer>
+                <GithubIconContainer area={'github'} style={{marginRight: 12}} size={31} onClick={jumpToGithub}>
+                    <GithubIcon size={26}/>
+                </GithubIconContainer>
+            </HeaderContainer>
             <MyModal isOpen={visible} close={() => setVisible(false)}/>
-        </HeaderContainer>)
+        </Fragment>
+    )
 }

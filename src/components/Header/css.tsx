@@ -66,20 +66,22 @@ const headerDayTheme = css`
 `
 const baseHeaderStyle = css`
   position: fixed;
-  display: flex;
-  flex-direction: row-reverse;
-  height: 50px;
-  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 32px) auto repeat(6, 32px);
+  grid-auto-rows: 1fr;
   align-items: center;
-  gap: 12px;
-  z-index: 2;
+  grid-template-areas: "fold add title delete fontPlus fontMinus theme token github";
+  height: 50px;
+  width: calc(100% - 30px);
+  grid-column-gap: 15px;
+  margin-left: 15px;
 `
 export const HeaderContainer = styled.div<{ theme: Theme }>`
   ${baseHeaderStyle}
   ${({theme}) => theme === Theme.night ? headerNightTheme : headerDayTheme}
   border-bottom: ${p=> p.theme === Theme.day? '#e7e1e1': ''} 1px solid;
 `;
-export const IconContainer = styled.div<{isClear?: boolean}>`
+export const IconContainer = styled.div<{isClear?: boolean, area: string}>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,25 +89,32 @@ export const IconContainer = styled.div<{isClear?: boolean}>`
   background-image: ${p=> p.isClear? 'linear-gradient(315deg, #fc9842 0%, #fe5f75 74%)': 'linear-gradient(315deg, #045de9 0%, #09c6f9 74%)'};
   width: 32px;
   height: 32px;
+  grid-area: ${p=> p.area};
 `
-export const LeftIconContainer = styled(IconContainer)<{needAuto: boolean}>`
-  margin-right: ${p=> p.needAuto? 'auto': '0'};
-`
-
 export const GithubIcon = styled(GithubSVG)<{size: number}>`
   ${svgStyle};
 `
-export const GithubIconContainer = styled.div<{size: number}>`
+export const GithubIconContainer = styled.div<{size: number, area: string}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${p=>p.size}px;
-  height: ${p=>p.size}px;
+  width: ${p => p.size}px;
+  height: ${p => p.size}px;
   border-radius: 50%;
   background-color: #000000;
   background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+  grid-area: ${p => p.area};
 
   &:hover {
     cursor: pointer;
   }
+`
+export const TitleContainer = styled.div`
+    grid-area: title;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 20px;
+    font-weight: 600;
+    color: #343636;
 `
