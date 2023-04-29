@@ -23,10 +23,9 @@ export default function InputArea(p: InputAreaProps) {
         dispatch(setInputString(value));
     }
     const onKeyUp = useCallback((e: any) => {
-        console.log('code', e.code)
         // shift-enter
-        if(e.code === 'Enter' && e.shiftKey) {
-            console.log('====shift-enter')
+        if(e.code === 'Enter') {
+            console.log('====enter===')
             p.onSubmit(inputString)
             clearText()
             setTextAreaHeight(initHeight)
@@ -38,7 +37,7 @@ export default function InputArea(p: InputAreaProps) {
     return (
         <PositionInputArea foldMenu={foldMenu}>
             <InputContainer theme={theme} height={textAreaHeight}>
-                <TextArea placeholder={"use shift-enter to send message"} theme={theme} height={textAreaHeight-30} value={inputString} onKeyUp={onKeyUp} onChange={onInputChange}/>
+                <TextArea placeholder={"enter to send message, shift-enter to start a newline"} theme={theme} height={textAreaHeight-30} value={inputString} onKeyUp={onKeyUp} onChange={onInputChange}/>
                 <RoundButton direction={'right'} onClick={() => {
                     p.onSubmit(inputString)
                     clearText()
