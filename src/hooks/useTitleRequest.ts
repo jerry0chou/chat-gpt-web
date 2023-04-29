@@ -14,7 +14,7 @@ export default function useTitleRequest(refreshCount: number) {
 
     const concatQuestionList = questionList.map(question => question.content).join('\n')
 
-    const template = `please write a title within 10 words for subsequent question list: ${concatQuestionList}`
+    const template = `please write a title within 10 words in total for a list of subsequent questions: ${concatQuestionList}`
     const questions: ChatCompletionRequestMessage[] = [{role: 'user', content: template}]
     useEffect(() => {
         if (refreshCount === 0) return;

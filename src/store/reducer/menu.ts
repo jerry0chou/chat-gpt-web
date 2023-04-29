@@ -42,7 +42,6 @@ export const menuSlice = createSlice({
             const index = state.menuList.findIndex(item => item.key === key)
             state.menuList.splice(index, 1)
             localStorage.setItem(menuList, JSON.stringify(state.menuList));
-            console.log('deleteTab', key, state.currentTabKey)
             localStorage.removeItem(key)
         },
         foldMenuAction: (state, action: PayloadAction<boolean>) => {

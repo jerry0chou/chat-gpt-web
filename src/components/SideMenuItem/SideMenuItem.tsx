@@ -34,13 +34,13 @@ function SideMenuItem(p: ItemProp) {
         const index = menuList.findIndex(item => item.key === p.id)
         const newMenuList = [...menuList]
         newMenuList.splice(index, 1)
+        dispatch(deleteTab(p.id))
         dispatch(setMenuList(newMenuList))
         if (index + 1 < menuList.length) {
             dispatch(setCurrentTabKey(menuList[index + 1].key));
         } else if (index === menuList.length - 1 && index !== 0) {
             dispatch(setCurrentTabKey(menuList[index - 1].key));
         }
-        dispatch(deleteTab(p.id))
     }
     return (
 

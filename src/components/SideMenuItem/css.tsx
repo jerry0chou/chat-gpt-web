@@ -24,9 +24,9 @@ const baseIconStyle = css<IconProps>`
   }
 `
 export const DeleteIcon = styled(DeleteSVG)<IconProps>`
-  margin-right: 2px;
-  margin-left: auto;
   ${baseIconStyle};
+  position: absolute;
+  right: 5px;
 `
 export const CreateTimeIcon = styled(CreateTimeSVG)<IconProps>`
   ${baseIconStyle};
@@ -71,10 +71,11 @@ export const ItemText = styled.div<ItemProp>`
   font-size: 14px;
   font-weight: 500;
   margin-left: 10px;
-  margin-right: 5px;
+  margin-right: 22px;
 `;
 export const ItemUpperContainer = styled.div<ItemProp>`
   display: flex;
+  position: relative;
   width: 100%;
   flex-direction: row;
   align-items: center;
