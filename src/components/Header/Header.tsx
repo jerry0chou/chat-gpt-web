@@ -13,12 +13,13 @@ import {
     TokenIcon,
     TrashIcon,
     GithubIconContainer,
-    GithubIcon, TitleContainer
+    GithubIcon, TitleContainer, RefreshIcon
 } from "./css";
 import {clearCurrentTabChat} from "../../store/reducer/chat";
 import {addNewChat, foldMenuAction} from "../../store/reducer/menu";
 import useWindowSize from "../../hooks/useWindowSize";
 import {SmallDeviceWidth} from "../../util/constanst";
+import useTitleRequest from "../../hooks/useTitleRequest";
 
 export enum FontOperation {
     FontPlus = 'A+',
@@ -30,6 +31,8 @@ export default function Header() {
     const {theme, foldMenu, currentTitle} = useAllStates()
     const [visible, setVisible] = useState(false)
     const {width} = useWindowSize();
+    const [titleFreshCount, setTitleFreshCount] = useState(0)
+    useTitleRequest(titleFreshCount)
     const onItemClick = (kind: 'Token' | 'Clear' | 'Fold' | 'Add' | FontOperation | Theme) => {
         if (kind === 'Token') {
             setVisible(true)
@@ -52,6 +55,16 @@ export default function Header() {
     const jumpToGithub = () => {
         window.open('https://github.com/jerry0chou/chat-gpt-web');
     }
+    const showRefreshIcon = (): boolean => {
+        if (currentTitle && currentTitle !== '' && !currentTitle.startsWith('New Chat')) {
+            return true
+        }
+        return false
+    }
+    const onTitleRefresh = () => {
+        console.log('onTitleRefresh')
+        setTitleFreshCount(prevState => prevState + 1)
+    }
     // @ts-ignore
     return (
         <Fragment>
@@ -69,7 +82,9 @@ export default function Header() {
                         }
                     </Fragment>
                 }
-                {!foldMenu && <TitleContainer theme={theme}>{currentTitle}</TitleContainer>}
+                {!foldMenu && <TitleContainer theme={theme}>{currentTitle}
+                    {showRefreshIcon() && <RefreshIcon theme={theme} onClick={onTitleRefresh}/>}
+                </TitleContainer>}
                 <IconContainer isClear={true} area={'delete'}>
                     <TrashIcon size={19} theme={theme} onClick={() => onItemClick('Clear')}/>
                 </IconContainer>

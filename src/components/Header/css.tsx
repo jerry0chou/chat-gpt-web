@@ -9,6 +9,8 @@ import {ReactComponent as TrashSVG } from "../../assets/trash.svg";
 import {ReactComponent as FoldSVG } from "../../assets/fold.svg";
 import {ReactComponent as AddSVG} from "../../assets/add.svg";
 import {ReactComponent as GithubSVG} from "../../assets/github.svg";
+import {ReactComponent as RefreshSVG} from "../../assets/refresh.svg";
+
 import {Theme} from "../../store/reducer/header";
 interface IconProps {
     size: number;
@@ -118,3 +120,14 @@ export const TitleContainer = styled.div<{theme: Theme}>`
     font-family: 'Noto Sans TC', sans-serif;
     color: ${p=> p.theme === Theme.day? '#000000': '#faf8f8'};
 `
+export const RefreshIcon = styled(RefreshSVG)<{ theme: Theme }>`
+  width: 18px;
+  height: 18px;
+  margin-left: 10px;
+  & path {
+    fill: ${p => p.theme === Theme.day ? '#343636' : '#faf8f8'};
+  }
+  &:hover {
+    cursor: pointer;
+  }
+`;
