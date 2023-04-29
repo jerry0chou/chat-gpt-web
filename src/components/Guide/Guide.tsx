@@ -13,7 +13,7 @@ export default function Guide(){
                 <GuideContent>☀️Scale font size at your disposal</GuideContent>
                 <GuideContent>☀️Respond question interactively and swiftly</GuideContent>
                 <GuideContent>☀️Copy code with one click</GuideContent>
-                <GuideContent>☀️Utilize hot key(↑, ↓) to browser history</GuideContent>
+                <GuideContent>☀️Modify title automatically</GuideContent>
                 <GuideContent >😁Please stay tuned for the latest updates</GuideContent>
                 <GuideContent style={{marginBottom: 10}}>🙏If you find my project useful, please star me</GuideContent>
             </GuideInnerContainer>

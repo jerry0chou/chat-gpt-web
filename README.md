@@ -22,15 +22,14 @@ Features are as follows:
 - ☀️Scale font size at your disposal
 - ☀️Respond question interactively and swiftly
 - ☀️Copy code with one click
-- ☀️Utilize hot key(↑, ↓) to browser history
+- ☀️Modify title automatically
 - 😁Please stay tuned for the latest updates
 - 🙏If you find my project useful, please star me
 
 ### project images
-![image](./project_images/cover1.png)
-![image](./project_images/cover2.png)
-![image](./project_images/cover3.png)
-![image](./project_images/cover4.png)
-![image](./project_images/cover5.png)
-![image](./project_images/cover6.jpeg)
-![image](./project_images/cover7.jpeg)
+
+<img src="./project_images/cover1.png" align="left"  width="800" >
+<img src="./project_images/cover2.png" align="left"  width="800" >
+<img src="./project_images/cover3.png" align="left"  width="800" >
+<img src="./project_images/cover4.png" align="left"  width="500" >
+<img src="./project_images/cover5.png" align="left"  width="500" >

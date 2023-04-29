@@ -76,6 +76,7 @@ const baseHeaderStyle = css`
   height: 50px;
   width: 100vw;
   grid-column-gap: 15px;
+  z-index: 2;
 `
 export const HeaderContainer = styled.div<{ theme: Theme }>`
   ${baseHeaderStyle}
