@@ -1,20 +1,40 @@
 import React from "react";
-import ReactMarkdown from 'react-markdown'
-
-// @ts-ignore
-import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
-// @ts-ignore
-// import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
 import {message} from "antd";
 import useAllStates from "../../hooks/useAllStates";
-import {CodeDisplayContainer, CopyContainer, MarkdownContainer} from "./css";
+import {CodeDisplayContainer, CopyContainer, LanguageContainer, MarkdownContainer} from "./css";
 import {CopyIcon} from "../ChatList/css";
 import {Theme} from "../../store/reducer/header";
+
+import createMD from 'markdown-it'
+import hljs from 'highlight.js/lib/common'
+// import 'highlight.js/styles/github-dark.css'
+import 'highlight.js/styles/github.css'
+// @ts-ignore
+import mk from 'markdown-it-katex'
+import parse from 'html-react-parser'
 
 interface CodeDisplayProps {
     language: string,
     code: string
 }
+
+export const renderer = createMD({
+    html: true,
+    xhtmlOut: true,
+    breaks: true,
+    linkify: true,
+    highlight: (str, lang) => {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return hljs.highlight(str, {language: lang}).value
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        return ''
+    },
+    typographer: true,
+}).use(mk)
 
 export default function CodeDisplay(p: CodeDisplayProps) {
     const markdown = `
@@ -36,29 +56,14 @@ ${p.code}
         <CodeDisplayContainer>
             <MarkdownContainer fontSize={fontSize}>
                 {contextHolder}
-                <ReactMarkdown
-                    children={markdown}
-                    components={{
-                        code({node, inline, className, children, ...props}) {
-                            const match = /language-(\w+)/.exec(className || "");
-                            return !inline && match ? (
-                                <SyntaxHighlighter
-                                    children={String(children).replace(/\n$/, "")}
-                                    language={match[1]}
-                                    {...props}
-                                />
-                            ) : (
-                                <code className={className} {...props}>
-                                    {children}
-                                </code>
-                            );
-                        },
-                    }}
-                />
+                {parse(renderer.render(markdown))}
             </MarkdownContainer>
             <CopyContainer onClick={onCopyClick}>
-                <CopyIcon size={20} theme={Theme.day}></CopyIcon>
+                <CopyIcon size={16} theme={Theme.day}></CopyIcon>
             </CopyContainer>
+            {p.language !== 'js' && <LanguageContainer>
+                {p.language}
+            </LanguageContainer>}
         </CodeDisplayContainer>
     )
 }

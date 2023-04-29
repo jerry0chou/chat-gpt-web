@@ -11,11 +11,22 @@ export const MarkdownContainer = styled.div<{ fontSize: number }>`
   position: relative;
   border: #a1ceea 1px solid;
   border-radius: 12px;
-  background-color: #f5f2f0;
+  background-color: #eeeae4;
+  padding: 23px 8px 0px 8px;
 `
 
 export const CopyContainer = styled.div`
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 2px;
+  right: 2px;
+`
+export const LanguageContainer = styled.div`
+  position: absolute;
+  top: 2px;
+  right: 26px;
+  background-color: #e0e0d2;
+  border-radius: 8px;
+  padding: 2px 2px;
+  font-size: 14px;
+  font-family: monospace;
 `

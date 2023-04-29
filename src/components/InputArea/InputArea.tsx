@@ -1,5 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
-import {Button} from "antd";
+import React, {useCallback} from "react";
 import useAllStates from "../../hooks/useAllStates";
 import {InputContainer, Input, PositionInputArea, RoundButton, SendIcon, ClearIcon} from "./css";
 import {useAppDispatch} from "../../hooks/storeHooks";
@@ -18,6 +17,7 @@ export default function InputArea(p: InputAreaProps) {
     }
     const onKeyUp = useCallback((e: any) => {
         if (e.code === 'Enter') {
+            if(inputString === '') return
             p.onSubmit(inputString)
             clearText()
         }

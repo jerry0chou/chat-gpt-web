@@ -65,6 +65,13 @@ export default function Header() {
         console.log('onTitleRefresh')
         setTitleFreshCount(prevState => prevState + 1)
     }
+    const changeTitle = (title: string) => {
+        const words = title.split(' ')
+        if(words.length > 10) {
+            return words.slice(0, 10).join(' ') + '...'
+        }
+        return title
+    }
     // @ts-ignore
     return (
         <Fragment>
@@ -82,7 +89,7 @@ export default function Header() {
                         }
                     </Fragment>
                 }
-                {!foldMenu && <TitleContainer theme={theme}>{currentTitle}
+                {!foldMenu && <TitleContainer theme={theme}>{changeTitle(currentTitle)}
                     {showRefreshIcon() && <RefreshIcon theme={theme} onClick={onTitleRefresh}/>}
                 </TitleContainer>}
                 <IconContainer isClear={true} area={'delete'}>
