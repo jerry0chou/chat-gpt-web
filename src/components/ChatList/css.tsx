@@ -80,5 +80,5 @@ export const ContentContainer = styled.div<{role: string, theme: Theme}>`
   border-radius: ${p => p.role === 'user' ? '15px 0 15px 15px' : '0 15px 15px 15px'};
   padding: 10px 10px;
   background-color: ${p => p.theme === Theme.day ? p.role === 'user'? '#bbe5fd': '#daf8d4' : 
-    p.role === 'system'? '#03915e': '#3968e1'};
+    p.role === 'system'? '#058a2b': '#3968e1'};
 `

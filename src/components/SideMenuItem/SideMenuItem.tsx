@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useState} from "react";
+import React, {memo} from "react";
 import {
     ItemContainer,
     ItemText,
@@ -12,8 +12,6 @@ import useAllStates from "../../hooks/useAllStates";
 import {deleteTab, setCurrentTabKey, setMenuList} from "../../store/reducer/menu";
 import {useAppDispatch} from "../../hooks/storeHooks";
 import formatTimestamp from "../../util/formatTimestamp";
-import useTitleRequest from "../../hooks/useTitleRequest";
-import {currentTabKey} from "../../util/constanst";
 
 interface ItemProp {
     id: string;

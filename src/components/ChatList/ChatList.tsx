@@ -25,7 +25,8 @@ export interface Chat {
 
 export default function ChatList() {
     const [messageApi, contextHolder] = message.useMessage();
-    const url = 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg';
+    const systemProfileUrl = 'https://api.dicebear.com/6.x/bottts/svg?seed=Miss%20kitty&eyes=bulging&backgroundColor[]';
+    const userProfileUrl = 'https://api.dicebear.com/6.x/miniavs/svg?seed=Bubba&flip=true'
     const {fontSize, chatList, theme} = useAllStates()
 
     const dispatch = useAppDispatch();
@@ -49,7 +50,7 @@ export default function ChatList() {
                         <CardContainer key={index} theme={theme}>
                             {
                                 item.role === 'system' ? <ProfileContainer role={'system'}>
-                                    <Avatar size={40} src={url}/>
+                                    <Avatar size={40} src={systemProfileUrl}/>
                                 </ProfileContainer> : <div/>
                             }
                             <ContentOutContainer role={item.role}>
@@ -78,7 +79,7 @@ export default function ChatList() {
                                 </ContentContainer>
                             </ContentOutContainer>
                             {item.role === 'user' ? <ProfileContainer role={'user'}>
-                                <Avatar size={40} style={{backgroundColor: '#3968e1', color: '#e9eef1'}}>User</Avatar>
+                                <Avatar size={40} src={userProfileUrl}/>
                             </ProfileContainer> : <div/>}
                         </CardContainer>
                     )
