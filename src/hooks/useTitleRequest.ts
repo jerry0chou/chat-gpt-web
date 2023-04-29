@@ -20,7 +20,6 @@ export default function useTitleRequest(refreshCount: number) {
         if (refreshCount === 0) return;
         requestAns(questions, cookies.openAIToken).then(res => {
             const title = res?.data?.choices?.[0]?.message?.content || ''
-            console.log('requestAns title', title)
             dispatch(updateTitle({key: currentTabKey, title}))
         })
     }, [refreshCount])

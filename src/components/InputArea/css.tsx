@@ -27,11 +27,11 @@ export const ClearIcon = styled(ClearSVG)`
   }
 `
 
-export const InputContainer = styled.div<{ theme: Theme }>`
+export const InputContainer = styled.div<{ theme: Theme, height: number }>`
   position: relative;
   display: flex;
   width: 100%;
-  height: 65px;
+  height: ${p=>p.height}px;
   padding-left: 5px;
   padding-right: 5px;
   align-items: center;
@@ -58,17 +58,28 @@ export const RoundButton = styled.button<{ direction: 'left' |'right' }>`
   }
 `
 
-export const Input = styled.input<{ theme: Theme }>`
+export const TextArea = styled.textarea<{ theme: Theme, height: number }>`
   width: 100%;
-  height: 70%;
+  height: ${p => p.height}px;
   border: 1px solid ${p => p.theme === Theme.day ? '#c2c8d0' : '#10417a'};
   background: ${p => p.theme === Theme.day ? '#ffffff' : '#1e2a38'};
   border-radius: 50px;
   color: ${p => p.theme === Theme.day ? '#62646e' : '#ffffff'};;
   outline: none;
-  font-size: 20px;
-  padding: 0 50px;
+  font-size: 18px;
+  padding: 5px 50px;
+  resize: none;
 
+
+  /* hide scrollbar but allow scrolling */
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+  
   &:focus {
     border: 1px solid #3875f6;
   }

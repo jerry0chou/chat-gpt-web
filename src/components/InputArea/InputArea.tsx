@@ -1,6 +1,6 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useState} from "react";
 import useAllStates from "../../hooks/useAllStates";
-import {InputContainer, Input, PositionInputArea, RoundButton, SendIcon, ClearIcon} from "./css";
+import {InputContainer, TextArea, PositionInputArea, RoundButton, SendIcon, ClearIcon} from "./css";
 import {useAppDispatch} from "../../hooks/storeHooks";
 import {setInputString} from "../../store/reducer/input";
 
@@ -11,15 +11,24 @@ export interface InputAreaProps {
 export default function InputArea(p: InputAreaProps) {
     const {theme, foldMenu, inputString} = useAllStates()
     const dispatch = useAppDispatch();
-
+    const initHeight = 70
+    const [textAreaHeight, setTextAreaHeight] = useState(initHeight)
     const onInputChange = (e: any) => {
-        dispatch(setInputString(e?.target?.value || ''));
+        const value = e?.target?.value || ''
+        const lines = value.split('\n')
+        const lineCount = lines.length
+        let height = (lineCount-1) * 20 + initHeight
+        if(height > 300) height = 300
+        setTextAreaHeight(height)
+        dispatch(setInputString(value));
     }
     const onKeyUp = useCallback((e: any) => {
-        if (e.code === 'Enter') {
+        console.log('code', e.code)
+        if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
             if(inputString === '') return
             p.onSubmit(inputString)
             clearText()
+            setTextAreaHeight(initHeight)
         }
     }, [inputString])
     const clearText = () => {
@@ -27,8 +36,8 @@ export default function InputArea(p: InputAreaProps) {
     }
     return (
         <PositionInputArea foldMenu={foldMenu}>
-            <InputContainer theme={theme}>
-                <Input theme={theme} value={inputString} onKeyUp={onKeyUp} onChange={onInputChange}/>
+            <InputContainer theme={theme} height={textAreaHeight}>
+                <TextArea theme={theme} height={textAreaHeight-30} value={inputString} onKeyUp={onKeyUp} onChange={onInputChange}/>
                 <RoundButton direction={'right'} onClick={() => {
                     p.onSubmit(inputString)
                     clearText()

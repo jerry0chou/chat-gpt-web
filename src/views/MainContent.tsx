@@ -73,9 +73,10 @@ export default function MainContent() {
         if(loading) return;
         const user: Chat = {
             role: "user",
-            content: [value],
+            content: value.split('\n'),
             timestamp: new Date().getTime()
         }
+        console.log('user', user )
         const newChatList = chatList.concat(user)
         dispatch(setChatList(newChatList))
         setRefreshCount(prevState => prevState + 1)

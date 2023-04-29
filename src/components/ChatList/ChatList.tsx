@@ -31,7 +31,6 @@ export default function ChatList() {
 
     const dispatch = useAppDispatch();
     const onCopyClick = (content: string[]) => {
-        console.log('click')
         navigator.clipboard.writeText(content.join('\n')).then(() => {
             messageApi.success('copy content successfully')
         }).catch(() => {

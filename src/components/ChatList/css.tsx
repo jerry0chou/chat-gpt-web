@@ -76,7 +76,7 @@ export const ContentContainer = styled.div<{role: string, theme: Theme}>`
   width: fit-content;
   //width: auto;
   flex-direction: column;
-  align-items: ${p => p.role === 'user' ? 'flex-end' : 'flex-start'};
+  align-items: flex-start;
   border-radius: ${p => p.role === 'user' ? '15px 0 15px 15px' : '0 15px 15px 15px'};
   padding: 10px 10px;
   background-color: ${p => p.theme === Theme.day ? p.role === 'user'? '#bbe5fd': '#daf8d4' : 
