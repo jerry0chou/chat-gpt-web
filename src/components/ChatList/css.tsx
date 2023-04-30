@@ -79,6 +79,9 @@ export const ContentContainer = styled.div<{role: string, theme: Theme}>`
   align-items: flex-start;
   border-radius: ${p => p.role === 'user' ? '15px 0 15px 15px' : '0 15px 15px 15px'};
   padding: 10px 10px;
-  background-color: ${p => p.theme === Theme.day ? p.role === 'user'? '#bbe5fd': '#daf8d4' : 
-    p.role === 'system'? '#058a2b': '#3968e1'};
+  ${p => p.theme === Theme.day ? p.role === 'user'?
+                  'background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);': 'background-image linear-gradient(315deg, #7cffcb 0%, #74f2ce 74%)':
+    p.role === 'system'? 
+            'background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);':
+            'background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%)'};
 `
